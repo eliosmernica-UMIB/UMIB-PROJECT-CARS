@@ -1,0 +1,740 @@
+/* 
+    STUDENT INITIALS: EM
+    FILE: css/style.css
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+
+/* --- 1. PERSONALIZATION (Rules: Body ID & Font) --- */
+#em-body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* --- GLOBAL ANIMATIONS --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes countUp {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.em-animate {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.em-animate-delay-1 { animation-delay: 0.1s; }
+.em-animate-delay-2 { animation-delay: 0.2s; }
+.em-animate-delay-3 { animation-delay: 0.3s; }
+.em-animate-delay-4 { animation-delay: 0.4s; }
+
+/* --- ICON STYLING --- */
+.em-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 1.5rem auto;
+    transition: all 0.3s ease;
+}
+
+.em-icon-primary {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4a 100%);
+    color: #000;
+}
+
+.em-icon-dark {
+    background: #000;
+    color: #fff;
+}
+
+.em-icon-outline {
+    background: transparent;
+    border: 2px solid #ffd700;
+    color: #ffd700;
+}
+
+/* --- STATS COUNTER SECTION --- */
+.em-stats-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 5rem 0;
+}
+
+.em-stat-item {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.em-stat-number {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #ffd700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.em-stat-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #999;
+    font-weight: 600;
+}
+
+/* --- SERVICES SECTION --- */
+.em-service-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    height: 100%;
+    border: 1px solid transparent;
+}
+
+.em-service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    border-color: #ffd700;
+}
+
+.em-service-card:hover .em-icon {
+    transform: scale(1.1);
+    animation: pulse 1s ease infinite;
+}
+
+.em-service-card h4 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.em-service-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+/* --- FEATURED CARS SECTION --- */
+.em-featured-section {
+    background: #f8f9fa;
+    padding: 5rem 0;
+}
+
+.em-section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.em-section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+}
+
+.em-section-header .em-divider {
+    width: 60px;
+    height: 4px;
+    background: #ffd700;
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+.em-featured-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+}
+
+.em-featured-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+
+.em-featured-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.em-featured-card:hover img {
+    transform: scale(1.05);
+}
+
+.em-featured-body {
+    padding: 1.5rem;
+}
+
+.em-featured-specs {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-top: 1px solid #eee;
+    margin-top: 1rem;
+}
+
+.em-spec-item {
+    text-align: center;
+}
+
+.em-spec-item span {
+    display: block;
+    font-size: 0.75rem;
+    color: #999;
+    text-transform: uppercase;
+}
+
+.em-spec-item strong {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+/* --- DASHBOARD STYLES --- */
+.em-dashboard {
+    background: #f4f6f9;
+    min-height: 100vh;
+    padding-top: 100px;
+}
+
+.em-dash-sidebar {
+    background: #fff;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 100px;
+}
+
+.em-dash-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.em-dash-nav li {
+    margin-bottom: 0.5rem;
+}
+
+.em-dash-nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    color: #555;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.em-dash-nav a:hover,
+.em-dash-nav a.active {
+    background: #ffd700;
+    color: #000;
+}
+
+.em-dash-nav a i {
+    font-size: 1.2rem;
+}
+
+.em-dash-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.em-dash-card:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.em-dash-stat {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.em-dash-stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.em-dash-stat-icon.blue { background: #e3f2fd; color: #1976d2; }
+.em-dash-stat-icon.green { background: #e8f5e9; color: #388e3c; }
+.em-dash-stat-icon.orange { background: #fff3e0; color: #f57c00; }
+.em-dash-stat-icon.purple { background: #f3e5f5; color: #7b1fa2; }
+.em-dash-stat-icon.gold { background: #fff8e1; color: #ff8f00; }
+
+.em-dash-stat-info h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.em-dash-stat-info p {
+    margin: 0;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* --- ADMIN DASHBOARD --- */
+.em-admin-header {
+    background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+    color: #fff;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+
+.em-chart-placeholder {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 15px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 1.2rem;
+}
+
+.em-table-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.em-table-card table {
+    margin-bottom: 0;
+}
+
+.em-table-card th {
+    border-top: none;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.em-status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.em-status-badge.success { background: #d4edda; color: #155724; }
+.em-status-badge.pending { background: #fff3cd; color: #856404; }
+.em-status-badge.cancelled { background: #f8d7da; color: #721c24; }
+
+/* --- SOCIAL ICONS --- */
+.em-social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.em-social-links a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.em-social-links a:hover {
+    background: #ffd700;
+    color: #000;
+    transform: translateY(-3px);
+}
+
+/* --- UTILITY CLASSES --- */
+.em-section-padding {
+    padding: 5rem 0;
+}
+
+.em-text-gold {
+    color: #ffd700 !important;
+}
+
+.em-bg-dark {
+    background: #1a1a1a;
+}
+
+.hover-lift {
+    transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+}
+
+/* --- 2. CUSTOM CLASSES (Rule: Must start with em-) --- */
+
+/* Navigation */
+.em-navbar {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+.em-brand {
+    font-weight: 900;
+    font-size: 1.8rem;
+    letter-spacing: -1px;
+    color: #000 !important;
+}
+
+.em-accent {
+    color: #ffd700; /* Gold color */
+}
+
+.em-nav-link {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #555 !important;
+    transition: color 0.3s ease;
+}
+
+.em-nav-link:hover, .em-nav-link.active {
+    color: #000 !important;
+    border-bottom: 2px solid #ffd700;
+}
+
+/* Hero Section */
+.em-hero {
+    height: 85vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.em-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+}
+
+.em-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.em-title-large {
+    font-size: 4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1.1;
+}
+
+/* Buttons */
+.em-btn-primary {
+    background-color: #000;
+    color: #fff;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.em-btn-primary:hover {
+    background-color: #ffd700;
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* Cards (Cars & Parts) */
+.em-card {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.em-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.em-card-img {
+    height: 250px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.em-card-body {
+    padding: 1.5rem;
+}
+
+.em-price-tag {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #000;
+}
+
+/* Footer */
+.em-footer {
+    background-color: #111;
+    color: #777;
+    padding: 4rem 0 2rem 0;
+    margin-top: 4rem;
+}
+
+.em-footer h5 {
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+.em-footer a {
+    color: #777;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.em-footer a:hover {
+    color: #ffd700;
+}
+
+/* Rental Page Specifics */
+.em-rent-box {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+
+.em-nav-link.active {
+    border-bottom: 2px solid #ffd700;
+}
+
+/* --- LOGIN PAGE STYLES --- */
+.em-login-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    min-height: 100vh;
+    padding-top: 80px;
+}
+
+.em-login-wrapper {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+}
+
+.em-login-brand {
+    background: linear-gradient(135deg, #000 0%, #222 100%);
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+}
+
+.em-login-brand-content {
+    color: #fff;
+}
+
+.em-brand-large {
+    font-size: 4rem;
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+.em-login-brand h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.em-login-brand p {
+    color: #aaa;
+    line-height: 1.7;
+}
+
+.em-login-features {
+    margin-top: 2rem;
+}
+
+.em-login-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+    color: #ccc;
+}
+
+.em-login-feature i {
+    font-size: 1.3rem;
+    color: #ffd700;
+}
+
+.em-login-form-section {
+    padding: 3rem;
+}
+
+.em-login-tabs {
+    background: #f8f9fa;
+    border-radius: 50px;
+    padding: 5px;
+}
+
+.em-login-tabs .nav-link {
+    border-radius: 50px;
+    padding: 12px 25px;
+    font-weight: 600;
+    color: #555;
+    transition: all 0.3s ease;
+}
+
+.em-login-tabs .nav-link.active {
+    background: #000;
+    color: #fff;
+}
+
+.em-login-tabs .nav-link:hover:not(.active) {
+    background: #e9ecef;
+}
+
+.em-login-form-content h3 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.em-google-btn-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.em-login-divider {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+
+.em-login-divider::before,
+.em-login-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #ddd;
+}
+
+.em-login-divider span {
+    padding: 0 1rem;
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.em-login-benefits {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 15px;
+}
+
+.em-login-benefits li {
+    margin-bottom: 0.5rem;
+}
+
+/* --- NOTIFICATION ICON STYLES --- */
+.em-notif-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 991px) {
+    .em-login-brand {
+        padding: 2rem;
+        text-align: center;
+    }
+    
+    .em-brand-large {
+        font-size: 3rem;
+    }
+    
+    .em-login-form-section {
+        padding: 2rem;
+    }
+    
+    .em-login-features {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .em-login-feature {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .em-login-tabs .nav-link {
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+}
