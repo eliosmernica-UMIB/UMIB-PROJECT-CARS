@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EM Luxury Cars - About Us</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Hero Section - Modern with Effects */
+        .about-hero {
+            min-height: 100vh;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            padding: 100px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(201, 160, 51, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+        }
+        
+        .hero-bg-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, #0a0a0a 0%, rgba(10,10,10,0.4) 50%, rgba(10,10,10,0.2) 100%);
+        }
+        
+        .hero-bg-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, #0a0a0a 0%, transparent 30%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .hero-tag span {
+            color: #c9a033;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        .hero-tag::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: #c9a033;
+        }
+        
+        .hero-title {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+        }
+        
+        .hero-title span {
+            background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-text {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.5);
+            max-width: 480px;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary-gold {
+            padding: 16px 36px;
+            background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
+            color: #000;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 25px rgba(201, 160, 51, 0.4);
+        }
+        
+        .btn-primary-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 35px rgba(201, 160, 51, 0.5);
+            color: #000;
+        }
+        
+        .btn-outline-gold {
+            padding: 16px 36px;
+            background: transparent;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-gold:hover {
+            border-color: #c9a033;
+            color: #c9a033;
+            transform: translateY(-3px);
+        }
+        
+        /* Stats Row */
+        .hero-stats {
+            display: flex;
+            gap: 50px;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .hero-stat {
+            transition: transform 0.3s ease;
+        }
+        
+        .hero-stat:hover {
+            transform: translateY(-5px);
+        }
+        
+        .hero-stat h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        
+        .hero-stat h3 span {
+            background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-stat p {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            z-index: 5;
+        }
+        
+        .scroll-indicator .line {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, #c9a033, transparent);
+            animation: scrollLine 2s ease-in-out infinite;
+        }
+        
+        @keyframes scrollLine {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+        
+        /* Floating Elements */
+        .floating-badge {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 20px 30px;
+            border-radius: 16px;
+            z-index: 3;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .floating-badge h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e8c547;
+            margin: 0;
+        }
+        
+        .floating-badge p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.8rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @media (max-width: 991px) {
+            .about-hero {
+                min-height: auto;
+                padding: 120px 0 80px;
+            }
+            
+            .hero-bg-image {
+                width: 100%;
+                height: 100%;
+                clip-path: none;
+                opacity: 0.3;
+            }
+            
+            .hero-title {
+                letter-spacing: -1px;
+            }
+            
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 30px;
+            }
+            
+            .hero-stat {
+                flex: 0 0 calc(50% - 15px);
+            }
+            
+            .scroll-indicator,
+            .floating-badge {
+                display: none;
+            }
+        }
+        
+        /* Mission Section */
+        .mission-section {
+            background: #fff;
+            padding: 100px 0;
+        }
+        .mission-card {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 40px 30px;
+            height: 100%;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+        .mission-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .mission-card .icon-box {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        .mission-card .icon-box i {
+            font-size: 2rem;
+            color: #000;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            background: #111;
+            padding: 80px 0;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        .stat-item h2 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #c9a033;
+            margin-bottom: 10px;
+        }
+        .stat-item p {
+            color: #aaa;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+        
+        /* Story Section */
+        .story-section {
+            background: #fff;
+            padding: 100px 0;
+        }
+        .story-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+        .story-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .story-image:hover img {
+            transform: scale(1.05);
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 30px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: #c9a033;
+            border-radius: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 20px;
+            width: 2px;
+            height: calc(100% + 10px);
+            background: #e0e0e0;
+        }
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        /* Team Section */
+        .team-section {
+            background: #f8f9fa;
+            padding: 100px 0;
+        }
+        .team-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        .team-card .team-img {
+            height: 300px;
+            overflow: hidden;
+        }
+        .team-card .team-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .team-card:hover .team-img img {
+            transform: scale(1.1);
+        }
+        .team-card .team-info {
+            padding: 25px;
+            text-align: center;
+        }
+        .team-card .team-info h5 {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .team-card .team-info p {
+            color: #c9a033;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .team-card .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            color: #333;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+        .team-card .social-links a:hover {
+            background: #c9a033;
+            color: #000;
+        }
+        
+        /* Values Section */
+        .values-section {
+            background: #111;
+            padding: 100px 0;
+        }
+        .value-item {
+            text-align: center;
+            padding: 40px 30px;
+        }
+        .value-item i {
+            font-size: 3rem;
+            color: #c9a033;
+            margin-bottom: 20px;
+        }
+        .value-item h5 {
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .value-item p {
+            color: #888;
+            margin: 0;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
+            padding: 80px 0;
+        }
+        .cta-section h2 {
+            color: #000;
+            font-weight: 700;
+        }
+        .cta-section p {
+            color: rgba(0,0,0,0.7);
+        }
+        .cta-section .btn-dark {
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body id="em-body">
+
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg fixed-top em-navbar">
+        <div class="container">
+            <a class="navbar-brand em-brand" href="index.html">
+                EM<span class="em-accent">.</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#emNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="emNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link active" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link em-nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            Shop NOW
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="inventory.html">Buy Cars</a></li>
+                            <li><a class="dropdown-item" href="rent.html">Rent a Car</a></li>
+                            <li><a class="dropdown-item" href="parts.html">Car Parts</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="testimonials.html">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="checkout.html" class="btn em-btn-primary position-relative">
+                            Cart
+                            <span id="em-cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                0
+                            </span>
+                        </a>
+                    </li>
+                    <ul class="navbar-nav ms-lg-2" id="em-nav-auth"></ul>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="hero-bg-image"></div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 hero-content">
+                    <div class="hero-tag">
+                        <span>About Us</span>
+                    </div>
+                    
+                    <h1 class="hero-title">
+                        Driven by<br>
+                        <span>Passion</span> & Excellence
+                    </h1>
+                    
+                    <p class="hero-text">
+                        For over a decade, we've been the trusted destination for automotive enthusiasts 
+                        seeking the world's most extraordinary vehicles.
+                    </p>
+                    
+                    <div class="hero-buttons">
+                        <a href="#story" class="btn-primary-gold">
+                            <i class="bi bi-play-circle me-2"></i>Our Story
+                        </a>
+                        <a href="contact.html" class="btn-outline-gold">
+                            Get in Touch
+                        </a>
+                    </div>
+                    
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <h3>500<span>+</span></h3>
+                            <p>Cars Sold</p>
+                        </div>
+                        <div class="hero-stat">
+                            <h3>10<span>+</span></h3>
+                            <p>Years</p>
+                        </div>
+                        <div class="hero-stat">
+                            <h3>98<span>%</span></h3>
+                            <p>Satisfaction</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Badge -->
+        <div class="floating-badge d-none d-lg-block">
+            <h4>Award Winning</h4>
+            <p>Best Dealer 2024</p>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="line"></div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="badge-label">WHAT DRIVES US</span>
+                <h2 class="display-5 fw-bold mt-3">Our Mission & Vision</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="mission-card">
+                        <div class="icon-box">
+                            <i class="bi bi-bullseye"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Our Mission</h4>
+                        <p class="text-muted mb-0">
+                            To connect passionate drivers with extraordinary machines, providing an unparalleled 
+                            purchasing experience backed by expertise and integrity.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="mission-card">
+                        <div class="icon-box">
+                            <i class="bi bi-eye"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Our Vision</h4>
+                        <p class="text-muted mb-0">
+                            To be the world's most trusted luxury automotive destination, where every client 
+                            finds their dream car and becomes part of our family.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="mission-card">
+                        <div class="icon-box">
+                            <i class="bi bi-gem"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Our Promise</h4>
+                        <p class="text-muted mb-0">
+                            Every vehicle we offer is meticulously inspected, authentically sourced, and 
+                            delivered with complete transparency and white-glove service.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-lg-3">
+                    <div class="stat-item">
+                        <h2>500+</h2>
+                        <p>Cars Sold</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="stat-item">
+                        <h2>10+</h2>
+                        <p>Years Experience</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="stat-item">
+                        <h2>100%</h2>
+                        <p>Satisfaction</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="stat-item">
+                        <h2>50+</h2>
+                        <p>Global Partners</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section" id="story">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <div class="story-image">
+                        <img src="https://images.unsplash.com/photo-1485291571150-772bcfc10da5?auto=format&fit=crop&q=80&w=800" alt="Our Showroom">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <span class="badge-label mb-4 d-inline-block">OUR JOURNEY</span>
+                    <h2 class="display-6 fw-bold mb-4">A Legacy of Automotive Excellence</h2>
+                    <p class="text-muted mb-4">
+                        What started as a passion project in 2014 has evolved into one of the most respected 
+                        luxury car dealerships in the industry. Our founder's vision was simple: create a place 
+                        where car enthusiasts could find their dream machines with complete peace of mind.
+                    </p>
+                    
+                    <div class="timeline-item">
+                        <h6 class="fw-bold">2014 - The Beginning</h6>
+                        <p class="text-muted small mb-0">Founded with just 5 cars and a dream to revolutionize luxury car sales.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h6 class="fw-bold">2018 - Expansion</h6>
+                        <p class="text-muted small mb-0">Opened our flagship showroom in Beverly Hills, expanding our collection to 50+ vehicles.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h6 class="fw-bold">2021 - Digital Innovation</h6>
+                        <p class="text-muted small mb-0">Launched our online platform, making luxury cars accessible worldwide.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h6 class="fw-bold">2024 - Today</h6>
+                        <p class="text-muted small mb-0">500+ satisfied clients and counting, with a curated collection of the world's finest automobiles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="badge-label">CORE VALUES</span>
+                <h2 class="display-5 fw-bold text-white mt-3">What We Stand For</h2>
+            </div>
+            <div class="row">
+                <div class="col-6 col-lg-3">
+                    <div class="value-item">
+                        <i class="bi bi-shield-check"></i>
+                        <h5>Integrity</h5>
+                        <p>Complete transparency in every transaction</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="value-item">
+                        <i class="bi bi-star"></i>
+                        <h5>Excellence</h5>
+                        <p>Only the finest vehicles make our collection</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="value-item">
+                        <i class="bi bi-people"></i>
+                        <h5>Relationships</h5>
+                        <p>Clients become family, not just customers</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="value-item">
+                        <i class="bi bi-lightning"></i>
+                        <h5>Innovation</h5>
+                        <p>Embracing technology for better service</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="badge-label">OUR TEAM</span>
+                <h2 class="display-5 fw-bold mt-3">Meet the Experts</h2>
+                <p class="text-muted">The passionate professionals behind EM Luxury Cars</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="team-card">
+                        <div class="team-img">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400" alt="CEO">
+                        </div>
+                        <div class="team-info">
+                            <h5>Marcus Sterling</h5>
+                            <p>Founder & CEO</p>
+                            <div class="social-links">
+                                <a href="#"><i class="bi bi-linkedin"></i></a>
+                                <a href="#"><i class="bi bi-twitter-x"></i></a>
+                                <a href="#"><i class="bi bi-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="team-card">
+                        <div class="team-img">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400" alt="Sales Director">
+                        </div>
+                        <div class="team-info">
+                            <h5>Sarah Mitchell</h5>
+                            <p>Sales Director</p>
+                            <div class="social-links">
+                                <a href="#"><i class="bi bi-linkedin"></i></a>
+                                <a href="#"><i class="bi bi-twitter-x"></i></a>
+                                <a href="#"><i class="bi bi-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="team-card">
+                        <div class="team-img">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400" alt="Head Mechanic">
+                        </div>
+                        <div class="team-info">
+                            <h5>James Donovan</h5>
+                            <p>Head Mechanic</p>
+                            <div class="social-links">
+                                <a href="#"><i class="bi bi-linkedin"></i></a>
+                                <a href="#"><i class="bi bi-twitter-x"></i></a>
+                                <a href="#"><i class="bi bi-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container text-center">
+            <h2 class="display-5 mb-3">Ready to Find Your Dream Car?</h2>
+            <p class="lead mb-4">Browse our exclusive collection or schedule a visit to our showroom.</p>
+            <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <a href="inventory.html" class="btn btn-dark btn-lg">View Inventory</a>
+                <a href="contact.html" class="btn btn-outline-dark btn-lg rounded-pill px-4">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="em-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="text-white fw-bold mb-3">EM<span class="em-accent">.</span> Luxury Cars</h5>
+                    <p class="text-muted">The premier destination for automotive excellence. Buying, renting, and upgrading - we do it all with passion and precision.</p>
+                    <div class="em-social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="inventory.html" class="text-muted">Inventory</a></li>
+                        <li class="mb-2"><a href="rent.html" class="text-muted">Rentals</a></li>
+                        <li class="mb-2"><a href="parts.html" class="text-muted">Parts Shop</a></li>
+                        <li class="mb-2"><a href="gallery.html" class="text-muted">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Company</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="about.html" class="text-muted">About Us</a></li>
+                        <li class="mb-2"><a href="blog.html" class="text-muted">Blog</a></li>
+                        <li class="mb-2"><a href="testimonials.html" class="text-muted">Reviews</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-muted">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Contact Info</h6>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2"></i>123 Luxury Blvd, Beverly Hills, CA</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2"></i>+1 (555) 123-4567</li>
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i>info@emcars.com</li>
+                        <li class="mb-2"><i class="bi bi-clock me-2"></i>Mon-Sat: 9AM - 7PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-4 pt-4 border-top border-secondary">
+                <p class="mb-0 text-muted small">&copy; 2026 EM Luxury Cars. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
