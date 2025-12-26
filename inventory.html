@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EM Luxury Cars - Inventory</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ============ HERO SECTION ============ */
+        .inventory-hero {
+            background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 100%),
+                        url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            padding: 140px 0 60px;
+        }
+        
+        .inventory-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        
+        .inventory-hero h1 span {
+            color: #ffd700;
+        }
+        
+        .inventory-hero p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+        }
+        
+        /* Search Box */
+        .search-box {
+            max-width: 500px;
+            margin: 30px auto 0;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 15px 50px 15px 25px;
+            border-radius: 50px;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .search-box input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #ffd700;
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .search-box i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ffd700;
+            font-size: 1.2rem;
+        }
+        
+        /* ============ FILTER SECTION ============ */
+        .filter-section {
+            background: #fff;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 76px;
+            z-index: 100;
+        }
+        
+        .filter-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .filter-label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #666;
+            white-space: nowrap;
+        }
+        
+        .filter-select {
+            padding: 8px 35px 8px 15px;
+            border-radius: 50px;
+            border: 1px solid #ddd;
+            font-size: 0.9rem;
+            background: #fff;
+            cursor: pointer;
+            min-width: 140px;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: #ffd700;
+        }
+        
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-tab {
+            padding: 8px 18px;
+            border-radius: 50px;
+            border: 1px solid #ddd;
+            background: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-tab:hover {
+            border-color: #000;
+        }
+        
+        .filter-tab.active {
+            background: #000;
+            color: #ffd700;
+            border-color: #000;
+        }
+        
+        .results-count {
+            margin-left: auto;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* ============ INVENTORY GRID ============ */
+        .inventory-section {
+            padding: 50px 0 80px;
+            background: #f8f9fa;
+            min-height: 60vh;
+        }
+        
+        .car-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .car-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+        
+        .car-image {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .car-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .car-card:hover .car-image img {
+            transform: scale(1.08);
+        }
+        
+        .car-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .car-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        
+        .car-wishlist {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        
+        .car-card:hover .car-wishlist {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .car-wishlist:hover {
+            background: #dc3545;
+            color: #fff;
+        }
+        
+        .car-body {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .car-category {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .car-body h5 {
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.15rem;
+        }
+        
+        .car-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #000;
+            margin-bottom: 15px;
+        }
+        
+        .car-specs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .spec-badge {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .spec-badge i {
+            color: #ffd700;
+        }
+        
+        .car-actions {
+            margin-top: auto;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .car-actions .btn {
+            flex: 1;
+        }
+        
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 80px 20px;
+        }
+        
+        .no-results i {
+            font-size: 4rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        /* ============ MODALS ============ */
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 20px;
+        }
+        
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 991px) {
+            .filter-row {
+                justify-content: center;
+            }
+            
+            .results-count {
+                margin-left: 0;
+                width: 100%;
+                text-align: center;
+                margin-top: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .inventory-hero {
+                padding: 120px 0 50px;
+            }
+            
+            .filter-section {
+                padding: 15px 0;
+            }
+            
+            .filter-group {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .filter-tabs {
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .car-image {
+                height: 200px;
+            }
+            
+            .car-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body id="em-body">
+
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg fixed-top em-navbar">
+        <div class="container">
+            <a class="navbar-brand em-brand" href="index.html">EM<span class="em-accent">.</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#emNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="emNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link em-nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link em-nav-link" href="about.html">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link em-nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Shop NOW</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item active" href="inventory.html">Buy Cars</a></li>
+                            <li><a class="dropdown-item" href="rent.html">Rent a Car</a></li>
+                            <li><a class="dropdown-item" href="parts.html">Car Parts</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link em-nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link em-nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link em-nav-link" href="testimonials.html">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link em-nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="checkout.html" class="btn em-btn-primary position-relative">
+                            Cart
+                            <span id="em-cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                        </a>
+                    </li>
+                    <ul class="navbar-nav ms-lg-2" id="em-nav-auth"></ul>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="inventory-hero">
+        <div class="container text-center">
+            <h1>Explore Our <span>Collection</span></h1>
+            <p>Discover the world's most exclusive exotic and classic automobiles</p>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search by name, brand, or category...">
+                <i class="bi bi-search"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- FILTER SECTION -->
+    <div class="filter-section">
+        <div class="container">
+            <div class="filter-row">
+                <div class="filter-tabs" id="categoryTabs">
+                    <button class="filter-tab active" data-category="all">All Cars</button>
+                    <button class="filter-tab" data-category="hypercar">Hypercars</button>
+                    <button class="filter-tab" data-category="supercar">Supercars</button>
+                    <button class="filter-tab" data-category="sports">Sports</button>
+                    <button class="filter-tab" data-category="classic">Classics</button>
+                    <button class="filter-tab" data-category="luxury">Luxury</button>
+                </div>
+                
+                <div class="filter-group">
+                    <span class="filter-label">Sort:</span>
+                    <select class="filter-select" id="sortSelect">
+                        <option value="featured">Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name">Name: A-Z</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <span class="filter-label">Price:</span>
+                    <select class="filter-select" id="priceSelect">
+                        <option value="all">All Prices</option>
+                        <option value="0-500000">Under $500K</option>
+                        <option value="500000-1000000">$500K - $1M</option>
+                        <option value="1000000-5000000">$1M - $5M</option>
+                        <option value="5000000-999999999">$5M+</option>
+                    </select>
+                </div>
+                
+                <span class="results-count" id="resultsCount">12 vehicles</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- INVENTORY GRID -->
+    <section class="inventory-section">
+        <div class="container">
+            <div class="row g-4" id="inventoryGrid">
+                <!-- Cars will be rendered here by JavaScript -->
+            </div>
+            
+            <!-- No Results -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <i class="bi bi-search"></i>
+                <h4>No vehicles found</h4>
+                <p class="text-muted">Try adjusting your filters or search terms</p>
+                <button class="btn em-btn-primary mt-3" onclick="resetFilters()">Reset Filters</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="em-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5 class="text-white fw-bold mb-3">EM<span style="color: #ffd700;">.</span> Luxury Cars</h5>
+                    <p class="text-muted">The premier destination for automotive excellence. Buying, renting, and upgrading - we do it all with passion.</p>
+                    <div class="em-social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="inventory.html" class="text-muted">Inventory</a></li>
+                        <li class="mb-2"><a href="rent.html" class="text-muted">Rentals</a></li>
+                        <li class="mb-2"><a href="parts.html" class="text-muted">Parts Shop</a></li>
+                        <li class="mb-2"><a href="gallery.html" class="text-muted">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Support</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="faq.html" class="text-muted">FAQ</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-muted">Contact Us</a></li>
+                        <li class="mb-2"><a href="user-dashboard.html" class="text-muted">Dashboard</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-muted">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Contact Info</h6>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2" style="color: #ffd700;"></i>123 Luxury Blvd, Beverly Hills, CA</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2" style="color: #ffd700;"></i>+1 (555) 123-4567</li>
+                        <li class="mb-2"><i class="bi bi-envelope me-2" style="color: #ffd700;"></i>info@emcars.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-4 pt-4 border-top border-secondary">
+                <p class="mb-0 text-muted small">&copy; 2026 EM Luxury Cars. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Detail Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 rounded-4 overflow-hidden">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img id="modalImg" src="" class="img-fluid h-100" style="object-fit: cover; min-height: 400px;">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="modal-header border-0 pb-0">
+                            <span id="modalCategory" class="badge bg-warning text-dark">Category</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body p-4">
+                            <h2 id="modalTitle" class="fw-bold mb-2">Car Name</h2>
+                            <h3 id="modalPrice" class="fw-black mb-3" style="color: #ffd700;">$0</h3>
+                            <p id="modalDesc" class="text-muted mb-4">Description goes here.</p>
+                            
+                            <div class="bg-light p-3 rounded-3 mb-4">
+                                <div class="row text-center g-3">
+                                    <div class="col-4">
+                                        <i class="bi bi-speedometer2 text-warning d-block mb-1"></i>
+                                        <small class="text-muted d-block">Top Speed</small>
+                                        <strong id="specSpeed" class="small"></strong>
+                                    </div>
+                                    <div class="col-4">
+                                        <i class="bi bi-lightning-charge text-warning d-block mb-1"></i>
+                                        <small class="text-muted d-block">0-100 km/h</small>
+                                        <strong id="specAccel" class="small"></strong>
+                                    </div>
+                                    <div class="col-4">
+                                        <i class="bi bi-gear text-warning d-block mb-1"></i>
+                                        <small class="text-muted d-block">Engine</small>
+                                        <strong id="specEngine" class="small"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2">
+                                <button class="btn em-btn-primary" id="modalAddToCart">
+                                    <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                                </button>
+                                <button class="btn btn-outline-dark rounded-pill" data-bs-dismiss="modal">Continue Browsing</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Success Modal -->
+    <div class="modal fade" id="wishlistSuccessModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4 rounded-4 text-center">
+                <div class="success-icon" style="background: #dc3545; color: #fff;">
+                    <i class="bi bi-heart-fill"></i>
+                </div>
+                <h4 class="fw-bold mb-2">Added to Wishlist!</h4>
+                <p class="text-muted mb-4"><span id="wishlistItemName"></span> has been added to your wishlist.</p>
+                <div class="d-grid gap-2">
+                    <a href="user-dashboard.html#wishlist" class="btn em-btn-primary">View Wishlist</a>
+                    <button type="button" class="btn btn-outline-dark rounded-pill" data-bs-dismiss="modal">Continue Shopping</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Prompt Modal -->
+    <div class="modal fade" id="loginPromptModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4 rounded-4 text-center">
+                <div class="success-icon" style="background: #6c757d; color: #fff;">
+                    <i class="bi bi-person-lock"></i>
+                </div>
+                <h4 class="fw-bold mb-2">Login Required</h4>
+                <p class="text-muted mb-4">Please sign in to add items to your wishlist.</p>
+                <div class="d-grid gap-2">
+                    <a href="login.html" class="btn em-btn-primary">Sign In</a>
+                    <button type="button" class="btn btn-outline-dark rounded-pill" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+        // Extended car inventory with more items
+        const allCars = [
+            {
+                id: 'car-1',
+                name: 'Bugatti Chiron Super Sport',
+                price: 3800000,
+                category: 'hypercar',
+                image: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=800',
+                description: 'The ultimate hypercar with quad-turbocharged W16 engine producing 1600 HP.',
+                speed: '440 km/h',
+                acceleration: '2.3s',
+                engine: 'W16 Quad-Turbo',
+                status: 'available',
+                featured: true
+            },
+            {
+                id: 'car-2',
+                name: 'Ferrari 250 GTO',
+                price: 48000000,
+                category: 'classic',
+                image: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=800',
+                description: 'One of the most valuable and collectible Ferraris ever made. A true piece of automotive history.',
+                speed: '280 km/h',
+                acceleration: '5.5s',
+                engine: '3.0L V12',
+                status: 'available',
+                featured: true
+            },
+            {
+                id: 'car-3',
+                name: 'Lamborghini Revuelto',
+                price: 608000,
+                category: 'hypercar',
+                image: 'https://images.unsplash.com/photo-1566008885218-90abf9200ddb?auto=format&fit=crop&q=80&w=800',
+                description: 'The first V12 hybrid Lamborghini, combining raw power with electrification.',
+                speed: '350 km/h',
+                acceleration: '2.5s',
+                engine: 'V12 Hybrid',
+                status: 'available',
+                featured: true
+            },
+            {
+                id: 'car-4',
+                name: 'Porsche 911 GT3 RS',
+                price: 225000,
+                category: 'sports',
+                image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800',
+                description: 'Track-focused perfection with naturally aspirated flat-six engine.',
+                speed: '312 km/h',
+                acceleration: '3.2s',
+                engine: '4.0L Flat-6',
+                status: 'available',
+                featured: false
+            },
+            {
+                id: 'car-5',
+                name: 'McLaren 720S Spider',
+                price: 315000,
+                category: 'supercar',
+                image: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&q=80&w=800',
+                description: 'Open-top thrills with incredible performance and lightweight construction.',
+                speed: '341 km/h',
+                acceleration: '2.9s',
+                engine: '4.0L Twin-Turbo V8',
+                status: 'available',
+                featured: false
+            },
+            {
+                id: 'car-6',
+                name: 'Lamborghini Huracan EVO',
+                price: 280000,
+                category: 'supercar',
+                image: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=800',
+                description: 'Naturally aspirated V10 supercar with advanced aerodynamics.',
+                speed: '325 km/h',
+                acceleration: '2.9s',
+                engine: '5.2L V10',
+                status: 'available',
+                featured: false
+            },
+            {
+                id: 'car-7',
+                name: 'Ferrari 488 Pista',
+                price: 350000,
+                category: 'supercar',
+                image: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=800',
+                description: 'Track-derived performance with the most powerful V8 in Ferrari history.',
+                speed: '340 km/h',
+                acceleration: '2.85s',
+                engine: 'Twin-Turbo V8',
+                status: 'available',
+                featured: false
+            },
+            {
+                id: 'car-8',
+                name: 'Aston Martin DBS Superleggera',
+                price: 316000,
+                category: 'luxury',
+                image: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&q=80&w=800',
+                description: 'Grand touring excellence with breathtaking design and performance.',
+                speed: '340 km/h',
+                acceleration: '3.4s',
+                engine: '5.2L Twin-Turbo V12',
+                status: 'available',
+                featured: false
+            },
+            {
+                id: 'car-9',
+                name: 'Mercedes 300SL Gullwing',
+                price: 1500000,
+                category: 'classic',
+                image: 'https://images.unsplash.com/photo-1566024164372-0281f1133aa6?auto=format&fit=crop&q=80&w=800',
+                description: 'Iconic gullwing doors and racing heritage. A true automotive legend.',
+                speed: '260 km/h',
+                acceleration: '8.8s',
+                engine: '3.0L Inline-6',
+                status: 'available',
+                featured: false
+            },
+            {
+                id: 'car-10',
+                name: 'Koenigsegg Jesko',
+                price: 3000000,
+                category: 'hypercar',
+                image: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=800',
+                description: 'Swedish hypercar masterpiece with revolutionary Light Speed Transmission.',
+                speed: '480 km/h',
+                acceleration: '2.5s',
+                engine: '5.0L Twin-Turbo V8',
+                status: 'reserved',
+                featured: false
+            },
+            {
+                id: 'car-11',
+                name: 'Bentley Continental GT',
+                price: 245000,
+                category: 'luxury',
+                image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=800',
+                description: 'The definitive grand tourer combining luxury craftsmanship with performance.',
+                speed: '333 km/h',
+                acceleration: '3.6s',
+                engine: '6.0L W12 Twin-Turbo',
+                status: 'available',
+                featured: false
+            },
+            {
+                id: 'car-12',
+                name: 'Ferrari SF90 Stradale',
+                price: 507000,
+                category: 'hypercar',
+                image: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=800',
+                description: 'Ferrari\'s first plug-in hybrid with 986 combined horsepower.',
+                speed: '340 km/h',
+                acceleration: '2.5s',
+                engine: 'V8 Hybrid',
+                status: 'available',
+                featured: false
+            }
+        ];
+
+        // State
+        let filteredCars = [...allCars];
+        let currentCategory = 'all';
+        let currentSort = 'featured';
+        let currentPrice = 'all';
+        let searchTerm = '';
+        // Use emCart from main.js (already declared globally)
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                renderCars();
+                setupEventListeners();
+                updateBadge();
+            } catch (e) {
+                console.error('Error initializing inventory:', e);
+                document.getElementById('inventoryGrid').innerHTML = '<div class="col-12 text-center py-5"><p class="text-danger">Error loading vehicles. Please refresh the page.</p></div>';
+            }
+        });
+
+        // Fallback: If DOMContentLoaded already fired, run immediately
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(function() {
+                var grid = document.getElementById('inventoryGrid');
+                if (grid && grid.children.length === 0) {
+                    try {
+                        renderCars();
+                        setupEventListeners();
+                        updateBadge();
+                    } catch (e) {
+                        console.error('Error initializing inventory:', e);
+                    }
+                }
+            }, 100);
+        }
+
+        function setupEventListeners() {
+            // Category tabs
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCategory = this.dataset.category;
+                    applyFilters();
+                });
+            });
+
+            // Sort select
+            document.getElementById('sortSelect').addEventListener('change', function() {
+                currentSort = this.value;
+                applyFilters();
+            });
+
+            // Price select
+            document.getElementById('priceSelect').addEventListener('change', function() {
+                currentPrice = this.value;
+                applyFilters();
+            });
+
+            // Search input
+            document.getElementById('searchInput').addEventListener('input', function() {
+                searchTerm = this.value.toLowerCase();
+                applyFilters();
+            });
+        }
+
+        function applyFilters() {
+            filteredCars = allCars.filter(car => {
+                // Category filter
+                if (currentCategory !== 'all' && car.category !== currentCategory) return false;
+                
+                // Price filter
+                if (currentPrice !== 'all') {
+                    const [min, max] = currentPrice.split('-').map(Number);
+                    if (car.price < min || car.price > max) return false;
+                }
+                
+                // Search filter
+                if (searchTerm) {
+                    const searchStr = `${car.name} ${car.category} ${car.engine}`.toLowerCase();
+                    if (!searchStr.includes(searchTerm)) return false;
+                }
+                
+                return true;
+            });
+
+            // Sort
+            switch(currentSort) {
+                case 'price-low':
+                    filteredCars.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    filteredCars.sort((a, b) => b.price - a.price);
+                    break;
+                case 'name':
+                    filteredCars.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'featured':
+                default:
+                    filteredCars.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+            }
+
+            renderCars();
+        }
+
+        function renderCars() {
+            const grid = document.getElementById('inventoryGrid');
+            const noResults = document.getElementById('noResults');
+            const resultsCount = document.getElementById('resultsCount');
+
+            resultsCount.textContent = `${filteredCars.length} vehicle${filteredCars.length !== 1 ? 's' : ''}`;
+
+            if (filteredCars.length === 0) {
+                grid.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            noResults.style.display = 'none';
+
+            grid.innerHTML = filteredCars.map(car => {
+                const categoryColors = {
+                    hypercar: 'bg-danger',
+                    supercar: 'bg-warning text-dark',
+                    sports: 'bg-primary',
+                    classic: 'bg-dark',
+                    luxury: 'bg-success'
+                };
+
+                const statusBadge = car.status !== 'available' 
+                    ? `<span class="car-status bg-warning text-dark">${car.status}</span>` 
+                    : '';
+
+                return `
+                    <div class="col-lg-4 col-md-6">
+                        <div class="car-card">
+                            <div class="car-image">
+                                <img src="${car.image}" alt="${car.name}" onerror="this.src='https://via.placeholder.com/800x400?text=No+Image'">
+                                <span class="car-badge ${categoryColors[car.category] || 'bg-secondary'}">${car.category}</span>
+                                ${statusBadge}
+                                <button class="car-wishlist" onclick="addToWishlist('${car.id}')" title="Add to Wishlist">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+                            </div>
+                            <div class="car-body">
+                                <div class="car-category">${car.category}</div>
+                                <h5>${car.name}</h5>
+                                <div class="car-price">$${car.price.toLocaleString()}</div>
+                                <div class="car-specs">
+                                    <span class="spec-badge"><i class="bi bi-speedometer2"></i> ${car.speed}</span>
+                                    <span class="spec-badge"><i class="bi bi-lightning-charge"></i> ${car.acceleration}</span>
+                                </div>
+                                <div class="car-actions">
+                                    <button class="btn em-btn-primary" onclick="addToCart('${car.id}')" ${car.status !== 'available' ? 'disabled' : ''}>
+                                        ${car.status === 'available' ? 'Add to Cart' : 'Reserved'}
+                                    </button>
+                                    <button class="btn btn-outline-dark rounded-pill" onclick="openModal('${car.id}')">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function resetFilters() {
+            currentCategory = 'all';
+            currentSort = 'featured';
+            currentPrice = 'all';
+            searchTerm = '';
+
+            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector('.filter-tab[data-category="all"]').classList.add('active');
+            document.getElementById('sortSelect').value = 'featured';
+            document.getElementById('priceSelect').value = 'all';
+            document.getElementById('searchInput').value = '';
+
+            applyFilters();
+        }
+
+        function updateBadge() {
+            const badge = document.getElementById('em-cart-count');
+            if (badge) {
+                const totalItems = emCart.reduce((sum, item) => sum + item.quantity, 0);
+                badge.innerText = totalItems;
+            }
+        }
+
+        function addToCart(carId) {
+            const car = allCars.find(c => c.id === carId);
+            if (!car || car.status !== 'available') return;
+
+            const existingItem = emCart.find(item => item.id === carId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                emCart.push({
+                    id: car.id,
+                    name: car.name,
+                    price: car.price,
+                    image: car.image,
+                    type: 'Sale',
+                    quantity: 1
+                });
+            }
+
+            localStorage.setItem('emCart', JSON.stringify(emCart));
+            updateBadge();
+
+            if (typeof showToast === 'function') {
+                showToast(`${car.name} added to cart!`, 'success');
+            }
+        }
+
+        function addToWishlist(carId) {
+            const car = allCars.find(c => c.id === carId);
+            if (!car) return;
+
+            const user = typeof EMAuth !== 'undefined' ? EMAuth.getCurrentUser() : null;
+            
+            if (!user || !user.isLoggedIn || user.userType !== 'user') {
+                new bootstrap.Modal(document.getElementById('loginPromptModal')).show();
+                return;
+            }
+
+            EMAuth.addToWishlist(user.googleId, {
+                id: car.id,
+                name: car.name,
+                price: car.price,
+                image: car.image,
+                type: 'car'
+            });
+
+            document.getElementById('wishlistItemName').innerText = car.name;
+            new bootstrap.Modal(document.getElementById('wishlistSuccessModal')).show();
+        }
+
+        function openModal(carId) {
+            const car = allCars.find(c => c.id === carId);
+            if (!car) return;
+
+            document.getElementById('modalTitle').innerText = car.name;
+            document.getElementById('modalPrice').innerText = '$' + car.price.toLocaleString();
+            document.getElementById('modalDesc').innerText = car.description;
+            document.getElementById('modalImg').src = car.image;
+            document.getElementById('modalCategory').innerText = car.category;
+            document.getElementById('specSpeed').innerText = car.speed;
+            document.getElementById('specAccel').innerText = car.acceleration;
+            document.getElementById('specEngine').innerText = car.engine;
+
+            const addToCartBtn = document.getElementById('modalAddToCart');
+            addToCartBtn.disabled = car.status !== 'available';
+            addToCartBtn.innerHTML = car.status === 'available' 
+                ? '<i class="bi bi-cart-plus me-2"></i>Add to Cart'
+                : '<i class="bi bi-lock me-2"></i>Reserved';
+            addToCartBtn.onclick = () => {
+                addToCart(carId);
+                bootstrap.Modal.getInstance(document.getElementById('productModal')).hide();
+            };
+
+            new bootstrap.Modal(document.getElementById('productModal')).show();
+        }
+
+        // Immediately render cars when script loads
+        (function initInventory() {
+            try {
+                renderCars();
+                setupEventListeners();
+                updateBadge();
+                console.log('Inventory initialized with', filteredCars.length, 'cars');
+            } catch (e) {
+                console.error('Init error:', e);
+            }
+        })();
+    </script>
+</body>
+</html>
