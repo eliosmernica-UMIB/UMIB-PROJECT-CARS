@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EM Luxury Cars - Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Hero Section */
+        .blog-hero {
+            min-height: 50vh;
+            background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 100%),
+                        url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+        .blog-hero .badge-label {
+            background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
+            color: #000;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        
+        /* Category Filters */
+        .category-filters {
+            background: #fff;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 70px;
+            z-index: 100;
+        }
+        .filter-btn {
+            padding: 10px 25px;
+            border: 2px solid #e0e0e0;
+            background: transparent;
+            border-radius: 50px;
+            font-weight: 600;
+            color: #333;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #111;
+            border-color: #111;
+            color: #fff;
+        }
+        
+        /* Featured Post */
+        .featured-post {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 60px;
+        }
+        .featured-post .featured-img {
+            height: 400px;
+            overflow: hidden;
+        }
+        .featured-post .featured-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .featured-post:hover .featured-img img {
+            transform: scale(1.05);
+        }
+        .featured-post .featured-content {
+            padding: 40px;
+        }
+        .featured-badge {
+            background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
+            color: #000;
+            font-weight: 600;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+        }
+        
+        /* Blog Cards */
+        .blog-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .blog-card .card-img-container {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        .blog-card .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .blog-card:hover .card-img-container img {
+            transform: scale(1.1);
+        }
+        .blog-card .category-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(0,0,0,0.8);
+            color: #c9a033;
+            font-weight: 600;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+        }
+        .blog-card .card-body {
+            padding: 25px;
+        }
+        .blog-card .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            color: #888;
+        }
+        .blog-card .card-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .blog-card .read-more {
+            color: #c9a033;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s ease;
+        }
+        .blog-card .read-more:hover {
+            gap: 10px;
+        }
+        
+        /* Newsletter Section */
+        .newsletter-section {
+            background: #111;
+            padding: 80px 0;
+        }
+        .newsletter-section h3 {
+            color: #fff;
+        }
+        .newsletter-section p {
+            color: #888;
+        }
+        .newsletter-form .form-control {
+            padding: 15px 25px;
+            border-radius: 50px 0 0 50px;
+            border: none;
+            font-size: 1rem;
+        }
+        .newsletter-form .btn {
+            border-radius: 0 50px 50px 0;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
+            border: none;
+            color: #000;
+            font-weight: 600;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .empty-state i {
+            font-size: 5rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body id="em-body">
+
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg fixed-top em-navbar">
+        <div class="container">
+            <a class="navbar-brand em-brand" href="index.html">
+                EM<span class="em-accent">.</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#emNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="emNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link em-nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            Shop NOW
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="inventory.html">Buy Cars</a></li>
+                            <li><a class="dropdown-item" href="rent.html">Rent a Car</a></li>
+                            <li><a class="dropdown-item" href="parts.html">Car Parts</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link active" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="testimonials.html">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="checkout.html" class="btn em-btn-primary position-relative">
+                            Cart
+                            <span id="em-cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                0
+                            </span>
+                        </a>
+                    </li>
+                    <ul class="navbar-nav ms-lg-2" id="em-nav-auth"></ul>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="blog-hero">
+        <div class="container">
+            <div class="text-center">
+                <span class="badge-label mb-4 d-inline-block">NEWS & INSIGHTS</span>
+                <h1 class="display-3 fw-bold text-white mb-4">The EM Blog</h1>
+                <p class="lead text-white-50 mx-auto" style="max-width: 600px;">
+                    Expert insights, industry news, and stories from the world of luxury automobiles.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Filters -->
+    <section class="category-filters">
+        <div class="container">
+            <div class="text-center">
+                <button class="filter-btn active" data-category="all">All Posts</button>
+                <button class="filter-btn" data-category="news">News</button>
+                <button class="filter-btn" data-category="reviews">Reviews</button>
+                <button class="filter-btn" data-category="guides">Guides</button>
+                <button class="filter-btn" data-category="lifestyle">Lifestyle</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Content -->
+    <section class="py-5" style="background: #f8f9fa;">
+        <div class="container py-4">
+            
+            <!-- Featured Post (Static Fallback) -->
+            <div id="featured-post-container">
+                <!-- Will be populated by JS -->
+            </div>
+            
+            <!-- Blog Grid -->
+            <div class="row g-4" id="blog-container">
+                <!-- Blog posts loaded dynamically -->
+                <div class="col-12 text-center py-5">
+                    <div class="spinner-border text-warning" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-3 text-muted">Loading blog posts...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <h3 class="fw-bold mb-3">Stay in the Fast Lane</h3>
+                    <p class="mb-4">Subscribe to our newsletter for the latest news, reviews, and exclusive offers.</p>
+                    <form class="newsletter-form d-flex">
+                        <input type="email" class="form-control flex-grow-1" placeholder="Enter your email">
+                        <button type="submit" class="btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="em-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="text-white fw-bold mb-3">EM<span class="em-accent">.</span> Luxury Cars</h5>
+                    <p class="text-muted">The premier destination for automotive excellence. Buying, renting, and upgrading - we do it all with passion and precision.</p>
+                    <div class="em-social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="inventory.html" class="text-muted">Inventory</a></li>
+                        <li class="mb-2"><a href="rent.html" class="text-muted">Rentals</a></li>
+                        <li class="mb-2"><a href="parts.html" class="text-muted">Parts Shop</a></li>
+                        <li class="mb-2"><a href="gallery.html" class="text-muted">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Company</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="about.html" class="text-muted">About Us</a></li>
+                        <li class="mb-2"><a href="blog.html" class="text-muted">Blog</a></li>
+                        <li class="mb-2"><a href="testimonials.html" class="text-muted">Reviews</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-muted">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Contact Info</h6>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2"></i>123 Luxury Blvd, Beverly Hills, CA</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2"></i>+1 (555) 123-4567</li>
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i>info@emcars.com</li>
+                        <li class="mb-2"><i class="bi bi-clock me-2"></i>Mon-Sat: 9AM - 7PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-4 pt-4 border-top border-secondary">
+                <p class="mb-0 text-muted small">&copy; 2026 EM Luxury Cars. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Blog Post Modal -->
+    <div class="modal fade" id="blogPostModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content" style="border-radius: 20px; overflow: hidden;">
+                <div class="modal-header border-0 position-absolute w-100" style="z-index: 10;">
+                    <button type="button" class="btn-close bg-white rounded-circle p-2" data-bs-dismiss="modal" style="position: absolute; right: 15px; top: 15px;"></button>
+                </div>
+                <div class="modal-body p-0" id="blog-post-content">
+                    <!-- Content loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Default blog posts (shown when no admin posts exist)
+        const defaultBlogPosts = [
+            {
+                id: 'default-1',
+                title: 'The Rise of Electric Hypercars: What the Future Holds',
+                excerpt: 'From Rimac to Pininfarina, electric hypercars are redefining what performance means in the automotive world.',
+                content: 'The automotive industry is witnessing a revolutionary shift as electric hypercars emerge as the new kings of performance. Brands like Rimac, Pininfarina, and even traditional powerhouses like Ferrari are embracing electrification.\n\nThe Rimac Nevera, for instance, produces an astounding 1,914 horsepower and can accelerate from 0-60 mph in just 1.85 seconds - numbers that were unthinkable just a decade ago.\n\nThis shift isn\'t just about raw power; it\'s about reimagining what a supercar can be. Instant torque, lower centers of gravity, and advanced traction control systems are making electric hypercars not just faster, but also more accessible to drive at the limit.\n\nAs battery technology continues to improve, we can expect even more impressive figures and longer ranges. The future of hypercars is electric, and it\'s more exciting than ever.',
+                category: 'news',
+                image: 'https://images.unsplash.com/photo-1617886322168-72b886573c35?auto=format&fit=crop&q=80&w=800',
+                author: 'Marcus Sterling',
+                date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+                featured: true
+            },
+            {
+                id: 'default-2',
+                title: '2024 Porsche 911 GT3 RS Review: Track Weapon Unleashed',
+                excerpt: 'We take the most extreme road-legal 911 to its limits on track and discover what makes it special.',
+                content: 'The Porsche 911 GT3 RS has always been the pinnacle of naturally aspirated performance, and the 2024 model takes this to new heights.\n\nWith its 4.0-liter flat-six producing 518 horsepower and revving to an intoxicating 9,000 RPM, this is a car that demands to be driven hard. The massive rear wing generates over 900 pounds of downforce at speed, keeping the car planted through corners that would unsettle lesser machines.\n\nOn track, the GT3 RS is nothing short of spectacular. The steering is telepathic, the brakes are seemingly fade-proof, and the way it changes direction defies physics. This is a car that rewards precision and punishes laziness.\n\nIs it worth the $230,000 asking price? If you\'re serious about track driving and want one of the most focused driver\'s cars ever made, absolutely.',
+                category: 'reviews',
+                image: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=800',
+                author: 'Sarah Mitchell',
+                date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+                featured: false
+            },
+            {
+                id: 'default-3',
+                title: 'Essential Guide: Maintaining Your Exotic Car',
+                excerpt: 'Expert tips on keeping your luxury vehicle in pristine condition for years to come.',
+                content: 'Owning an exotic car is a privilege that comes with responsibility. Unlike regular vehicles, supercars and hypercars require specialized care to maintain their performance and value.\n\nFirst and foremost, always use manufacturer-recommended fluids and parts. The cost savings of aftermarket alternatives are not worth the potential damage to your investment.\n\nStorage is crucial. If you\'re not driving your exotic regularly, invest in a climate-controlled garage and a quality car cover. Battery tenders prevent discharge, while periodic starts and short drives keep seals lubricated.\n\nFind a specialist. General mechanics, no matter how skilled, often lack the specific training and tools required for exotic cars. Authorized service centers may cost more, but they maintain proper service records that protect resale value.\n\nFinally, drive it! Exotic cars are meant to be enjoyed. Regular use actually helps maintain mechanical components better than extended storage.',
+                category: 'guides',
+                image: 'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&q=80&w=800',
+                author: 'James Donovan',
+                date: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+                featured: false
+            },
+            {
+                id: 'default-4',
+                title: 'Monaco Grand Prix: The Ultimate Luxury Experience',
+                excerpt: 'What it\'s really like to experience F1\'s most glamorous race from a superyacht.',
+                content: 'The Monaco Grand Prix isn\'t just a race; it\'s the ultimate expression of automotive luxury and lifestyle. For those fortunate enough to experience it properly, there\'s nothing quite like it.\n\nWatching the race from a superyacht in the harbor offers unparalleled views of the famous circuit. As cars scream through the tunnel and emerge into the sunlight, you\'re close enough to feel the vibration.\n\nThe social scene is equally impressive. Champagne flows freely, and you\'re likely to spot celebrities, racing legends, and business titans mingling on the decks around you.\n\nBut the real magic happens at night. After the race, Monaco transforms into the world\'s most exclusive party. The Casino Square fills with supercars, and the clubs stay open until dawn.\n\nFor true automotive enthusiasts, the Monaco Grand Prix is a bucket-list experience that combines the best of racing, luxury, and lifestyle.',
+                category: 'lifestyle',
+                image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?auto=format&fit=crop&q=80&w=800',
+                author: 'Marcus Sterling',
+                date: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
+                featured: false
+            },
+            {
+                id: 'default-5',
+                title: 'Classic vs Modern: Ferrari 250 GTO vs SF90 Stradale',
+                excerpt: 'We compare two icons from different eras to see how Ferrari has evolved.',
+                content: 'The Ferrari 250 GTO and the SF90 Stradale represent two different philosophies from the same legendary marque, separated by six decades of innovation.\n\nThe 250 GTO, with its 3.0-liter V12 producing around 300 horsepower, was the ultimate expression of 1960s racing technology. Today, it\'s worth over $50 million and is considered the most valuable car in the world.\n\nThe SF90 Stradale, Ferrari\'s first plug-in hybrid, produces a combined 986 horsepower from its twin-turbo V8 and three electric motors. It can accelerate to 60 mph in just 2.5 seconds and has a top speed of 211 mph.\n\nBut which is better? That\'s missing the point. The 250 GTO represents a purity and connection to the driver that modern cars can\'t replicate. The SF90, meanwhile, showcases what\'s possible when you embrace technology.\n\nBoth cars are masterpieces of their era, and together they tell the story of Ferrari\'s relentless pursuit of excellence.',
+                category: 'reviews',
+                image: 'https://images.unsplash.com/photo-1592198084033-aade902d1f98?auto=format&fit=crop&q=80&w=800',
+                author: 'Sarah Mitchell',
+                date: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
+                featured: false
+            },
+            {
+                id: 'default-6',
+                title: 'The Art of Car Photography: Capturing Automotive Beauty',
+                excerpt: 'Professional tips for photographing your prized possession like a pro.',
+                content: 'Great car photography isn\'t just about having an expensive camera; it\'s about understanding light, composition, and the character of the vehicle you\'re shooting.\n\nThe golden hour - just after sunrise or before sunset - provides the most flattering light for car photography. The warm, soft light reduces harsh reflections and creates dramatic shadows that highlight the car\'s curves.\n\nLocation matters. Choose backgrounds that complement rather than compete with your subject. Industrial settings work well for aggressive sports cars, while elegant architecture suits luxury vehicles.\n\nGet low. Shooting from a low angle makes cars look more imposing and dramatic. Don\'t be afraid to get on the ground for the perfect shot.\n\nPay attention to reflections. The panels of a car act like mirrors, so check what\'s being reflected before you shoot. Sometimes a strategically placed black panel can eliminate distracting reflections.\n\nFinally, tell a story. The best automotive photographs capture not just how a car looks, but how it makes you feel.',
+                category: 'guides',
+                image: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&q=80&w=800',
+                author: 'James Donovan',
+                date: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
+                featured: false
+            }
+        ];
+
+        let currentFilter = 'all';
+        let allPosts = [];
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBlogPosts();
+            setupFilters();
+        });
+
+        function loadBlogPosts() {
+            // Get posts from EMAuth (admin-created) or use defaults
+            let posts = [];
+            if (typeof EMAuth !== 'undefined' && typeof EMAuth.getBlogPosts === 'function') {
+                posts = EMAuth.getBlogPosts();
+            }
+            
+            // If no admin posts, use defaults
+            if (posts.length === 0) {
+                posts = defaultBlogPosts;
+            }
+            
+            allPosts = posts;
+            renderPosts(posts);
+        }
+
+        function renderPosts(posts) {
+            const container = document.getElementById('blog-container');
+            const featuredContainer = document.getElementById('featured-post-container');
+            
+            // Filter posts
+            let filteredPosts = currentFilter === 'all' 
+                ? posts 
+                : posts.filter(p => p.category === currentFilter);
+            
+            if (filteredPosts.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12">
+                        <div class="empty-state">
+                            <i class="bi bi-newspaper"></i>
+                            <h3 class="text-muted">No Posts Found</h3>
+                            <p class="text-muted">Check back soon for new content in this category!</p>
+                        </div>
+                    </div>
+                `;
+                featuredContainer.innerHTML = '';
+                return;
+            }
+
+            // Render featured post (first post with featured flag, or just first post)
+            const featuredPost = filteredPosts.find(p => p.featured) || filteredPosts[0];
+            const regularPosts = filteredPosts.filter(p => p.id !== featuredPost.id);
+            
+            featuredContainer.innerHTML = `
+                <div class="featured-post mb-5" onclick="viewBlogPost('${featuredPost.id}')" style="cursor: pointer;">
+                    <div class="row g-0">
+                        <div class="col-lg-6">
+                            <div class="featured-img">
+                                <img src="${featuredPost.image}" alt="${featuredPost.title}" 
+                                     onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800'">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex align-items-center">
+                            <div class="featured-content">
+                                <span class="featured-badge mb-3 d-inline-block">FEATURED</span>
+                                <span class="text-uppercase text-muted small ms-2">${featuredPost.category || 'General'}</span>
+                                <h2 class="fw-bold mb-3">${featuredPost.title}</h2>
+                                <p class="text-muted mb-4">${featuredPost.excerpt || (featuredPost.content ? featuredPost.content.substring(0, 200) + '...' : '')}</p>
+                                <div class="d-flex align-items-center gap-3 mb-4">
+                                    <span class="text-muted"><i class="bi bi-person me-1"></i>${featuredPost.author || 'Admin'}</span>
+                                    <span class="text-muted"><i class="bi bi-calendar me-1"></i>${formatDate(featuredPost.date)}</span>
+                                </div>
+                                <span class="read-more">Read Article <i class="bi bi-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Render regular posts
+            let html = '';
+            regularPosts.forEach(post => {
+                html += `
+                    <div class="col-lg-4 col-md-6 blog-item" data-category="${post.category}">
+                        <div class="blog-card" onclick="viewBlogPost('${post.id}')" style="cursor: pointer;">
+                            <div class="card-img-container">
+                                <img src="${post.image}" alt="${post.title}"
+                                     onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800'">
+                                <span class="category-badge">${post.category || 'General'}</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-meta">
+                                    <span><i class="bi bi-person me-1"></i>${post.author || 'Admin'}</span>
+                                    <span><i class="bi bi-calendar me-1"></i>${formatDate(post.date)}</span>
+                                </div>
+                                <h5 class="card-title">${post.title}</h5>
+                                <p class="text-muted small mb-3">${post.excerpt || (post.content ? post.content.substring(0, 100) + '...' : '')}</p>
+                                <span class="read-more">Read More <i class="bi bi-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function setupFilters() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilter = this.dataset.category;
+                    renderPosts(allPosts);
+                });
+            });
+        }
+
+        function viewBlogPost(postId) {
+            const post = allPosts.find(p => p.id === postId);
+            if (!post) return;
+
+            const content = `
+                <div class="position-relative">
+                    ${post.image ? `<img src="${post.image}" class="w-100" style="height: 300px; object-fit: cover;" alt="${post.title}">` : ''}
+                    <div class="p-4 p-lg-5">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <span class="badge bg-dark text-warning">${post.category || 'General'}</span>
+                            <span class="text-muted small"><i class="bi bi-calendar me-1"></i>${formatDate(post.date)}</span>
+                        </div>
+                        <h2 class="fw-bold mb-3">${post.title}</h2>
+                        <div class="d-flex align-items-center gap-2 mb-4 pb-4 border-bottom">
+                            <div class="bg-secondary rounded-circle" style="width: 40px; height: 40px;"></div>
+                            <div>
+                                <div class="fw-bold small">${post.author || 'Admin'}</div>
+                                <div class="text-muted small">EM Luxury Cars</div>
+                            </div>
+                        </div>
+                        <div class="blog-content" style="line-height: 1.8;">
+                            ${post.content ? post.content.split('\n').map(p => p.trim() ? `<p>${p}</p>` : '').join('') : ''}
+                        </div>
+                        <div class="mt-4 pt-4 border-top d-flex justify-content-between align-items-center">
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3"><i class="bi bi-heart me-1"></i>Like</button>
+                                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3"><i class="bi bi-share me-1"></i>Share</button>
+                            </div>
+                            <button class="btn btn-sm btn-dark rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('blog-post-content').innerHTML = content;
+            new bootstrap.Modal(document.getElementById('blogPostModal')).show();
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return 'N/A';
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+    </script>
+</body>
+</html>
