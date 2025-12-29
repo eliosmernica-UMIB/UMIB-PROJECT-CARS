@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EM Luxury Cars - Rent</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Hero Section */
+        .rent-hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 100%),
+                        url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            padding: 100px 0;
+        }
+        @media (max-width: 991px) {
+            .rent-hero {
+                background-attachment: scroll;
+                min-height: auto;
+                padding: 120px 0 60px;
+            }
+        }
+        .rent-hero .badge-label {
+            background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
+            color: #000;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        
+        /* Booking Card */
+        .booking-card {
+            background: rgba(255,255,255,0.98);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+        .booking-card h3 {
+            font-weight: 700;
+        }
+        
+        /* Selected Car Preview */
+        .car-preview {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .car-preview img {
+            width: 100px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .car-preview .remove-btn {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #dc3545;
+            color: #fff;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .car-placeholder {
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .car-placeholder i {
+            font-size: 2rem;
+            color: #ccc;
+        }
+        
+        /* Price Display */
+        .price-display {
+            background: linear-gradient(135deg, #111 0%, #222 100%);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .price-display .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #c9a033;
+        }
+        .price-display .details {
+            color: #aaa;
+        }
+        
+        /* Fleet Section */
+        .fleet-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+        .fleet-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .fleet-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .fleet-card .card-img-container {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        .fleet-card .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .fleet-card:hover .card-img-container img {
+            transform: scale(1.1);
+        }
+        .fleet-card .status-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .fleet-card .card-body {
+            padding: 25px;
+        }
+        .fleet-card .card-title {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .fleet-card .daily-rate {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #c9a033;
+        }
+        .fleet-card .daily-rate span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #888;
+        }
+        .fleet-card .btn-select {
+            background: #111;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        .fleet-card .btn-select:hover {
+            background: #c9a033;
+            color: #000;
+        }
+        .fleet-card .btn-select:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .fleet-card.unavailable {
+            opacity: 0.7;
+        }
+        .fleet-card.unavailable .card-img-container img {
+            filter: grayscale(70%);
+        }
+        
+        /* Features */
+        .features-bar {
+            background: #111;
+            padding: 50px 0;
+        }
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+        }
+        .feature-item i {
+            font-size: 2rem;
+            color: #c9a033;
+            margin-bottom: 10px;
+        }
+        .feature-item h6 {
+            color: #fff;
+            font-weight: 600;
+        }
+        .feature-item p {
+            color: #888;
+            font-size: 0.85rem;
+            margin: 0;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 80px 0;
+            background: #fff;
+        }
+        .step-card {
+            text-align: center;
+            padding: 30px;
+        }
+        .step-card .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #000;
+            margin: 0 auto 20px;
+        }
+        .step-card h5 {
+            font-weight: 700;
+        }
+        .step-card p {
+            color: #666;
+        }
+    </style>
+</head>
+<body id="em-body">
+
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg fixed-top em-navbar">
+        <div class="container">
+            <a class="navbar-brand em-brand" href="index.html">
+                EM<span class="em-accent">.</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#emNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="emNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link em-nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            Shop NOW
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="inventory.html">Buy Cars</a></li>
+                            <li><a class="dropdown-item active" href="rent.html">Rent a Car</a></li>
+                            <li><a class="dropdown-item" href="parts.html">Car Parts</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="testimonials.html">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="checkout.html" class="btn em-btn-primary position-relative">
+                            Cart
+                            <span id="em-cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                0
+                            </span>
+                        </a>
+                    </li>
+                    <ul class="navbar-nav ms-lg-2" id="em-nav-auth"></ul>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Booking Form -->
+    <section class="rent-hero">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <span class="badge-label mb-4 d-inline-block">LUXURY RENTALS</span>
+                    <h1 class="display-3 fw-bold text-white mb-4">Drive Your<br>Dream Today</h1>
+                    <p class="lead text-white-50 mb-4">
+                        Experience the thrill of driving the world's most exclusive supercars and hypercars. 
+                        From weekend getaways to special occasions.
+                    </p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <div class="text-center px-4 py-3 bg-white bg-opacity-10 rounded-3">
+                            <h4 class="text-white fw-bold mb-0">50+</h4>
+                            <small class="text-white-50">Vehicles</small>
+                        </div>
+                        <div class="text-center px-4 py-3 bg-white bg-opacity-10 rounded-3">
+                            <h4 class="text-white fw-bold mb-0">24/7</h4>
+                            <small class="text-white-50">Support</small>
+                        </div>
+                        <div class="text-center px-4 py-3 bg-white bg-opacity-10 rounded-3">
+                            <h4 class="text-white fw-bold mb-0">100%</h4>
+                            <small class="text-white-50">Insured</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="booking-card">
+                        <h3 class="mb-4">Book Your Rental</h3>
+                        
+                        <form id="rentalForm" onsubmit="event.preventDefault(); handleBooking();">
+                            <!-- Car Placeholder -->
+                            <div id="car-placeholder" class="car-placeholder">
+                                <i class="bi bi-car-front"></i>
+                                <p class="mb-0 mt-2 text-muted">Select a car from the fleet below</p>
+                            </div>
+                            
+                            <!-- Selected Car Preview -->
+                            <div id="car-preview" class="car-preview" style="display: none;">
+                                <button type="button" class="remove-btn" onclick="removeCar()">
+                                    <i class="bi bi-x"></i>
+                                </button>
+                                <img id="preview-img" src="" alt="Selected Car">
+                                <div>
+                                    <h6 class="fw-bold mb-1" id="preview-name">Car Name</h6>
+                                    <p class="text-muted mb-0 small" id="preview-rate">$0 / day</p>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Pick-up Date</label>
+                                    <input type="date" id="em-start-date" class="form-control form-control-lg" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Return Date</label>
+                                    <input type="date" id="em-end-date" class="form-control form-control-lg" required>
+                                </div>
+                            </div>
+                            
+                            <div class="price-display">
+                                <div id="em-price-display">
+                                    <p class="details mb-2">Select a car and dates to see pricing</p>
+                                    <div class="price">$0</div>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn em-btn-primary w-100 py-3">
+                                <i class="bi bi-calendar-check me-2"></i>Book Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Bar -->
+    <section class="features-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-lg-3">
+                    <div class="feature-item">
+                        <i class="bi bi-shield-check"></i>
+                        <h6>Fully Insured</h6>
+                        <p>Comprehensive coverage</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="feature-item">
+                        <i class="bi bi-truck"></i>
+                        <h6>Free Delivery</h6>
+                        <p>Within 50 miles</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="feature-item">
+                        <i class="bi bi-fuel-pump"></i>
+                        <h6>Full Tank</h6>
+                        <p>Ready to drive</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="feature-item">
+                        <i class="bi bi-headset"></i>
+                        <h6>24/7 Support</h6>
+                        <p>Always available</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fleet Section -->
+    <section class="fleet-section" id="fleet">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="badge-label mb-3 d-inline-block">OUR FLEET</span>
+                <h2 class="display-5 fw-bold">Choose Your Experience</h2>
+                <p class="text-muted">Select from our curated collection of luxury vehicles</p>
+            </div>
+            
+            <div class="row g-4" id="rental-cars-grid">
+                <!-- Cars loaded dynamically -->
+                <div class="col-12 text-center py-5">
+                    <div class="spinner-border text-warning" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-3 text-muted">Loading fleet...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="badge-label mb-3 d-inline-block">HOW IT WORKS</span>
+                <h2 class="display-5 fw-bold">Rent in 3 Easy Steps</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h5>Choose Your Car</h5>
+                        <p>Browse our exclusive fleet and select your dream ride from our available vehicles.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h5>Pick Your Dates</h5>
+                        <p>Select your pick-up and return dates. Get instant pricing with no hidden fees.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h5>Hit the Road</h5>
+                        <p>Complete booking, and we'll deliver your car fully fueled and ready to drive.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="em-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="text-white fw-bold mb-3">EM<span class="em-accent">.</span> Luxury Cars</h5>
+                    <p class="text-muted">The premier destination for automotive excellence. Buying, renting, and upgrading - we do it all with passion and precision.</p>
+                    <div class="em-social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="inventory.html" class="text-muted">Inventory</a></li>
+                        <li class="mb-2"><a href="rent.html" class="text-muted">Rentals</a></li>
+                        <li class="mb-2"><a href="parts.html" class="text-muted">Parts Shop</a></li>
+                        <li class="mb-2"><a href="gallery.html" class="text-muted">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Company</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="about.html" class="text-muted">About Us</a></li>
+                        <li class="mb-2"><a href="blog.html" class="text-muted">Blog</a></li>
+                        <li class="mb-2"><a href="testimonials.html" class="text-muted">Reviews</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-muted">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Contact Info</h6>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2"></i>123 Luxury Blvd, Beverly Hills, CA</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2"></i>+1 (555) 123-4567</li>
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i>info@emcars.com</li>
+                        <li class="mb-2"><i class="bi bi-clock me-2"></i>Mon-Sat: 9AM - 7PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-4 pt-4 border-top border-secondary">
+                <p class="mb-0 text-muted small">&copy; 2026 EM Luxury Cars. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    
+    <script>
+        // Default rental cars
+        const defaultRentalCars = [
+            {
+                id: 'rental-1',
+                name: 'Lamborghini Huracán EVO',
+                dailyRate: 1500,
+                image: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=600',
+                status: 'available',
+                specs: '640 HP | V10 | AWD'
+            },
+            {
+                id: 'rental-2',
+                name: 'Ferrari 488 Spider',
+                dailyRate: 1800,
+                image: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=600',
+                status: 'available',
+                specs: '661 HP | V8 TT | Convertible'
+            },
+            {
+                id: 'rental-3',
+                name: 'Porsche 911 Turbo S',
+                dailyRate: 1200,
+                image: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=600',
+                status: 'available',
+                specs: '640 HP | Flat-6 TT | AWD'
+            },
+            {
+                id: 'rental-4',
+                name: 'McLaren 720S',
+                dailyRate: 2000,
+                image: 'https://images.unsplash.com/photo-1621135802920-133df287f89c?auto=format&fit=crop&q=80&w=600',
+                status: 'available',
+                specs: '710 HP | V8 TT | RWD'
+            },
+            {
+                id: 'rental-5',
+                name: 'Rolls-Royce Cullinan',
+                dailyRate: 2500,
+                image: 'https://images.unsplash.com/photo-1563720360172-67b8f3dce741?auto=format&fit=crop&q=80&w=600',
+                status: 'available',
+                specs: '563 HP | V12 | Luxury SUV'
+            },
+            {
+                id: 'rental-6',
+                name: 'Bentley Continental GT',
+                dailyRate: 1400,
+                image: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&q=80&w=600',
+                status: 'unavailable',
+                specs: '626 HP | W12 | Grand Tourer'
+            },
+            {
+                id: 'rental-7',
+                name: 'Aston Martin DBS',
+                dailyRate: 1600,
+                image: 'https://images.unsplash.com/photo-1596468138838-6f97fa90d0a1?auto=format&fit=crop&q=80&w=600',
+                status: 'available',
+                specs: '715 HP | V12 | RWD'
+            },
+            {
+                id: 'rental-8',
+                name: 'Mercedes-AMG GT R',
+                dailyRate: 1100,
+                image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=600',
+                status: 'available',
+                specs: '577 HP | V8 TT | Track Beast'
+            }
+        ];
+
+        let selectedCar = null;
+        const startDateInput = document.getElementById('em-start-date');
+        const endDateInput = document.getElementById('em-end-date');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set min date to today
+            const today = new Date().toISOString().split('T')[0];
+            startDateInput.setAttribute('min', today);
+            endDateInput.setAttribute('min', today);
+            
+            if (typeof EMAuth !== 'undefined') {
+                EMAuth.initializeDefaultInventory();
+            }
+            loadRentalCars();
+            
+            // Date change listeners
+            startDateInput.addEventListener('change', calculateTotal);
+            endDateInput.addEventListener('change', calculateTotal);
+        });
+
+        function loadRentalCars() {
+            const grid = document.getElementById('rental-cars-grid');
+            let rentalCars = [];
+            
+            if (typeof EMAuth !== 'undefined' && typeof EMAuth.getRentalCars === 'function') {
+                rentalCars = EMAuth.getRentalCars();
+            }
+            
+            if (rentalCars.length === 0) {
+                rentalCars = defaultRentalCars;
+            }
+            
+            if (rentalCars.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="bi bi-car-front display-1 text-muted"></i>
+                        <h4 class="mt-3">No Rental Cars Available</h4>
+                        <p class="text-muted">Check back soon for new arrivals!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            rentalCars.forEach(car => {
+                const isAvailable = car.status === 'available';
+                const statusBadge = isAvailable 
+                    ? '<span class="status-badge bg-success text-white">Available</span>'
+                    : '<span class="status-badge bg-danger text-white">Reserved</span>';
+                const cardClass = isAvailable ? '' : 'unavailable';
+                
+                html += `
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="fleet-card ${cardClass}">
+                            <div class="card-img-container">
+                                <img src="${car.image}" alt="${car.name}">
+                                ${statusBadge}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">${car.name}</h5>
+                                <p class="text-muted small mb-3">${car.specs || car.description || ''}</p>
+                                <div class="daily-rate mb-3">
+                                    $${car.dailyRate.toLocaleString()} <span>/ day</span>
+                                </div>
+                                <button class="btn-select" 
+                                    ${!isAvailable ? 'disabled' : ''}
+                                    onclick="selectCar('${car.name.replace(/'/g, "\\'")}', ${car.dailyRate}, '${car.image}', ${isAvailable})">
+                                    ${isAvailable ? 'Select This Car' : 'Currently Reserved'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            grid.innerHTML = html;
+        }
+
+        function selectCar(name, rate, image, isAvailable) {
+            if (!isAvailable) {
+                if (typeof showNotificationModal === 'function') {
+                    showNotificationModal(`Sorry, the ${name} is currently reserved.`, 'error', 'Car Unavailable');
+                }
+                return;
+            }
+
+            selectedCar = { name, rate, image };
+            
+            document.getElementById('car-placeholder').style.display = 'none';
+            const preview = document.getElementById('car-preview');
+            preview.style.display = 'flex';
+            
+            document.getElementById('preview-name').innerText = name;
+            document.getElementById('preview-rate').innerText = `$${rate.toLocaleString()} / day`;
+            document.getElementById('preview-img').src = image;
+            
+            calculateTotal();
+            
+            // Scroll to booking form
+            document.querySelector('.booking-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function removeCar() {
+            selectedCar = null;
+            document.getElementById('car-preview').style.display = 'none';
+            document.getElementById('car-placeholder').style.display = 'block';
+            
+            document.getElementById('em-price-display').innerHTML = `
+                <p class="details mb-2">Select a car and dates to see pricing</p>
+                <div class="price">$0</div>
+            `;
+        }
+
+        function calculateTotal() {
+            const priceDisplay = document.getElementById('em-price-display');
+            
+            if (selectedCar && startDateInput.value && endDateInput.value) {
+                const start = new Date(startDateInput.value);
+                const end = new Date(endDateInput.value);
+                
+                if (end > start) {
+                    const diffTime = Math.abs(end - start);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    const total = diffDays * selectedCar.rate;
+                    
+                    priceDisplay.innerHTML = `
+                        <p class="details mb-2">${selectedCar.name} x ${diffDays} days</p>
+                        <div class="price">$${total.toLocaleString()}</div>
+                    `;
+                } else {
+                    priceDisplay.innerHTML = `
+                        <p class="details mb-2 text-danger">Return date must be after pick-up date</p>
+                        <div class="price text-danger">Invalid</div>
+                    `;
+                }
+            } else if (!selectedCar) {
+                priceDisplay.innerHTML = `
+                    <p class="details mb-2">Select a car from the fleet below</p>
+                    <div class="price">$0</div>
+                `;
+            } else {
+                priceDisplay.innerHTML = `
+                    <p class="details mb-2">Select pick-up and return dates</p>
+                    <div class="price">$0</div>
+                `;
+            }
+        }
+
+        function handleBooking() {
+            if (!selectedCar) {
+                if (typeof showToast === 'function') {
+                    showToast('Please select a car from the fleet below.', 'warning');
+                }
+                return;
+            }
+
+            const start = new Date(startDateInput.value);
+            const end = new Date(endDateInput.value);
+            
+            if (!startDateInput.value || !endDateInput.value) {
+                if (typeof showToast === 'function') {
+                    showToast('Please select pick-up and return dates.', 'warning');
+                }
+                return;
+            }
+
+            if (end <= start) {
+                if (typeof showToast === 'function') {
+                    showToast('Return date must be after pick-up date.', 'error');
+                }
+                return;
+            }
+
+            const diffTime = Math.abs(end - start);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const totalCost = diffDays * selectedCar.rate;
+
+            // Add to cart
+            const rentalId = 'rent-' + Date.now();
+            let cart = JSON.parse(localStorage.getItem('emCart')) || [];
+            cart.push({
+                id: rentalId,
+                name: `${selectedCar.name} (${diffDays} Days)`,
+                price: totalCost,
+                image: selectedCar.image,
+                type: 'Rental',
+                quantity: 1
+            });
+            localStorage.setItem('emCart', JSON.stringify(cart));
+            
+            if (typeof emUpdateBadge === 'function') {
+                emUpdateBadge();
+            }
+
+            // Save to user's rental history
+            if (typeof EMAuth !== 'undefined') {
+                const user = EMAuth.getCurrentUser();
+                if (user && user.isLoggedIn && user.userType === 'user') {
+                    EMAuth.addRental(user.googleId, {
+                        carName: selectedCar.name,
+                        carImage: selectedCar.image,
+                        dailyRate: selectedCar.rate,
+                        startDate: startDateInput.value,
+                        endDate: endDateInput.value,
+                        days: diffDays,
+                        totalCost: totalCost
+                    });
+                }
+            }
+
+            // Show success
+            if (typeof showToast === 'function') {
+                showToast(`${selectedCar.name} added to cart for ${diffDays} days!`, 'success');
+            }
+            
+            // Reset form
+            removeCar();
+            document.getElementById('rentalForm').reset();
+        }
+    </script>
+</body>
+</html>
