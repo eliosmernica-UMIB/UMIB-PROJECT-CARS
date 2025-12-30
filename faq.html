@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EM Luxury Cars - FAQ</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Hero Section */
+        .faq-hero {
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 50%, #000 100%);
+            padding: 100px 0 80px;
+            margin-top: 76px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .faq-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=1920') center/cover;
+            opacity: 0.15;
+        }
+        
+        .faq-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .faq-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #ffd700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Search Box */
+        .faq-search {
+            max-width: 500px;
+            margin: 30px auto 0;
+        }
+        
+        .faq-search .form-control {
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            border: 2px solid rgba(255,215,0,0.3);
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+        
+        .faq-search .form-control::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .faq-search .form-control:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+        }
+        
+        .faq-search .btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            border-radius: 50px;
+            padding: 10px 25px;
+        }
+        
+        /* Category Tabs */
+        .faq-tabs {
+            background: #fff;
+            border-radius: 20px;
+            padding: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-top: -40px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .faq-tabs .nav-link {
+            border-radius: 15px;
+            padding: 15px 25px;
+            font-weight: 600;
+            color: #333;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .faq-tabs .nav-link:hover {
+            background: #f8f9fa;
+        }
+        
+        .faq-tabs .nav-link.active {
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            color: #ffd700;
+        }
+        
+        .faq-tabs .nav-link i {
+            font-size: 1.3rem;
+            margin-right: 8px;
+        }
+        
+        /* Category Section */
+        .faq-category {
+            padding: 40px 0;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4a 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: #000;
+        }
+        
+        .category-header h3 {
+            margin: 0;
+            font-weight: 700;
+        }
+        
+        .category-header p {
+            margin: 0;
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        /* Accordion Styling */
+        .faq-accordion .accordion-item {
+            border: none;
+            margin-bottom: 15px;
+            border-radius: 15px !important;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .faq-accordion .accordion-item:hover {
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .faq-accordion .accordion-button {
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 20px 25px;
+            background: #fff;
+            color: #000;
+            border-radius: 15px !important;
+        }
+        
+        .faq-accordion .accordion-button:not(.collapsed) {
+            background: linear-gradient(135deg, #fffef5 0%, #fff8e1 100%);
+            color: #000;
+            box-shadow: none;
+        }
+        
+        .faq-accordion .accordion-button:focus {
+            box-shadow: none;
+            border-color: transparent;
+        }
+        
+        .faq-accordion .accordion-button::after {
+            background-size: 1.2rem;
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+        
+        .faq-accordion .accordion-body {
+            padding: 0 25px 25px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .faq-accordion .accordion-body strong {
+            color: #000;
+        }
+        
+        /* Quick Stats */
+        .faq-stats {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-item i {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+        
+        .stat-item h4 {
+            font-weight: 800;
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        
+        .stat-item p {
+            color: #666;
+            margin: 0;
+        }
+        
+        /* CTA Section */
+        .faq-cta {
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            border-radius: 30px;
+            padding: 60px;
+            text-align: center;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .faq-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+        }
+        
+        .faq-cta h2 {
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .faq-cta p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .faq-cta .btn {
+            position: relative;
+        }
+        
+        .contact-options {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-option {
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+        }
+        
+        .contact-option i {
+            font-size: 1.5rem;
+            color: #ffd700;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .contact-option span {
+            font-size: 0.9rem;
+        }
+        
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            display: none;
+        }
+        
+        .no-results i {
+            font-size: 4rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .faq-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .faq-tabs .nav-link {
+                padding: 12px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .faq-tabs .nav-link i {
+                display: block;
+                margin: 0 0 5px 0;
+            }
+            
+            .faq-cta {
+                padding: 40px 25px;
+                border-radius: 20px;
+            }
+            
+            .contact-options {
+                gap: 25px;
+            }
+            
+            .category-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body id="em-body">
+
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg fixed-top em-navbar">
+        <div class="container">
+            <a class="navbar-brand em-brand" href="index.html">EM<span class="em-accent">.</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#emNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="emNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link em-nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link em-nav-link" href="about.html">About</a></li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link em-nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Shop NOW</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="inventory.html">Buy Cars</a></li>
+                            <li><a class="dropdown-item" href="rent.html">Rent a Car</a></li>
+                            <li><a class="dropdown-item" href="parts.html">Car Parts</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link em-nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link em-nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link em-nav-link" href="testimonials.html">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link em-nav-link" href="contact.html">Contact</a></li>
+                    
+                    <li class="nav-item ms-lg-3">
+                        <a href="checkout.html" class="btn em-btn-primary position-relative">
+                            Cart
+                            <span id="em-cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                        </a>
+                    </li>
+                    <!-- Auth section -->
+                    <ul class="navbar-nav ms-lg-2" id="em-nav-auth"></ul>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="faq-hero text-center">
+        <div class="container">
+            <h1>How Can We Help?</h1>
+            <p class="lead text-light opacity-75 mb-4">Find answers to common questions about buying, renting, and servicing luxury vehicles.</p>
+            
+            <!-- Search Box -->
+            <div class="faq-search position-relative">
+                <input type="text" class="form-control" id="faqSearch" placeholder="Search for answers..." autocomplete="off">
+                <button class="btn em-btn-primary" type="button">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Category Tabs -->
+        <div class="faq-tabs">
+            <ul class="nav nav-pills justify-content-center flex-wrap" id="faqCategoryTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="all-tab" data-bs-toggle="pill" data-bs-target="#all-content" type="button" role="tab">
+                        <i class="bi bi-grid-3x3-gap-fill"></i>All Topics
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="purchase-tab" data-bs-toggle="pill" data-bs-target="#purchase-content" type="button" role="tab">
+                        <i class="bi bi-cart-check"></i>Purchasing
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="rental-tab" data-bs-toggle="pill" data-bs-target="#rental-content" type="button" role="tab">
+                        <i class="bi bi-key"></i>Rentals
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="parts-tab" data-bs-toggle="pill" data-bs-target="#parts-content" type="button" role="tab">
+                        <i class="bi bi-gear"></i>Parts & Service
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="shipping-tab" data-bs-toggle="pill" data-bs-target="#shipping-content" type="button" role="tab">
+                        <i class="bi bi-truck"></i>Shipping
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="faq-stats mt-5">
+            <div class="row">
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <i class="bi bi-headset"></i>
+                        <h4>24/7</h4>
+                        <p>Support Available</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <i class="bi bi-clock-history"></i>
+                        <h4>&lt;2hrs</h4>
+                        <p>Avg Response Time</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <i class="bi bi-globe"></i>
+                        <h4>50+</h4>
+                        <p>Countries Served</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <i class="bi bi-star-fill"></i>
+                        <h4>4.9/5</h4>
+                        <p>Customer Rating</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="faqTabContent">
+            
+            <!-- All Topics -->
+            <div class="tab-pane fade show active" id="all-content" role="tabpanel">
+                
+                <!-- Purchasing Section -->
+                <div class="faq-category" id="section-purchase">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="bi bi-cart-check"></i></div>
+                        <div>
+                            <h3>Purchasing & Financing</h3>
+                            <p>Everything about buying your dream car</p>
+                        </div>
+                    </div>
+                    <div class="accordion faq-accordion" id="accordionPurchase">
+                        <div class="accordion-item" data-keywords="ship international transport freight customs">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#purchase1">
+                                    Do you ship vehicles internationally?
+                                </button>
+                            </h2>
+                            <div id="purchase1" class="accordion-collapse collapse show" data-bs-parent="#accordionPurchase">
+                                <div class="accordion-body">
+                                    <strong>Yes, absolutely.</strong> We have a dedicated logistics team that handles enclosed transport and air freight to over 50 countries. We handle all customs paperwork and insurance to ensure your vehicle arrives safely. Typical delivery times range from 2-6 weeks depending on the destination.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item" data-keywords="finance loan payment lease credit">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#purchase2">
+                                    What financing options do you offer?
+                                </button>
+                            </h2>
+                            <div id="purchase2" class="accordion-collapse collapse" data-bs-parent="#accordionPurchase">
+                                <div class="accordion-body">
+                                    We partner with premier banks to offer tailored financing solutions, including:<br><br>
+                                    <strong>- Traditional Auto Loans:</strong> Terms from 24-84 months<br>
+                                    <strong>- Classic Car Financing:</strong> Specialized loans for collector vehicles<br>
+                                    <strong>- Lease Options:</strong> For modern exotic inventory<br>
+                                    <strong>- International Financing:</strong> Available in select countries<br><br>
+                                    Rates start as low as 4.9% APR for qualified buyers.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item" data-keywords="trade trade-in exchange sell my car">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#purchase3">
+                                    Do you accept trade-ins?
+                                </button>
+                            </h2>
+                            <div id="purchase3" class="accordion-collapse collapse" data-bs-parent="#accordionPurchase">
+                                <div class="accordion-body">
+                                    <strong>Yes!</strong> We accept trade-ins of luxury, exotic, and classic vehicles. Our process is simple:<br><br>
+                                    1. Submit photos and VIN number via our contact form<br>
+                                    2. Receive a preliminary valuation within 24 hours<br>
+                                    3. Schedule an in-person inspection if needed<br>
+                                    4. Get a final offer and apply it to your purchase<br><br>
+                                    We also purchase vehicles outright if you're not looking to buy.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item" data-keywords="warranty guarantee protection coverage">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#purchase4">
+                                    What warranties do you offer?
+                                </button>
+                            </h2>
+                            <div id="purchase4" class="accordion-collapse collapse" data-bs-parent="#accordionPurchase">
+                                <div class="accordion-body">
+                                    All vehicles come with our <strong>EM Assurance Program</strong>:<br><br>
+                                    <strong>- New Vehicles:</strong> Full manufacturer warranty + 2-year EM extended coverage<br>
+                                    <strong>- Pre-Owned:</strong> 12-month/12,000-mile comprehensive warranty<br>
+                                    <strong>- Classic Cars:</strong> 90-day mechanical warranty<br><br>
+                                    Extended warranty packages are available for up to 5 years.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rentals Section -->
+                <div class="faq-category" id="section-rental">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="bi bi-key"></i></div>
+                        <div>
+                            <h3>Rentals & Experiences</h3>
+                            <p>Drive the car of your dreams</p>
+                        </div>
+                    </div>
+                    <div class="accordion faq-accordion" id="accordionRental">
+                        <div class="accordion-item" data-keywords="requirements age license insurance deposit">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rental1">
+                                    What are the requirements to rent a car?
+                                </button>
+                            </h2>
+                            <div id="rental1" class="accordion-collapse collapse" data-bs-parent="#accordionRental">
+                                <div class="accordion-body">
+                                    To rent from our fleet, you must:<br><br>
+                                    <strong>- Age:</strong> Be at least 25 years old (30+ for supercars)<br>
+                                    <strong>- License:</strong> Valid driver's license (international permit if applicable)<br>
+                                    <strong>- Insurance:</strong> Proof of full-coverage insurance<br>
+                                    <strong>- Deposit:</strong> Security deposit required ($2,500-$25,000 depending on vehicle)<br><br>
+                                    We also require a signed rental agreement and vehicle inspection.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item" data-keywords="mileage miles limit distance">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rental2">
+                                    Is there a mileage limit?
+                                </button>
+                            </h2>
+                            <div id="rental2" class="accordion-collapse collapse" data-bs-parent="#accordionRental">
+                                <div class="accordion-body">
+                                    Yes, our rentals include a daily mileage allowance:<br><br>
+                                    <strong>- Standard Luxury:</strong> 150 miles/day<br>
+                                    <strong>- Exotic/Supercar:</strong> 100 miles/day<br>
+                                    <strong>- Classic Cars:</strong> 75 miles/day<br><br>
+                                    Additional miles can be purchased in advance at a discounted rate, or will be charged at $2-5 per mile upon return.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item" data-keywords="cancel cancellation refund policy">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rental3">
+                                    What is your cancellation policy?
+                                </button>
+                            </h2>
+                            <div id="rental3" class="accordion-collapse collapse" data-bs-parent="#accordionRental">
+                                <div class="accordion-body">
+                                    <strong>- 7+ days before:</strong> Full refund<br>
+                                    <strong>- 3-7 days before:</strong> 50% refund<br>
+                                    <strong>- Less than 3 days:</strong> No refund<br><br>
+                                    We understand plans change - contact us and we'll do our best to accommodate rescheduling when possible.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item" data-keywords="delivery pickup drop-off location">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rental4">
+                                    Do you offer delivery and pickup?
+                                </button>
+                            </h2>
+                            <div id="rental4" class="accordion-collapse collapse" data-bs-parent="#accordionRental">
+                                <div class="accordion-body">
+                                    <strong>Yes!</strong> We offer white-glove delivery and pickup service:<br><br>
+                                    <strong>- Within 25 miles:</strong> Complimentary<br>
+                                    <strong>- 25-50 miles:</strong> $150 each way<br>
+                                    <strong>- Airport delivery:</strong> $100 (LAX, SFO, LAS)<br><br>
+                                    All deliveries include a full vehicle orientation and walkthrough.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Parts Section -->
+                <div class="faq-category" id="section-parts">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="bi bi-gear"></i></div>
+                        <div>
+                            <h3>Parts & Service</h3>
+                            <p>Genuine parts and expert service</p>
+                        </div>
+                    </div>
+                    <div class="accordion faq-accordion" id="accordionParts">
+                        <div class="accordion-item" data-keywords="oem aftermarket genuine original">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#parts1">
+                                    Are your parts OEM or Aftermarket?
+                                </button>
+                            </h2>
+                            <div id="parts1" class="accordion-collapse collapse" data-bs-parent="#accordionParts">
+                                <div class="accordion-body">
+                                    We sell both, clearly labeled for transparency:<br><br>
+                                    <strong>- OEM Parts:</strong> Original Equipment Manufacturer parts with full warranty<br>
+                                    <strong>- Aftermarket:</strong> Performance upgrades from premium brands like Brembo, Akrapovic, HRE, Novitec, and more<br><br>
+                                    All parts are verified for authenticity and come with documentation.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item" data-keywords="return refund exchange policy">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#parts2">
+                                    What is the return policy on parts?
+                                </button>
+                            </h2>
+                            <div id="parts2" class="accordion-collapse collapse" data-bs-parent="#accordionParts">
+                                <div class="accordion-body">
+                                    <strong>Standard Returns (30 days):</strong><br>
+                                    - Unused parts in original packaging<br>
+                                    - Full refund minus shipping costs<br><br>
+                                    <strong>Non-Returnable Items:</strong><br>
+                                    - Custom-ordered parts<br>
+                                    - Electronic components (ECU, sensors)<br>
+                                    - Installed or modified parts<br><br>
+                                    Defective items are replaced free of charge.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item" data-keywords="installation install service mechanic">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#parts3">
+                                    Do you offer installation services?
+                                </button>
+                            </h2>
+                            <div id="parts3" class="accordion-collapse collapse" data-bs-parent="#accordionParts">
+                                <div class="accordion-body">
+                                    <strong>Yes!</strong> Our service center offers professional installation:<br><br>
+                                    - Factory-trained technicians for all major brands<br>
+                                    - State-of-the-art diagnostic equipment<br>
+                                    - Installation warranty on all work performed<br>
+                                    - Complimentary vehicle inspection with service<br><br>
+                                    <a href="contact.html" class="text-decoration-none">Contact us</a> to schedule an appointment.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping Section -->
+                <div class="faq-category" id="section-shipping">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="bi bi-truck"></i></div>
+                        <div>
+                            <h3>Shipping & Delivery</h3>
+                            <p>Safe and secure worldwide delivery</p>
+                        </div>
+                    </div>
+                    <div class="accordion faq-accordion" id="accordionShipping">
+                        <div class="accordion-item" data-keywords="shipping cost price delivery fee">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#shipping1">
+                                    How much does shipping cost?
+                                </button>
+                            </h2>
+                            <div id="shipping1" class="accordion-collapse collapse" data-bs-parent="#accordionShipping">
+                                <div class="accordion-body">
+                                    Shipping costs vary by method and destination:<br><br>
+                                    <strong>Domestic (USA):</strong><br>
+                                    - Open Carrier: $500-$1,500<br>
+                                    - Enclosed Transport: $1,000-$2,500<br><br>
+                                    <strong>International:</strong><br>
+                                    - Container Shipping: $3,000-$8,000<br>
+                                    - Air Freight: $15,000-$50,000<br><br>
+                                    Contact us for a precise quote for your location.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item" data-keywords="track tracking order status">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#shipping2">
+                                    Can I track my order?
+                                </button>
+                            </h2>
+                            <div id="shipping2" class="accordion-collapse collapse" data-bs-parent="#accordionShipping">
+                                <div class="accordion-body">
+                                    <strong>Absolutely!</strong> All shipments come with real-time tracking:<br><br>
+                                    - GPS tracking for vehicle transport<br>
+                                    - Regular photo updates during transit<br>
+                                    - Dedicated logistics coordinator<br>
+                                    - SMS and email notifications<br><br>
+                                    Access tracking through your <a href="user-dashboard.html">dashboard</a> or the tracking link sent via email.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item" data-keywords="insurance damage protection covered">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#shipping3">
+                                    Is my vehicle insured during shipping?
+                                </button>
+                            </h2>
+                            <div id="shipping3" class="accordion-collapse collapse" data-bs-parent="#accordionShipping">
+                                <div class="accordion-body">
+                                    <strong>Yes, fully insured.</strong> All vehicles are covered during transport:<br><br>
+                                    - Domestic: Up to $500,000 coverage<br>
+                                    - International: Up to $1,000,000 coverage<br>
+                                    - Additional coverage available for high-value vehicles<br><br>
+                                    Pre and post-transport inspections are documented with photos.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Individual Category Tabs (show filtered content) -->
+            <div class="tab-pane fade" id="purchase-content" role="tabpanel">
+                <div class="faq-category" id="section-purchase-tab"></div>
+            </div>
+            <div class="tab-pane fade" id="rental-content" role="tabpanel">
+                <div class="faq-category" id="section-rental-tab"></div>
+            </div>
+            <div class="tab-pane fade" id="parts-content" role="tabpanel">
+                <div class="faq-category" id="section-parts-tab"></div>
+            </div>
+            <div class="tab-pane fade" id="shipping-content" role="tabpanel">
+                <div class="faq-category" id="section-shipping-tab"></div>
+            </div>
+        </div>
+
+        <!-- No Results -->
+        <div class="no-results" id="noResults">
+            <i class="bi bi-search"></i>
+            <h4>No results found</h4>
+            <p class="text-muted">Try different keywords or browse by category above.</p>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="faq-cta">
+            <h2>Still Have Questions?</h2>
+            <p>Our concierge team is available 24/7 to assist you with any inquiries.</p>
+            <a href="contact.html" class="btn em-btn-primary btn-lg px-5 py-3">
+                <i class="bi bi-chat-dots me-2"></i>Contact Us
+            </a>
+            <div class="contact-options">
+                <div class="contact-option">
+                    <i class="bi bi-telephone"></i>
+                    <span>+1 (555) 123-4567</span>
+                </div>
+                <div class="contact-option">
+                    <i class="bi bi-envelope"></i>
+                    <span>info@emcars.com</span>
+                </div>
+                <div class="contact-option">
+                    <i class="bi bi-geo-alt"></i>
+                    <span>Beverly Hills, CA</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="em-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-white fw-bold mb-3">EM Luxury Cars</h5>
+                    <p>The premier destination for automotive excellence. Buying, renting, and upgrading - we do it all with passion and precision.</p>
+                    <div class="em-social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-white fw-bold mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="inventory.html" class="text-muted">Inventory</a></li>
+                        <li class="mb-2"><a href="rent.html" class="text-muted">Rentals</a></li>
+                        <li class="mb-2"><a href="parts.html" class="text-muted">Parts Shop</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-muted">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-white fw-bold mb-3">Contact</h5>
+                    <p class="text-muted">
+                        123 Luxury Blvd, Beverly Hills<br>
+                        California, USA<br><br>
+                        <strong>Phone:</strong> +1 (555) 123-4567<br>
+                        <strong>Email:</strong> info@emcars.com
+                    </p>
+                </div>
+            </div>
+            <div class="text-center mt-4 pt-4 border-top border-secondary">
+                <p class="mb-0 text-muted small">&copy; 2026 EM Luxury Cars. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('faqSearch');
+            const allAccordionItems = document.querySelectorAll('#all-content .accordion-item');
+            const noResults = document.getElementById('noResults');
+            const allContent = document.getElementById('all-content');
+            
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                let visibleCount = 0;
+                
+                if (searchTerm === '') {
+                    // Show all items
+                    allAccordionItems.forEach(item => {
+                        item.style.display = 'block';
+                    });
+                    document.querySelectorAll('.faq-category').forEach(cat => {
+                        cat.style.display = 'block';
+                    });
+                    noResults.style.display = 'none';
+                    return;
+                }
+                
+                // Filter items
+                allAccordionItems.forEach(item => {
+                    const question = item.querySelector('.accordion-button').textContent.toLowerCase();
+                    const answer = item.querySelector('.accordion-body').textContent.toLowerCase();
+                    const keywords = item.dataset.keywords || '';
+                    
+                    if (question.includes(searchTerm) || answer.includes(searchTerm) || keywords.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Show/hide categories based on visible items
+                document.querySelectorAll('.faq-category').forEach(category => {
+                    const visibleItems = category.querySelectorAll('.accordion-item[style="display: block"]');
+                    category.style.display = visibleItems.length > 0 ? 'block' : 'none';
+                });
+                
+                // Show no results message
+                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            });
+            
+            // Tab switching - copy content to individual tab panes
+            const tabs = document.querySelectorAll('#faqCategoryTabs button');
+            tabs.forEach(tab => {
+                tab.addEventListener('shown.bs.tab', function(e) {
+                    const targetId = e.target.getAttribute('data-bs-target');
+                    
+                    if (targetId === '#all-content') return;
+                    
+                    const sectionMap = {
+                        '#purchase-content': '#section-purchase',
+                        '#rental-content': '#section-rental',
+                        '#parts-content': '#section-parts',
+                        '#shipping-content': '#section-shipping'
+                    };
+                    
+                    const sourceSection = document.querySelector(sectionMap[targetId]);
+                    const targetPane = document.querySelector(targetId + ' .faq-category');
+                    
+                    if (sourceSection && targetPane) {
+                        targetPane.innerHTML = sourceSection.innerHTML;
+                        
+                        // Reinitialize accordions in the new tab
+                        targetPane.querySelectorAll('.accordion-collapse').forEach(collapse => {
+                            collapse.classList.remove('show');
+                        });
+                        targetPane.querySelectorAll('.accordion-button').forEach(btn => {
+                            btn.classList.add('collapsed');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
