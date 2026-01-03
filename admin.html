@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EM Luxury Cars - Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body id="em-body">
+
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg fixed-top em-navbar">
+        <div class="container">
+            <span class="navbar-brand em-brand" style="cursor: default;">EM<span class="em-accent">.</span></span>
+            
+            <!-- Always visible on mobile - smaller buttons -->
+            <div class="d-flex align-items-center gap-2 ms-auto">
+                <a class="btn btn-sm btn-outline-dark rounded-pill d-lg-none" href="admin.html">
+                    <i class="bi bi-speedometer2"></i>
+                </a>
+                <button class="btn btn-sm btn-outline-danger rounded-pill d-lg-none" onclick="EMAuth.logout()">
+                    <i class="bi bi-box-arrow-right"></i>
+                </button>
+            </div>
+            
+            <!-- Desktop nav items -->
+            <div class="d-none d-lg-flex align-items-center gap-3 ms-auto">
+                <a class="nav-link em-nav-link active" href="admin.html">Admin Panel</a>
+                <button class="btn btn-outline-danger rounded-pill" onclick="EMAuth.logout()">
+                    <i class="bi bi-box-arrow-right me-1"></i>Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ADMIN DASHBOARD CONTENT -->
+    <div class="em-dashboard">
+        <div class="container py-4">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-lg-3 mb-4">
+                    <!-- Mobile Sidebar Toggle -->
+                    <button class="btn btn-dark w-100 d-lg-none mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#adminSidebar" aria-expanded="false">
+                        <i class="bi bi-list me-2"></i>Menu
+                    </button>
+                    
+                    <div class="collapse d-lg-block" id="adminSidebar">
+                        <div class="em-dash-sidebar em-sidebar-scroll">
+                            <!-- Admin Profile -->
+                            <div class="text-center mb-4">
+                                <div class="bg-dark text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                    <i class="bi bi-shield-lock-fill" style="font-size: 2rem;"></i>
+                                </div>
+                                <h5 class="fw-bold mb-0">Admin Panel</h5>
+                                <small class="text-muted">Full Access</small>
+                            </div>
+                            <!-- Navigation -->
+                            <ul class="em-dash-nav">
+                            <li><a href="#overview" class="active"><i class="bi bi-speedometer2"></i> Overview</a></li>
+                            <li><a href="#sales"><i class="bi bi-graph-up-arrow"></i> Sales & Charts</a></li>
+                            <li><a href="#orders"><i class="bi bi-receipt"></i> Orders</a></li>
+                            <li><a href="#rentals-section"><i class="bi bi-key"></i> Rentals</a></li>
+                            <li><a href="#inventory"><i class="bi bi-car-front-fill"></i> Cars for Sale</a></li>
+                            <li><a href="#rental-cars"><i class="bi bi-car-front"></i> Rental Fleet</a></li>
+                            <li><a href="#parts"><i class="bi bi-gear-fill"></i> Car Parts</a></li>
+                            <li><a href="#users"><i class="bi bi-people-fill"></i> Users</a></li>
+                            <li><a href="#inbox"><i class="bi bi-inbox-fill"></i> Inbox <span id="inbox-badge" class="badge bg-danger ms-1">0</span></a></li>
+                            <li><a href="#tickets"><i class="bi bi-headset"></i> Support Tickets</a></li>
+                            <li><a href="#messages"><i class="bi bi-envelope-fill"></i> Contact Messages <span id="msg-badge" class="badge bg-danger ms-1">0</span></a></li>
+                            <li><a href="#blog"><i class="bi bi-newspaper"></i> Blog Posts</a></li>
+                            <li><a href="#testimonials"><i class="bi bi-star-fill"></i> Testimonials</a></li>
+                            <li><hr class="my-2"></li>
+                            <li><a href="#" onclick="if(confirm('Clear all data? This cannot be undone!')){EMAuth.clearAllData();location.reload();}" class="text-warning"><i class="bi bi-trash"></i> Clear All Data</a></li>
+                            <li><a href="#" onclick="EMAuth.logout(); return false;" class="text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="col-lg-9">
+                    <!-- Admin Header -->
+                    <div class="em-admin-header" id="overview">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h2 class="fw-bold mb-2">Admin Dashboard</h2>
+                                <p class="mb-0 opacity-75">Welcome back! Here's your business overview.</p>
+                            </div>
+                            <div class="col-md-4 text-md-end">
+                                <span class="badge bg-success fs-6 px-3 py-2">
+                                    <i class="bi bi-circle-fill me-2" style="font-size: 8px;"></i>System Online
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-3 col-6">
+                            <div class="em-dash-card">
+                                <div class="em-dash-stat">
+                                    <div class="em-dash-stat-icon green">
+                                        <i class="bi bi-currency-dollar"></i>
+                                    </div>
+                                    <div class="em-dash-stat-info">
+                                        <h3 id="stat-revenue">$0</h3>
+                                        <p>Total Revenue</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="em-dash-card">
+                                <div class="em-dash-stat">
+                                    <div class="em-dash-stat-icon blue">
+                                        <i class="bi bi-bag-fill"></i>
+                                    </div>
+                                    <div class="em-dash-stat-info">
+                                        <h3 id="stat-orders">0</h3>
+                                        <p>Total Orders</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="em-dash-card">
+                                <div class="em-dash-stat">
+                                    <div class="em-dash-stat-icon orange">
+                                        <i class="bi bi-headset"></i>
+                                    </div>
+                                    <div class="em-dash-stat-info">
+                                        <h3 id="stat-tickets">0</h3>
+                                        <p>Open Tickets</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="em-dash-card">
+                                <div class="em-dash-stat">
+                                    <div class="em-dash-stat-icon purple">
+                                        <i class="bi bi-people-fill"></i>
+                                    </div>
+                                    <div class="em-dash-stat-info">
+                                        <h3 id="stat-users">0</h3>
+                                        <p>Active Users</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sales Charts Row -->
+                    <div class="row g-4 mb-4" id="sales">
+                        <div class="col-lg-8">
+                            <div class="em-dash-card">
+                                <h5 class="fw-bold mb-4">Revenue Overview (Last 6 Months)</h5>
+                                <div style="height: 250px; position: relative;">
+                                    <canvas id="revenueChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="em-dash-card h-100">
+                                <h5 class="fw-bold mb-4">Sales by Category</h5>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>Car Sales</span>
+                                        <span id="cat-cars" class="fw-bold">0%</span>
+                                    </div>
+                                    <div class="progress" style="height: 8px;">
+                                        <div id="cat-cars-bar" class="progress-bar bg-warning" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>Rentals</span>
+                                        <span id="cat-rentals" class="fw-bold">0%</span>
+                                    </div>
+                                    <div class="progress" style="height: 8px;">
+                                        <div id="cat-rentals-bar" class="progress-bar bg-dark" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>Parts</span>
+                                        <span id="cat-parts" class="fw-bold">0%</span>
+                                    </div>
+                                    <div class="progress" style="height: 8px;">
+                                        <div id="cat-parts-bar" class="progress-bar bg-secondary" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="text-center">
+                                    <small class="text-muted">Order Revenue: <strong id="order-revenue">$0</strong></small><br>
+                                    <small class="text-muted">Rental Revenue: <strong id="rental-revenue">$0</strong></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Orders Table -->
+                    <div class="em-table-card mb-4" id="orders">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="fw-bold mb-0"><i class="bi bi-receipt me-2"></i>All Orders</h5>
+                        </div>
+                        <div id="orders-container">
+                            <div class="text-center py-5 text-muted">
+                                <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                                <p class="mt-3 mb-0">No orders yet.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rentals Section -->
+                    <div class="em-table-card mb-4" id="rentals-section">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="fw-bold mb-0"><i class="bi bi-key me-2"></i>All Rentals</h5>
+                        </div>
+                        <div id="rentals-container">
+                            <div class="text-center py-5 text-muted">
+                                <i class="bi bi-key" style="font-size: 3rem;"></i>
+                                <p class="mt-3 mb-0">No rentals yet.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cars for Sale Inventory -->
+                    <div class="em-dash-card mb-4" id="inventory">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0"><i class="bi bi-car-front me-2"></i>Cars for Sale</h5>
+                            <button class="btn btn-dark rounded-pill" data-bs-toggle="modal" data-bs-target="#addCarModal">
+                                <i class="bi bi-plus-lg me-2"></i>Add Car
+                            </button>
+                        </div>
+                        <div class="row g-3" id="cars-container">
+                            <div class="col-12 text-center py-5 text-muted">
+                                <i class="bi bi-car-front" style="font-size: 3rem;"></i>
+                                <p class="mt-3 mb-0">No cars in inventory.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rental Fleet -->
+                    <div class="em-dash-card mb-4" id="rental-cars">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0"><i class="bi bi-car-front me-2"></i>Rental Fleet</h5>
+                            <button class="btn btn-dark rounded-pill" data-bs-toggle="modal" data-bs-target="#addRentalCarModal">
+                                <i class="bi bi-plus-lg me-2"></i>Add Rental Car
+                            </button>
+                        </div>
+                        <div class="row g-3" id="rental-cars-container">
+                            <div class="col-12 text-center py-5 text-muted">
+                                <i class="bi bi-car-front" style="font-size: 3rem;"></i>
+                                <p class="mt-3 mb-0">No rental cars.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Car Parts -->
+                    <div class="em-dash-card mb-4" id="parts">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0"><i class="bi bi-gear me-2"></i>Car Parts Inventory</h5>
+                            <button class="btn btn-dark rounded-pill" data-bs-toggle="modal" data-bs-target="#addPartModal">
+                                <i class="bi bi-plus-lg me-2"></i>Add Part
+                            </button>
+                        </div>
+                        <div class="row g-3" id="parts-container">
+                            <div class="col-12 text-center py-5 text-muted">
+                                <i class="bi bi-gear" style="font-size: 3rem;"></i>
+                                <p class="mt-3 mb-0">No parts in inventory.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Management -->
+                    <div class="em-table-card mb-4" id="users">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="fw-bold mb-0"><i class="bi bi-people me-2"></i>Registered Users</h5>
+                            <div class="input-group" style="max-width: 250px;">
+                                <input type="text" class="form-control form-control-sm" id="user-search" placeholder="Search users...">
+                                <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                        <div id="users-container">
+                            <div class="text-center py-5 text-muted">
+                                <i class="bi bi-people" style="font-size: 3rem;"></i>
+                                <p class="mt-3 mb-0">No registered users yet.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Admin Inbox -->
+                    <div class="em-table-card mb-4" id="inbox">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="fw-bold mb-0"><i class="bi bi-inbox me-2"></i>Inbox (Messages with Users)</h5>
+                            <button class="btn btn-dark rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#composeMessageModal">
+                                <i class="bi bi-pencil-square me-1"></i>Compose
+                            </button>
+                        </div>
+                        <div id="inbox-container">
+                            <div class="text-center py-5 text-muted">
+                                <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                                <p class="mt-3 mb-0">No messages.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Support Tickets -->
+                    <div class="em-table-card mb-4" id="tickets">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="fw-bold mb-0"><i class="bi bi-headset me-2"></i>Support Tickets</h5>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-dark active" onclick="filterTickets('all')">All</button>
+                                <button class="btn btn-outline-dark" onclick="filterTickets('open')">Open</button>
+                                <button class="btn btn-outline-dark" onclick="filterTickets('resolved')">Resolved</button>
+                            </div>
+                        </div>
+                        <div id="tickets-container">
+                            <div class="text-center py-5 text-muted">
+                                <i class="bi bi-chat-left-text" style="font-size: 3rem;"></i>
+                                <p class="mt-3 mb-0">No support tickets.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Messages -->
+                    <div class="em-table-card mb-4" id="messages">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="fw-bold mb-0"><i class="bi bi-envelope me-2"></i>Contact Messages</h5>
+                            <button class="btn btn-sm btn-outline-secondary rounded-pill" onclick="markAllMessagesRead()">
+                                <i class="bi bi-check-all me-1"></i>Mark All Read
+                            </button>
+                        </div>
+                        <div id="messages-container">
+                            <div class="text-center py-5 text-muted">
+                                <i class="bi bi-envelope-open" style="font-size: 3rem;"></i>
+                                <p class="mt-3 mb-0">No contact messages.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blog Posts Management -->
+                    <div class="em-dash-card mb-4" id="blog">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0"><i class="bi bi-newspaper me-2"></i>Blog Posts</h5>
+                            <button class="btn btn-dark rounded-pill" data-bs-toggle="modal" data-bs-target="#addBlogModal">
+                                <i class="bi bi-plus-lg me-2"></i>New Post
+                            </button>
+                        </div>
+                        <div id="blog-container">
+                            <div class="text-center py-5 text-muted">
+                                <i class="bi bi-file-earmark-text" style="font-size: 3rem;"></i>
+                                <p class="mt-3 mb-0">No blog posts yet.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonials Management -->
+                    <div class="em-dash-card mb-4" id="testimonials">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0"><i class="bi bi-star me-2"></i>Testimonials</h5>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-dark active" onclick="filterTestimonials('all')">All</button>
+                                <button class="btn btn-outline-dark" onclick="filterTestimonials('pending')">Pending</button>
+                                <button class="btn btn-outline-dark" onclick="filterTestimonials('approved')">Approved</button>
+                            </div>
+                        </div>
+                        <div id="testimonials-container">
+                            <div class="text-center py-5 text-muted">
+                                <i class="bi bi-chat-quote" style="font-size: 3rem;"></i>
+                                <p class="mt-3 mb-0">No testimonials yet.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Car Modal -->
+    <div class="modal fade" id="addCarModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-car-front me-2"></i>Add Car for Sale</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="add-car-form">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Car Name *</label>
+                                <input type="text" class="form-control" id="car-name" required placeholder="e.g. Ferrari 488 GTB">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Price ($) *</label>
+                                <input type="number" class="form-control" id="car-price" required placeholder="e.g. 350000">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Image URL *</label>
+                            <input type="url" class="form-control" id="car-image" required placeholder="https://...">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Description</label>
+                            <textarea class="form-control" id="car-description" rows="3" placeholder="Describe the vehicle..."></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-bold">Category</label>
+                                <select class="form-select" id="car-category">
+                                    <option value="Supercar">Supercar</option>
+                                    <option value="Hypercar">Hypercar</option>
+                                    <option value="Classic">Classic</option>
+                                    <option value="Sports">Sports</option>
+                                    <option value="Luxury">Luxury</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-bold">Top Speed</label>
+                                <input type="text" class="form-control" id="car-speed" placeholder="e.g. 340 km/h">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-bold">0-100 km/h</label>
+                                <input type="text" class="form-control" id="car-acceleration" placeholder="e.g. 2.9s">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-bold">Engine</label>
+                                <input type="text" class="form-control" id="car-engine" placeholder="e.g. V8 Twin-Turbo">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Status</label>
+                            <select class="form-select" id="car-status">
+                                <option value="available">Available</option>
+                                <option value="reserved">Reserved</option>
+                                <option value="sold">Sold</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn em-btn-primary">Add Car</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Rental Car Modal -->
+    <div class="modal fade" id="addRentalCarModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-key me-2"></i>Add Rental Car</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="add-rental-car-form">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Car Name *</label>
+                                <input type="text" class="form-control" id="rental-car-name" required placeholder="e.g. Porsche 911">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Daily Rate ($) *</label>
+                                <input type="number" class="form-control" id="rental-car-rate" required placeholder="e.g. 1500">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Image URL *</label>
+                            <input type="url" class="form-control" id="rental-car-image" required placeholder="https://...">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Description</label>
+                            <textarea class="form-control" id="rental-car-description" rows="3" placeholder="Describe the rental vehicle..."></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Category</label>
+                                <select class="form-select" id="rental-car-category">
+                                    <option value="Supercar">Supercar</option>
+                                    <option value="Classic">Classic</option>
+                                    <option value="Sports">Sports</option>
+                                    <option value="Luxury">Luxury</option>
+                                    <option value="SUV">SUV</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Seats</label>
+                                <input type="number" class="form-control" id="rental-car-seats" placeholder="e.g. 2">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Transmission</label>
+                                <select class="form-select" id="rental-car-transmission">
+                                    <option value="Automatic">Automatic</option>
+                                    <option value="Manual">Manual</option>
+                                    <option value="PDK">PDK</option>
+                                    <option value="S-Tronic">S-Tronic</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Status</label>
+                            <select class="form-select" id="rental-car-status">
+                                <option value="available">Available</option>
+                                <option value="rented">Currently Rented</option>
+                                <option value="maintenance">Under Maintenance</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn em-btn-primary">Add Rental Car</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Part Modal -->
+    <div class="modal fade" id="addPartModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-gear me-2"></i>Add Car Part</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="add-part-form">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Part Name *</label>
+                                <input type="text" class="form-control" id="part-name" required placeholder="e.g. Brembo Ceramic Brakes">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Price ($) *</label>
+                                <input type="number" class="form-control" id="part-price" required placeholder="e.g. 12500">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Image URL *</label>
+                            <input type="url" class="form-control" id="part-image" required placeholder="https://... or img/filename.png">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Description</label>
+                            <textarea class="form-control" id="part-description" rows="3" placeholder="Describe the part..."></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Category</label>
+                                <select class="form-select" id="part-category">
+                                    <option value="Brakes">Brakes</option>
+                                    <option value="Exhaust">Exhaust</option>
+                                    <option value="Wheels">Wheels</option>
+                                    <option value="Engine">Engine</option>
+                                    <option value="Body">Body</option>
+                                    <option value="Suspension">Suspension</option>
+                                    <option value="Interior">Interior</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Compatibility</label>
+                                <input type="text" class="form-control" id="part-compatibility" placeholder="e.g. Universal">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Quantity</label>
+                                <input type="number" class="form-control" id="part-quantity" value="1" min="0">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Status</label>
+                            <select class="form-select" id="part-status">
+                                <option value="in-stock">In Stock</option>
+                                <option value="low-stock">Low Stock</option>
+                                <option value="out-of-stock">Out of Stock</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn em-btn-primary">Add Part</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ban User Modal -->
+    <div class="modal fade" id="banUserModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-slash-circle me-2"></i>Ban User</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="ban-user-form">
+                    <div class="modal-body">
+                        <input type="hidden" id="ban-user-id">
+                        <p>You are about to ban: <strong id="ban-user-name"></strong></p>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Ban Duration</label>
+                            <select class="form-select" id="ban-duration">
+                                <option value="1">1 Hour</option>
+                                <option value="24">24 Hours</option>
+                                <option value="168">7 Days</option>
+                                <option value="720">30 Days</option>
+                                <option value="permanent">Permanent</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Reason</label>
+                            <textarea class="form-control" id="ban-reason" rows="3" placeholder="Enter reason for ban..."></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger">Ban User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Compose Message Modal -->
+    <div class="modal fade" id="composeMessageModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-pencil-square me-2"></i>Send Message to User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="compose-message-form">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Recipient</label>
+                            <select class="form-select" id="message-recipient" required>
+                                <option value="">Select a user...</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Subject</label>
+                            <input type="text" class="form-control" id="message-subject" required placeholder="Message subject...">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Message</label>
+                            <textarea class="form-control" id="message-content" rows="5" required placeholder="Type your message..."></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn em-btn-primary">Send Message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reply to Inbox Message Modal -->
+    <div class="modal fade" id="replyInboxModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-reply me-2"></i>Reply to Message</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="reply-inbox-form">
+                    <div class="modal-body">
+                        <input type="hidden" id="reply-message-id">
+                        <div class="bg-light p-3 rounded mb-3">
+                            <small class="text-muted">Original message from:</small>
+                            <strong id="reply-from-name"></strong>
+                            <p class="mb-0 mt-2" id="reply-original-message"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Your Reply</label>
+                            <textarea class="form-control" id="reply-content" rows="4" required placeholder="Type your reply..."></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn em-btn-primary">Send Reply</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Blog Post Modal -->
+    <div class="modal fade" id="addBlogModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-newspaper me-2"></i>Create New Blog Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="add-blog-form">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Title</label>
+                            <input type="text" class="form-control" id="blog-title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Excerpt</label>
+                            <input type="text" class="form-control" id="blog-excerpt" required placeholder="Short description">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Image URL</label>
+                                <input type="url" class="form-control" id="blog-image" placeholder="https://...">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Category</label>
+                                <select class="form-select" id="blog-category">
+                                    <option value="Technology">Technology</option>
+                                    <option value="Maintenance">Maintenance</option>
+                                    <option value="Market Trends">Market Trends</option>
+                                    <option value="Events">Events</option>
+                                    <option value="Reviews">Reviews</option>
+                                    <option value="News">News</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Content</label>
+                            <textarea class="form-control" id="blog-content" rows="8" required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn em-btn-primary">Publish Post</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ticket Response Modal -->
+    <div class="modal fade" id="ticketResponseModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-reply me-2"></i>Respond to Ticket</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="ticket-response-form">
+                    <div class="modal-body">
+                        <input type="hidden" id="response-ticket-id">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Your Response</label>
+                            <textarea class="form-control" id="ticket-response" rows="5" required placeholder="Type your response..."></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn em-btn-primary">Send Response</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Message Modal -->
+    <div class="modal fade" id="viewInboxModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-envelope-open me-2"></i>Message Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="view-inbox-content">
+                    <!-- Content loaded dynamically -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn em-btn-primary" id="view-inbox-reply-btn">Reply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Car Modal -->
+    <div class="modal fade" id="editCarModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-pencil me-2"></i>Edit Car</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="edit-car-form">
+                    <div class="modal-body">
+                        <input type="hidden" id="edit-car-id">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Car Name *</label>
+                                <input type="text" class="form-control" id="edit-car-name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Price ($) *</label>
+                                <input type="number" class="form-control" id="edit-car-price" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Image URL *</label>
+                            <input type="url" class="form-control" id="edit-car-image" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Description</label>
+                            <textarea class="form-control" id="edit-car-description" rows="3"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-bold">Category</label>
+                                <select class="form-select" id="edit-car-category">
+                                    <option value="Supercar">Supercar</option>
+                                    <option value="Hypercar">Hypercar</option>
+                                    <option value="Classic">Classic</option>
+                                    <option value="Sports">Sports</option>
+                                    <option value="Luxury">Luxury</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-bold">Top Speed</label>
+                                <input type="text" class="form-control" id="edit-car-speed">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-bold">0-100 km/h</label>
+                                <input type="text" class="form-control" id="edit-car-acceleration">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-bold">Engine</label>
+                                <input type="text" class="form-control" id="edit-car-engine">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Status</label>
+                            <select class="form-select" id="edit-car-status">
+                                <option value="available">Available</option>
+                                <option value="reserved">Reserved</option>
+                                <option value="sold">Sold</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn em-btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Rental Car Modal -->
+    <div class="modal fade" id="editRentalCarModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-pencil me-2"></i>Edit Rental Car</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="edit-rental-car-form">
+                    <div class="modal-body">
+                        <input type="hidden" id="edit-rental-car-id">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Car Name *</label>
+                                <input type="text" class="form-control" id="edit-rental-car-name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Daily Rate ($) *</label>
+                                <input type="number" class="form-control" id="edit-rental-car-rate" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Image URL *</label>
+                            <input type="url" class="form-control" id="edit-rental-car-image" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Description</label>
+                            <textarea class="form-control" id="edit-rental-car-description" rows="3"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Category</label>
+                                <select class="form-select" id="edit-rental-car-category">
+                                    <option value="Supercar">Supercar</option>
+                                    <option value="Classic">Classic</option>
+                                    <option value="Sports">Sports</option>
+                                    <option value="Luxury">Luxury</option>
+                                    <option value="SUV">SUV</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Seats</label>
+                                <input type="number" class="form-control" id="edit-rental-car-seats">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Transmission</label>
+                                <select class="form-select" id="edit-rental-car-transmission">
+                                    <option value="Automatic">Automatic</option>
+                                    <option value="Manual">Manual</option>
+                                    <option value="PDK">PDK</option>
+                                    <option value="S-Tronic">S-Tronic</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Status</label>
+                            <select class="form-select" id="edit-rental-car-status">
+                                <option value="available">Available</option>
+                                <option value="rented">Currently Rented</option>
+                                <option value="maintenance">Under Maintenance</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn em-btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Part Modal -->
+    <div class="modal fade" id="editPartModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-pencil me-2"></i>Edit Car Part</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="edit-part-form">
+                    <div class="modal-body">
+                        <input type="hidden" id="edit-part-id">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Part Name *</label>
+                                <input type="text" class="form-control" id="edit-part-name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Price ($) *</label>
+                                <input type="number" class="form-control" id="edit-part-price" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Image URL *</label>
+                            <input type="url" class="form-control" id="edit-part-image" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Description</label>
+                            <textarea class="form-control" id="edit-part-description" rows="3"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Category</label>
+                                <select class="form-select" id="edit-part-category">
+                                    <option value="Brakes">Brakes</option>
+                                    <option value="Exhaust">Exhaust</option>
+                                    <option value="Wheels">Wheels</option>
+                                    <option value="Engine">Engine</option>
+                                    <option value="Body">Body</option>
+                                    <option value="Suspension">Suspension</option>
+                                    <option value="Interior">Interior</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Compatibility</label>
+                                <input type="text" class="form-control" id="edit-part-compatibility">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Quantity</label>
+                                <input type="number" class="form-control" id="edit-part-quantity" min="0">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Status</label>
+                                <select class="form-select" id="edit-part-status" onchange="toggleStockQuantity()">
+                                    <option value="in-stock">In Stock</option>
+                                    <option value="low-stock">Low Stock</option>
+                                    <option value="out-of-stock">Out of Stock</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3" id="stock-quantity-container" style="display: none;">
+                                <label class="form-label fw-bold">Items Left</label>
+                                <input type="number" class="form-control" id="edit-part-stock-left" min="1" placeholder="Enter quantity left">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn em-btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/admin-dashboard.js"></script>
+</body>
+</html>
