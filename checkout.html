@@ -1,0 +1,608 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EM Luxury Cars - Checkout</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Page Layout */
+        .em-checkout-page {
+            background: #f8f9fa;
+            min-height: 100vh;
+            padding-top: 100px;
+            padding-bottom: 60px;
+        }
+        
+        /* Cart Header */
+        .em-cart-header {
+            margin-bottom: 40px;
+        }
+        .em-cart-header h1 {
+            font-weight: 700;
+        }
+        .em-cart-header .breadcrumb {
+            margin: 0;
+        }
+        .em-cart-header .breadcrumb-item a {
+            color: #666;
+            text-decoration: none;
+        }
+        .em-cart-header .breadcrumb-item.active {
+            color: #c9a033;
+        }
+        
+        /* Cart Items Container */
+        .em-cart-container {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* Cart Item */
+        .em-cart-item {
+            display: flex;
+            align-items: center;
+            padding: 25px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .em-cart-item:last-child {
+            border-bottom: none;
+        }
+        .em-cart-item .item-image {
+            width: 120px;
+            height: 80px;
+            border-radius: 12px;
+            overflow: hidden;
+            flex-shrink: 0;
+            margin-right: 20px;
+        }
+        .em-cart-item .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .em-cart-item .item-image .placeholder-icon {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #c9a033;
+            font-size: 2rem;
+        }
+        .em-cart-item .item-details {
+            flex-grow: 1;
+        }
+        .em-cart-item .item-name {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .em-cart-item .item-type {
+            color: #c9a033;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .em-cart-item .item-price {
+            font-weight: 700;
+            font-size: 1.25rem;
+            min-width: 120px;
+            text-align: right;
+        }
+        .em-cart-item .remove-btn {
+            background: none;
+            border: none;
+            color: #dc3545;
+            font-size: 1.25rem;
+            padding: 10px;
+            margin-left: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+        }
+        .em-cart-item .remove-btn:hover {
+            background: #dc3545;
+            color: #fff;
+        }
+        
+        /* Quantity Controls */
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .quantity-control button {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            background: #fff;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .quantity-control button:hover {
+            background: #111;
+            border-color: #111;
+            color: #fff;
+        }
+        .quantity-control span {
+            min-width: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        /* Empty Cart */
+        .empty-cart {
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .empty-cart i {
+            font-size: 5rem;
+            color: #ddd;
+        }
+        .empty-cart h3 {
+            margin-top: 20px;
+            color: #333;
+        }
+        .empty-cart p {
+            color: #888;
+            margin-bottom: 30px;
+        }
+        
+        /* Order Summary */
+        .em-order-summary {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 100px;
+        }
+        .em-order-summary h4 {
+            font-weight: 700;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .summary-row .label {
+            color: #666;
+        }
+        .summary-row .value {
+            font-weight: 600;
+        }
+        .summary-row.total {
+            padding-top: 15px;
+            border-top: 2px solid #111;
+            margin-top: 20px;
+        }
+        .summary-row.total .label {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111;
+        }
+        .summary-row.total .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #c9a033;
+        }
+        
+        /* Checkout Button */
+        .btn-checkout {
+            background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
+            border: none;
+            color: #000;
+            font-weight: 700;
+            padding: 18px;
+            border-radius: 50px;
+            width: 100%;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        .btn-checkout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 160, 51, 0.4);
+            color: #000;
+        }
+        
+        /* Secure Badge */
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            color: #888;
+            font-size: 0.85rem;
+        }
+        .secure-badge i {
+            color: #28a745;
+        }
+        
+        /* Continue Shopping */
+        .continue-shopping {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .continue-shopping a {
+            color: #666;
+            text-decoration: none;
+        }
+        .continue-shopping a:hover {
+            color: #c9a033;
+        }
+        
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .trust-badges .badge-item {
+            text-align: center;
+        }
+        .trust-badges .badge-item i {
+            font-size: 1.5rem;
+            color: #c9a033;
+            margin-bottom: 5px;
+        }
+        .trust-badges .badge-item span {
+            display: block;
+            font-size: 0.75rem;
+            color: #888;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .em-cart-item {
+                flex-wrap: wrap;
+            }
+            .em-cart-item .item-image {
+                width: 80px;
+                height: 60px;
+            }
+            .em-cart-item .item-price {
+                width: 100%;
+                text-align: left;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body id="em-body">
+
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg fixed-top em-navbar">
+        <div class="container">
+            <a class="navbar-brand em-brand" href="index.html">
+                EM<span class="em-accent">.</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#emNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="emNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link em-nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            Shop NOW
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="inventory.html">Buy Cars</a></li>
+                            <li><a class="dropdown-item" href="rent.html">Rent a Car</a></li>
+                            <li><a class="dropdown-item" href="parts.html">Car Parts</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="testimonials.html">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="checkout.html" class="btn em-btn-primary position-relative active">
+                            Cart
+                            <span id="em-cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                0
+                            </span>
+                        </a>
+                    </li>
+                    <ul class="navbar-nav ms-lg-2" id="em-nav-auth"></ul>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Checkout Page -->
+    <section class="em-checkout-page">
+        <div class="container">
+            <!-- Header -->
+            <div class="em-cart-header">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active">Shopping Cart</li>
+                    </ol>
+                </nav>
+                <h1>Your Cart</h1>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Cart Items -->
+                <div class="col-lg-8">
+                    <div class="em-cart-container" id="cart-container">
+                        <!-- Items loaded dynamically -->
+                    </div>
+                </div>
+                
+                <!-- Order Summary -->
+                <div class="col-lg-4">
+                    <div class="em-order-summary">
+                        <h4>Order Summary</h4>
+                        
+                        <div class="summary-row">
+                            <span class="label">Subtotal</span>
+                            <span class="value" id="subtotal">$0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="label">Shipping</span>
+                            <span class="value text-success">Free</span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="label">Tax (Est.)</span>
+                            <span class="value" id="tax">$0</span>
+                        </div>
+                        
+                        <div class="summary-row total">
+                            <span class="label">Total</span>
+                            <span class="value" id="grand-total">$0</span>
+                        </div>
+                        
+                        <button class="btn btn-checkout mt-4" onclick="checkAndPurchase()">
+                            <i class="bi bi-lock-fill me-2"></i>Confirm Purchase
+                        </button>
+                        
+                        <div class="secure-badge">
+                            <i class="bi bi-shield-check"></i>
+                            <span>Secure Checkout - 256-bit SSL Encryption</span>
+                        </div>
+                        
+                        <div class="continue-shopping">
+                            <a href="inventory.html"><i class="bi bi-arrow-left me-1"></i>Continue Shopping</a>
+                        </div>
+                        
+                        <div class="trust-badges">
+                            <div class="badge-item">
+                                <i class="bi bi-truck"></i>
+                                <span>Free Shipping</span>
+                            </div>
+                            <div class="badge-item">
+                                <i class="bi bi-shield-check"></i>
+                                <span>Secure Payment</span>
+                            </div>
+                            <div class="badge-item">
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                                <span>Easy Returns</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center p-5" style="border-radius: 25px;">
+                <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #28a745, #34c759); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 50px; margin: 0 auto 25px auto;">
+                    <i class="bi bi-check-lg"></i>
+                </div>
+                <h2 class="fw-bold mb-2">Purchase Successful!</h2>
+                <p class="text-muted mb-4">Thank you for your order. You'll receive a confirmation email shortly.</p>
+                
+                <div class="bg-light p-4 rounded-4 mb-4">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Order Date</span>
+                        <span class="fw-bold" id="em-success-date"></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span class="text-muted">Status</span>
+                        <span class="fw-bold text-success">Confirmed</span>
+                    </div>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <a href="user-dashboard.html" class="btn em-btn-primary py-3">View My Orders</a>
+                    <button type="button" class="btn btn-outline-dark rounded-pill py-2" data-bs-dismiss="modal" onclick="window.location.href='index.html'">
+                        Return Home
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Empty Cart Modal -->
+    <div class="modal fade" id="emptyCartModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center p-5" style="border-radius: 25px;">
+                <div style="width: 100px; height: 100px; background: #ffc107; color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 50px; margin: 0 auto 25px auto;">
+                    <i class="bi bi-exclamation"></i>
+                </div>
+                <h2 class="fw-bold mb-2">Your Cart is Empty</h2>
+                <p class="text-muted mb-4">Add some items to your cart before proceeding to checkout.</p>
+                
+                <div class="d-grid gap-2">
+                    <a href="inventory.html" class="btn em-btn-primary py-3">Browse Cars</a>
+                    <a href="parts.html" class="btn btn-outline-dark rounded-pill py-2">Shop Parts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCart();
+        });
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem('emCart')) || [];
+            const container = document.getElementById('cart-container');
+            const subtotalEl = document.getElementById('subtotal');
+            const taxEl = document.getElementById('tax');
+            const totalEl = document.getElementById('grand-total');
+            const badge = document.getElementById('em-cart-count');
+
+            // Update badge
+            if (badge) {
+                badge.innerText = cart.reduce((total, item) => total + item.quantity, 0);
+            }
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="bi bi-cart-x"></i>
+                        <h3>Your cart is empty</h3>
+                        <p>Looks like you haven't added anything yet.</p>
+                        <a href="inventory.html" class="btn em-btn-primary btn-lg px-5">Start Shopping</a>
+                    </div>
+                `;
+                subtotalEl.textContent = '$0';
+                taxEl.textContent = '$0';
+                totalEl.textContent = '$0';
+                return;
+            }
+
+            let html = '';
+            let subtotal = 0;
+
+            cart.forEach((item, index) => {
+                const lineTotal = item.price * item.quantity;
+                subtotal += lineTotal;
+                
+                // Determine icon based on item type
+                let iconClass = 'bi-gear';
+                if (item.type === 'Car') iconClass = 'bi-car-front';
+                else if (item.type === 'Rental') iconClass = 'bi-key';
+                else if (item.type === 'Part') iconClass = 'bi-gear';
+                
+                // Show image or placeholder
+                const imageContent = item.image && item.image.trim() !== '' 
+                    ? `<img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                       <div class="placeholder-icon" style="display: none;"><i class="bi ${iconClass}"></i></div>`
+                    : `<div class="placeholder-icon"><i class="bi ${iconClass}"></i></div>`;
+
+                html += `
+                    <div class="em-cart-item">
+                        <div class="item-image">
+                            ${imageContent}
+                        </div>
+                        <div class="item-details">
+                            <h5 class="item-name">${item.name}</h5>
+                            <span class="item-type">${item.type}</span>
+                            ${item.type === 'Part' ? `
+                                <div class="quantity-control mt-2">
+                                    <button onclick="updateQuantity(${index}, -1)">-</button>
+                                    <span>${item.quantity}</span>
+                                    <button onclick="updateQuantity(${index}, 1)">+</button>
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div class="item-price">$${lineTotal.toLocaleString()}</div>
+                        <button class="remove-btn" onclick="removeItem(${index})" title="Remove item">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+
+            // Calculate totals (demo: no real tax)
+            const tax = 0;
+            const total = subtotal + tax;
+
+            subtotalEl.textContent = '$' + subtotal.toLocaleString();
+            taxEl.textContent = '$' + tax.toLocaleString();
+            totalEl.textContent = '$' + total.toLocaleString();
+        }
+
+        function updateQuantity(index, change) {
+            let cart = JSON.parse(localStorage.getItem('emCart')) || [];
+            if (cart[index]) {
+                cart[index].quantity += change;
+                if (cart[index].quantity <= 0) {
+                    cart.splice(index, 1);
+                }
+                localStorage.setItem('emCart', JSON.stringify(cart));
+                renderCart();
+            }
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('emCart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('emCart', JSON.stringify(cart));
+            renderCart();
+            
+            if (typeof showToast === 'function') {
+                showToast('Item removed from cart', 'info');
+            }
+        }
+
+        function checkAndPurchase() {
+            const cart = JSON.parse(localStorage.getItem('emCart')) || [];
+            
+            if (cart.length === 0) {
+                const emptyModal = new bootstrap.Modal(document.getElementById('emptyCartModal'));
+                emptyModal.show();
+                return;
+            }
+            
+            // Save order to user's order history
+            if (typeof emCheckoutSuccess === 'function') {
+                emCheckoutSuccess();
+            }
+            
+            // Show success
+            document.getElementById('em-success-date').innerText = new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+            
+            // Clear cart
+            localStorage.setItem('emCart', JSON.stringify([]));
+            renderCart();
+        }
+    </script>
+</body>
+</html>

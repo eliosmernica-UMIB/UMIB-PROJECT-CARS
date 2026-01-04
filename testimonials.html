@@ -30,7 +30,7 @@
         }
         
         /* Stats Bar */
-        .stats-bar {
+        .em-stats-bar {
             background: #111;
             padding: 40px 0;
         }
@@ -54,7 +54,7 @@
             background: #f8f9fa;
             padding: 80px 0;
         }
-        .review-card {
+        .em-review-card {
             background: #fff;
             border-radius: 20px;
             padding: 35px;
@@ -64,7 +64,7 @@
             position: relative;
             overflow: hidden;
         }
-        .review-card::before {
+        .em-review-card::before {
             content: '"';
             position: absolute;
             top: 20px;
@@ -74,23 +74,23 @@
             font-family: Georgia, serif;
             line-height: 1;
         }
-        .review-card:hover {
+        .em-review-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
-        .review-card .stars {
+        .em-review-card .stars {
             color: #c9a033;
             font-size: 1.2rem;
             margin-bottom: 15px;
         }
-        .review-card .review-title {
+        .em-review-card .em-review-title {
             font-weight: 700;
             font-size: 1.25rem;
             margin-bottom: 15px;
             position: relative;
             z-index: 1;
         }
-        .review-card .review-text {
+        .em-review-card .em-review-text {
             color: #666;
             font-style: italic;
             line-height: 1.7;
@@ -98,25 +98,25 @@
             position: relative;
             z-index: 1;
         }
-        .review-card .reviewer {
+        .em-review-card .reviewer {
             display: flex;
             align-items: center;
             gap: 15px;
             position: relative;
             z-index: 1;
         }
-        .review-card .reviewer img {
+        .em-review-card .reviewer img {
             width: 55px;
             height: 55px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid #c9a033;
         }
-        .review-card .reviewer-info h6 {
+        .em-review-card .reviewer-info h6 {
             font-weight: 700;
             margin-bottom: 2px;
         }
-        .review-card .reviewer-info p {
+        .em-review-card .reviewer-info p {
             color: #888;
             font-size: 0.85rem;
             margin: 0;
@@ -137,7 +137,7 @@
             color: #fff;
             font-weight: 700;
         }
-        .featured-review .review-text {
+        .featured-review .em-review-text {
             color: #aaa;
             font-size: 1.2rem;
             line-height: 1.8;
@@ -162,7 +162,7 @@
             background: #fff;
             padding: 80px 0;
         }
-        .review-form-card {
+        .em-review-form-card {
             background: #f8f9fa;
             border-radius: 20px;
             padding: 40px;
@@ -255,7 +255,7 @@
     </section>
 
     <!-- Stats Bar -->
-    <section class="stats-bar">
+    <section class="em-stats-bar">
         <div class="container">
             <div class="row">
                 <div class="col-6 col-md-3">
@@ -318,7 +318,7 @@
                         <h2 class="display-6 fw-bold">Write a Review</h2>
                         <p class="text-muted">We'd love to hear about your experience with EM Luxury Cars</p>
                     </div>
-                    <div class="review-form-card">
+                    <div class="em-review-form-card">
                         <form id="reviewForm" onsubmit="submitReview(event)">
                             <div class="mb-4 text-center">
                                 <label class="form-label fw-bold mb-3">Your Rating</label>
@@ -403,7 +403,8 @@
                         <li class="mb-2"><a href="about.html" class="text-muted">About Us</a></li>
                         <li class="mb-2"><a href="blog.html" class="text-muted">Blog</a></li>
                         <li class="mb-2"><a href="testimonials.html" class="text-muted">Reviews</a></li>
-                        <li class="mb-2"><a href="contact.html" class="text-muted">Contact</a></li>
+<li class="mb-2"><a href="contact.html" class="text-muted">Contact</a></li>
+                        <li class="mb-2"><a href="terms-policies.html" class="text-muted">Terms & Policies</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-4 mb-4">
@@ -537,7 +538,7 @@
                     <div class="col-lg-8">
                         <div class="stars mb-3">${featuredStars}</div>
                         <h3 class="mb-4">"${featuredReview.title}"</h3>
-                        <p class="review-text mb-4">"${featuredReview.text}"</p>
+                        <p class="em-review-text mb-4">"${featuredReview.text}"</p>
                         <div class="reviewer d-flex align-items-center gap-3">
                             <img src="${featuredReview.userPicture || 'https://randomuser.me/api/portraits/lego/1.jpg'}" alt="${featuredReview.userName}">
                             <div class="reviewer-info">
@@ -560,10 +561,10 @@
                 
                 html += `
                     <div class="col-lg-4 col-md-6">
-                        <div class="review-card">
+                        <div class="em-review-card">
                             <div class="stars">${stars}${emptyStars}</div>
-                            <h5 class="review-title">"${review.title}"</h5>
-                            <p class="review-text">"${review.text}"</p>
+                            <h5 class="em-review-title">"${review.title}"</h5>
+                            <p class="em-review-text">"${review.text}"</p>
                             <div class="reviewer">
                                 <img src="${review.userPicture || 'https://randomuser.me/api/portraits/lego/1.jpg'}" alt="${review.userName}">
                                 <div class="reviewer-info">

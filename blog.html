@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         /* Hero Section */
-        .blog-hero {
+        .em-blog-hero {
             min-height: 50vh;
             background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 100%),
                         url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1920');
@@ -19,7 +19,7 @@
             align-items: center;
             padding-top: 80px;
         }
-        .blog-hero .badge-label {
+        .em-blog-hero .badge-label {
             background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
             color: #000;
             font-weight: 600;
@@ -89,7 +89,7 @@
         }
         
         /* Blog Cards */
-        .blog-card {
+        .em-blog-card {
             background: #fff;
             border-radius: 20px;
             overflow: hidden;
@@ -97,25 +97,25 @@
             transition: all 0.3s ease;
             height: 100%;
         }
-        .blog-card:hover {
+        .em-blog-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
-        .blog-card .card-img-container {
+        .em-blog-card .card-img-container {
             height: 220px;
             overflow: hidden;
             position: relative;
         }
-        .blog-card .card-img-container img {
+        .em-blog-card .card-img-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-        .blog-card:hover .card-img-container img {
+        .em-blog-card:hover .card-img-container img {
             transform: scale(1.1);
         }
-        .blog-card .category-badge {
+        .em-blog-card .category-badge {
             position: absolute;
             top: 15px;
             left: 15px;
@@ -126,10 +126,10 @@
             border-radius: 50px;
             font-size: 0.75rem;
         }
-        .blog-card .card-body {
+        .em-blog-card .card-body {
             padding: 25px;
         }
-        .blog-card .card-meta {
+        .em-blog-card .card-meta {
             display: flex;
             align-items: center;
             gap: 15px;
@@ -137,12 +137,12 @@
             font-size: 0.85rem;
             color: #888;
         }
-        .blog-card .card-title {
+        .em-blog-card .card-title {
             font-weight: 700;
             margin-bottom: 10px;
             line-height: 1.4;
         }
-        .blog-card .read-more {
+        .em-blog-card .read-more {
             color: #c9a033;
             font-weight: 600;
             text-decoration: none;
@@ -151,7 +151,7 @@
             gap: 5px;
             transition: gap 0.3s ease;
         }
-        .blog-card .read-more:hover {
+        .em-blog-card .read-more:hover {
             gap: 10px;
         }
         
@@ -249,7 +249,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="blog-hero">
+    <section class="em-blog-hero">
         <div class="container">
             <div class="text-center">
                 <span class="badge-label mb-4 d-inline-block">NEWS & INSIGHTS</span>
@@ -341,7 +341,8 @@
                         <li class="mb-2"><a href="about.html" class="text-muted">About Us</a></li>
                         <li class="mb-2"><a href="blog.html" class="text-muted">Blog</a></li>
                         <li class="mb-2"><a href="testimonials.html" class="text-muted">Reviews</a></li>
-                        <li class="mb-2"><a href="contact.html" class="text-muted">Contact</a></li>
+<li class="mb-2"><a href="contact.html" class="text-muted">Contact</a></li>
+                        <li class="mb-2"><a href="terms-policies.html" class="text-muted">Terms & Policies</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-4 mb-4">
@@ -531,7 +532,7 @@
             regularPosts.forEach(post => {
                 html += `
                     <div class="col-lg-4 col-md-6 blog-item" data-category="${post.category}">
-                        <div class="blog-card" onclick="viewBlogPost('${post.id}')" style="cursor: pointer;">
+                        <div class="em-blog-card" onclick="viewBlogPost('${post.id}')" style="cursor: pointer;">
                             <div class="card-img-container">
                                 <img src="${post.image}" alt="${post.title}"
                                      onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800'">
@@ -586,7 +587,7 @@
                                 <div class="text-muted small">EM Luxury Cars</div>
                             </div>
                         </div>
-                        <div class="blog-content" style="line-height: 1.8;">
+                        <div class="em-blog-content" style="line-height: 1.8;">
                             ${post.content ? post.content.split('\n').map(p => p.trim() ? `<p>${p}</p>` : '').join('') : ''}
                         </div>
                         <div class="mt-4 pt-4 border-top d-flex justify-content-between align-items-center">

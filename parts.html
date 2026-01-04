@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EM Luxury Cars - Performance Parts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Hero Section */
+        .em-parts-hero {
+            min-height: 60vh;
+            background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 100%),
+                        url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            padding-bottom: 60px;
+            position: relative;
+        }
+        .em-parts-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(201, 160, 51, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .em-parts-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        .em-parts-hero .badge-label {
+            background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
+            color: #000;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            display: inline-block;
+        }
+        .search-box {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .search-box .form-control {
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+        }
+        .search-box .btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            bottom: 5px;
+            border-radius: 50px;
+            padding: 0 25px;
+            background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
+            border: none;
+            color: #000;
+            font-weight: 600;
+        }
+        
+        /* Filter Bar */
+        .filter-bar {
+            background: #fff;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 70px;
+            z-index: 100;
+        }
+        .filter-btn {
+            padding: 10px 25px;
+            border: 2px solid #e0e0e0;
+            background: transparent;
+            border-radius: 50px;
+            font-weight: 600;
+            color: #333;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #111;
+            border-color: #111;
+            color: #fff;
+        }
+        
+        /* Parts Grid */
+        .em-parts-section {
+            background: #f8f9fa;
+            padding: 60px 0;
+        }
+        .em-part-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .em-part-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .em-part-card .card-img-container {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+            background: #f0f0f0;
+        }
+        .em-part-card .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .em-part-card:hover .card-img-container img {
+            transform: scale(1.1);
+        }
+        .em-part-card .status-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .em-part-card .wishlist-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        .em-part-card:hover .wishlist-btn {
+            opacity: 1;
+        }
+        .em-part-card .wishlist-btn:hover {
+            background: #dc3545;
+            color: #fff;
+        }
+        .em-part-card .card-body {
+            padding: 25px;
+        }
+        .em-part-card .category-label {
+            color: #c9a033;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .em-part-card .card-title {
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        .em-part-card .compatibility {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+        .em-part-card .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #111;
+        }
+        .em-part-card .btn-add-cart {
+            background: #111;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .em-part-card .btn-add-cart:hover {
+            background: #c9a033;
+            color: #000;
+        }
+        .em-part-card .btn-add-cart:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        /* Carousel Controls */
+        .em-part-card .carousel-control-prev,
+        .em-part-card .carousel-control-next {
+            width: 30px;
+            height: 30px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .em-part-card:hover .carousel-control-prev,
+        .em-part-card:hover .carousel-control-next {
+            opacity: 1;
+        }
+        .em-part-card .carousel-control-prev {
+            left: 10px;
+        }
+        .em-part-card .carousel-control-next {
+            right: 10px;
+        }
+        .em-part-card .carousel-control-prev-icon,
+        .em-part-card .carousel-control-next-icon {
+            width: 15px;
+            height: 15px;
+        }
+        
+        /* Features Section */
+        .features-section {
+            background: #111;
+            padding: 60px 0;
+        }
+        .feature-item {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        .feature-item i {
+            font-size: 2.5rem;
+            color: #c9a033;
+            margin-bottom: 15px;
+        }
+        .feature-item h5 {
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .feature-item p {
+            color: #888;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .empty-state i {
+            font-size: 5rem;
+            color: #ddd;
+        }
+    </style>
+</head>
+<body id="em-body">
+
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg fixed-top em-navbar">
+        <div class="container">
+            <a class="navbar-brand em-brand" href="index.html">
+                EM<span class="em-accent">.</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#emNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="emNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link em-nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            Shop NOW
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="inventory.html">Buy Cars</a></li>
+                            <li><a class="dropdown-item" href="rent.html">Rent a Car</a></li>
+                            <li><a class="dropdown-item active" href="parts.html">Car Parts</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="testimonials.html">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link em-nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="checkout.html" class="btn em-btn-primary position-relative">
+                            Cart
+                            <span id="em-cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                0
+                            </span>
+                        </a>
+                    </li>
+                    <ul class="navbar-nav ms-lg-2" id="em-nav-auth"></ul>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="em-parts-hero">
+        <div class="container">
+            <div class="text-center">
+                <span class="badge-label mb-4">PERFORMANCE PARTS</span>
+                <h1 class="display-3 fw-bold text-white mb-4">Premium Auto Parts</h1>
+                <p class="lead text-white-50 mx-auto mb-5" style="max-width: 600px;">
+                    OEM quality parts and high-performance upgrades for the world's finest automobiles.
+                </p>
+                <div class="search-box position-relative">
+                    <input type="text" class="form-control" id="partsSearch" placeholder="Search parts by name or compatibility...">
+                    <button class="btn" onclick="filterParts()"><i class="bi bi-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Bar -->
+    <section class="filter-bar">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-center align-items-center gap-2">
+                <button class="filter-btn active" data-category="all">All Parts</button>
+                <button class="filter-btn" data-category="engine">Engine</button>
+                <button class="filter-btn" data-category="brakes">Brakes</button>
+                <button class="filter-btn" data-category="suspension">Suspension</button>
+                <button class="filter-btn" data-category="exhaust">Exhaust</button>
+                <button class="filter-btn" data-category="wheels">Wheels</button>
+                <button class="filter-btn" data-category="interior">Interior</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parts Grid -->
+    <section class="em-parts-section">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <p class="mb-0 text-muted"><span id="results-count">0</span> parts found</p>
+                <select class="form-select" style="width: auto;" id="sortSelect" onchange="sortParts()">
+                    <option value="featured">Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="name">Name: A-Z</option>
+                </select>
+            </div>
+            
+            <div class="row g-4" id="parts-grid">
+                <!-- Parts loaded dynamically from admin panel -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-lg-3">
+                    <div class="feature-item">
+                        <i class="bi bi-patch-check"></i>
+                        <h5>OEM Quality</h5>
+                        <p>Genuine & certified parts</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="feature-item">
+                        <i class="bi bi-truck"></i>
+                        <h5>Fast Shipping</h5>
+                        <p>Worldwide delivery</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="feature-item">
+                        <i class="bi bi-shield-check"></i>
+                        <h5>Warranty</h5>
+                        <p>1-year guarantee</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="feature-item">
+                        <i class="bi bi-headset"></i>
+                        <h5>Expert Support</h5>
+                        <p>Technical assistance</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="em-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="text-white fw-bold mb-3">EM<span class="em-accent">.</span> Luxury Cars</h5>
+                    <p class="text-muted">The premier destination for automotive excellence. Buying, renting, and upgrading - we do it all with passion and precision.</p>
+                    <div class="em-social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="inventory.html" class="text-muted">Inventory</a></li>
+                        <li class="mb-2"><a href="rent.html" class="text-muted">Rentals</a></li>
+                        <li class="mb-2"><a href="parts.html" class="text-muted">Parts Shop</a></li>
+                        <li class="mb-2"><a href="gallery.html" class="text-muted">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Company</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="about.html" class="text-muted">About Us</a></li>
+                        <li class="mb-2"><a href="blog.html" class="text-muted">Blog</a></li>
+                        <li class="mb-2"><a href="testimonials.html" class="text-muted">Reviews</a></li>
+<li class="mb-2"><a href="contact.html" class="text-muted">Contact</a></li>
+                        <li class="mb-2"><a href="terms-policies.html" class="text-muted">Terms & Policies</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Contact Info</h6>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2"></i>123 Luxury Blvd, Beverly Hills, CA</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2"></i>+1 (555) 123-4567</li>
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i>info@emcars.com</li>
+                        <li class="mb-2"><i class="bi bi-clock me-2"></i>Mon-Sat: 9AM - 7PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-4 pt-4 border-top border-secondary">
+                <p class="mb-0 text-muted small">&copy; 2026 EM Luxury Cars. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal fade" id="wishlistSuccessModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4 rounded-4 text-center">
+                <div style="width: 80px; height: 80px; background: #dc3545; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 20px auto;">
+                    <i class="bi bi-heart-fill"></i>
+                </div>
+                <h2 class="fw-bold mb-2">Added to Wishlist!</h2>
+                <p class="text-muted mb-4"><span id="wishlistItemName"></span> has been added to your wishlist.</p>
+                <div class="d-grid gap-2">
+                    <a href="user-dashboard.html#wishlist" class="btn em-btn-primary">View Wishlist</a>
+                    <button type="button" class="btn btn-outline-dark rounded-pill" data-bs-dismiss="modal">Continue Shopping</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="loginPromptModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4 rounded-4 text-center">
+                <div style="width: 80px; height: 80px; background: #6c757d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 20px auto;">
+                    <i class="bi bi-person-lock"></i>
+                </div>
+                <h2 class="fw-bold mb-2">Login Required</h2>
+                <p class="text-muted mb-4">Please sign in to add items to your wishlist.</p>
+                <div class="d-grid gap-2">
+                    <a href="login.html" class="btn em-btn-primary">Sign In</a>
+                    <button type="button" class="btn btn-outline-dark rounded-pill" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    
+    <script>
+        let allParts = [];
+        let currentCategory = 'all';
+        let currentSort = 'featured';
+
+        // Initialize - run immediately when script loads
+        (function() {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initPage);
+            } else {
+                initPage();
+            }
+            
+            function initPage() {
+                loadParts();
+                setupFilters();
+                setupSearch();
+            }
+        })();
+
+        function loadParts() {
+            let parts = [];
+            
+            // Get parts from admin panel (localStorage)
+            if (typeof EMAuth !== 'undefined' && typeof EMAuth.getCarParts === 'function') {
+                parts = EMAuth.getCarParts();
+            }
+            
+            allParts = parts;
+            renderParts(parts);
+        }
+
+        function renderParts(parts) {
+            const grid = document.getElementById('parts-grid');
+            const countEl = document.getElementById('results-count');
+            
+            // Filter by category (case-insensitive)
+            let filtered = currentCategory === 'all' 
+                ? parts 
+                : parts.filter(p => {
+                    const partCategory = (p.category || '').toLowerCase();
+                    return partCategory === currentCategory.toLowerCase();
+                });
+            
+            // Apply search
+            const searchTerm = document.getElementById('partsSearch').value.toLowerCase();
+            if (searchTerm) {
+                filtered = filtered.filter(p => 
+                    p.name.toLowerCase().includes(searchTerm) ||
+                    (p.compatibility && p.compatibility.toLowerCase().includes(searchTerm)) ||
+                    (p.category && p.category.toLowerCase().includes(searchTerm))
+                );
+            }
+            
+            // Sort
+            switch (currentSort) {
+                case 'price-low':
+                    filtered.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    filtered.sort((a, b) => b.price - a.price);
+                    break;
+                case 'name':
+                    filtered.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+            }
+            
+            countEl.textContent = filtered.length;
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-12">
+                        <div class="empty-state">
+                            <i class="bi bi-gear"></i>
+                            <h3 class="mt-4 text-muted">${parts.length === 0 ? 'No Parts Available' : 'No Parts Found'}</h3>
+                            <p class="text-muted">${parts.length === 0 ? 'Parts will appear here once added from the admin panel.' : 'Try adjusting your search or filters.'}</p>
+                            ${parts.length > 0 ? '<button class="btn btn-outline-dark mt-3" onclick="resetFilters()">Reset Filters</button>' : ''}
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            filtered.forEach((part, index) => {
+                const isAvailable = part.status === 'in-stock' || part.status === 'low-stock';
+                const isLowStock = part.status === 'low-stock';
+                const stockLeft = part.stockLeft || part.quantity || 0;
+                
+                let statusBadge = '';
+                let statusClass = '';
+                if (part.status === 'in-stock') {
+                    statusBadge = 'In Stock';
+                    statusClass = 'bg-success text-white';
+                } else if (part.status === 'low-stock') {
+                    statusBadge = `Only ${stockLeft} left`;
+                    statusClass = 'bg-warning text-dark';
+                } else {
+                    statusBadge = 'Out of Stock';
+                    statusClass = 'bg-danger text-white';
+                }
+                
+                // Use icon if no image, or show image with fallback
+                const iconClass = part.icon || 'bi-gear';
+                let imageHtml = '';
+                
+                if (part.image) {
+                    imageHtml = `<img src="${part.image}" alt="${part.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); align-items: center; justify-content: center;">
+                            <div style="text-align: center; color: #c9a033;">
+                                <i class="bi ${iconClass}" style="font-size: 3rem;"></i>
+                                <p style="margin: 10px 0 0; font-weight: 600;">${part.category}</p>
+                            </div>
+                        </div>`;
+                } else {
+                    imageHtml = `<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); display: flex; align-items: center; justify-content: center;">
+                        <div style="text-align: center; color: #c9a033;">
+                            <i class="bi ${iconClass}" style="font-size: 3rem;"></i>
+                            <p style="margin: 10px 0 0; font-weight: 600;">${part.category}</p>
+                        </div>
+                    </div>`;
+                }
+                
+                html += `
+                    <div class="col-lg-3 col-md-4 col-sm-6 part-item" data-category="${part.category}">
+                        <div class="em-part-card">
+                            <div class="card-img-container" style="position: relative;">
+                                ${imageHtml}
+                                <span class="status-badge ${statusClass}">${statusBadge}</span>
+                                <button class="wishlist-btn" onclick="event.stopPropagation(); addToWishlist('${part.id}', '${part.name.replace(/'/g, "\\'")}', ${part.price}, '${encodeURIComponent(part.image || '')}')">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <span class="category-label">${part.category || 'General'}</span>
+                                <h5 class="card-title">${part.name}</h5>
+                                <p class="compatibility"><i class="bi bi-car-front me-1"></i>${part.compatibility || 'Universal'}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$${part.price.toLocaleString()}</span>
+                                    <button class="btn-add-cart" 
+                                        ${!isAvailable ? 'disabled' : ''}
+                                        onclick="addToCart('${part.id}', '${part.name.replace(/'/g, "\\'")}', ${part.price}, '${encodeURIComponent(part.image || '')}')">
+                                        ${isAvailable ? '<i class="bi bi-cart-plus me-1"></i>Add' : 'Sold Out'}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            grid.innerHTML = html;
+        }
+
+        function setupFilters() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active to clicked button
+                    this.classList.add('active');
+                    
+                    // Update category and re-render
+                    currentCategory = this.dataset.category;
+                    renderParts(allParts);
+                });
+            });
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('partsSearch');
+            searchInput.addEventListener('input', function() {
+                renderParts(allParts);
+            });
+        }
+
+        function filterParts() {
+            renderParts(allParts);
+        }
+
+        function sortParts() {
+            currentSort = document.getElementById('sortSelect').value;
+            renderParts(allParts);
+        }
+
+        function resetFilters() {
+            currentCategory = 'all';
+            currentSort = 'featured';
+            document.getElementById('partsSearch').value = '';
+            document.getElementById('sortSelect').value = 'featured';
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector('.filter-btn[data-category="all"]').classList.add('active');
+            renderParts(allParts);
+        }
+
+        function addToCart(id, name, price, image) {
+            // Decode the image URL (it was encoded to handle special characters)
+            const decodedImage = image ? decodeURIComponent(image) : '';
+            
+            if (typeof emAddToCart === 'function') {
+                emAddToCart(id, name, price, decodedImage, 'Part');
+            } else {
+                // Fallback
+                let cart = JSON.parse(localStorage.getItem('emCart')) || [];
+                const existing = cart.find(item => item.id === id);
+                if (existing) {
+                    existing.quantity += 1;
+                } else {
+                    cart.push({ id, name, price, image: decodedImage, type: 'Part', quantity: 1 });
+                }
+                localStorage.setItem('emCart', JSON.stringify(cart));
+                if (typeof emUpdateBadge === 'function') emUpdateBadge();
+                if (typeof showToast === 'function') showToast(`${name} added to cart!`, 'success');
+            }
+        }
+
+        function addToWishlist(id, name, price, image) {
+            // Decode the image URL (it was encoded to handle special characters)
+            const decodedImage = image ? decodeURIComponent(image) : '';
+            
+            const user = typeof EMAuth !== 'undefined' ? EMAuth.getCurrentUser() : null;
+            
+            if (!user || !user.isLoggedIn || user.userType !== 'user') {
+                const modal = new bootstrap.Modal(document.getElementById('loginPromptModal'));
+                modal.show();
+                return;
+            }
+
+            EMAuth.addToWishlist(user.googleId, {
+                id: id,
+                name: name,
+                price: price,
+                image: decodedImage,
+                type: 'part'
+            });
+
+            document.getElementById('wishlistItemName').innerText = name;
+            const modal = new bootstrap.Modal(document.getElementById('wishlistSuccessModal'));
+            modal.show();
+        }
+    </script>
+</body>
+</html>

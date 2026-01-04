@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EM Luxury Cars - Dashboard Redirect</title>
+    <script>
+        // Redirect to appropriate dashboard based on auth status
+        (function() {
+            const currentUser = JSON.parse(localStorage.getItem('emCurrentUser'));
+            
+            if (currentUser) {
+                // User is logged in - redirect based on type
+                if (currentUser.type === 'admin') {
+                    window.location.replace('admin.html');
+                } else {
+                    window.location.replace('user-dashboard.html');
+                }
+            } else {
+                // Not logged in - redirect to login page
+                window.location.replace('login.html');
+            }
+        })();
+    </script>
+</head>
+<body id="em-body">
+    <p>Redirecting...</p>
+</body>
+</html>

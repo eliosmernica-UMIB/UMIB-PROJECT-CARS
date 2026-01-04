@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         /* Hero Section - Modern with Effects */
-        .about-hero {
+        .em-about-hero {
             min-height: 100vh;
             background: #0a0a0a;
             display: flex;
@@ -19,7 +19,7 @@
             overflow: hidden;
         }
         
-        .about-hero::before {
+        .em-about-hero::before {
             content: '';
             position: absolute;
             top: 20%;
@@ -254,7 +254,7 @@
         }
         
         @media (max-width: 991px) {
-            .about-hero {
+            .em-about-hero {
                 min-height: auto;
                 padding: 120px 0 80px;
             }
@@ -359,12 +359,12 @@
         .story-image:hover img {
             transform: scale(1.05);
         }
-        .timeline-item {
+        .em-timeline-item {
             position: relative;
             padding-left: 30px;
             margin-bottom: 30px;
         }
-        .timeline-item::before {
+        .em-timeline-item::before {
             content: '';
             position: absolute;
             left: 0;
@@ -374,7 +374,7 @@
             background: #c9a033;
             border-radius: 50%;
         }
-        .timeline-item::after {
+        .em-timeline-item::after {
             content: '';
             position: absolute;
             left: 5px;
@@ -383,54 +383,54 @@
             height: calc(100% + 10px);
             background: #e0e0e0;
         }
-        .timeline-item:last-child::after {
+        .em-timeline-item:last-child::after {
             display: none;
         }
         
         /* Team Section */
-        .team-section {
+        .em-team-section {
             background: #f8f9fa;
             padding: 100px 0;
         }
-        .team-card {
+        .em-team-card {
             background: #fff;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
         }
-        .team-card:hover {
+        .em-team-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 50px rgba(0,0,0,0.15);
         }
-        .team-card .team-img {
+        .em-team-card .em-team-img {
             height: 300px;
             overflow: hidden;
         }
-        .team-card .team-img img {
+        .em-team-card .em-team-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-        .team-card:hover .team-img img {
+        .em-team-card:hover .em-team-img img {
             transform: scale(1.1);
         }
-        .team-card .team-info {
+        .em-team-card .em-team-info {
             padding: 25px;
             text-align: center;
         }
-        .team-card .team-info h5 {
+        .em-team-card .em-team-info h5 {
             font-weight: 700;
             margin-bottom: 5px;
         }
-        .team-card .team-info p {
+        .em-team-card .em-team-info p {
             color: #c9a033;
             font-weight: 600;
             font-size: 0.9rem;
             margin-bottom: 15px;
         }
-        .team-card .social-links a {
+        .em-team-card .social-links a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -442,7 +442,7 @@
             margin: 0 5px;
             transition: all 0.3s ease;
         }
-        .team-card .social-links a:hover {
+        .em-team-card .social-links a:hover {
             background: #c9a033;
             color: #000;
         }
@@ -452,38 +452,38 @@
             background: #111;
             padding: 100px 0;
         }
-        .value-item {
+        .em-value-item {
             text-align: center;
             padding: 40px 30px;
         }
-        .value-item i {
+        .em-value-item i {
             font-size: 3rem;
             color: #c9a033;
             margin-bottom: 20px;
         }
-        .value-item h5 {
+        .em-value-item h5 {
             color: #fff;
             font-weight: 700;
             margin-bottom: 15px;
         }
-        .value-item p {
+        .em-value-item p {
             color: #888;
             margin: 0;
         }
         
         /* CTA Section */
-        .cta-section {
+        .em-cta-section {
             background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
             padding: 80px 0;
         }
-        .cta-section h2 {
+        .em-cta-section h2 {
             color: #000;
             font-weight: 700;
         }
-        .cta-section p {
+        .em-cta-section p {
             color: rgba(0,0,0,0.7);
         }
-        .cta-section .btn-dark {
+        .em-cta-section .btn-dark {
             padding: 15px 40px;
             border-radius: 50px;
             font-weight: 600;
@@ -546,7 +546,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="about-hero">
+    <section class="em-about-hero">
         <div class="hero-bg-image"></div>
         
         <div class="container">
@@ -703,19 +703,19 @@
                         where car enthusiasts could find their dream machines with complete peace of mind.
                     </p>
                     
-                    <div class="timeline-item">
+                    <div class="em-timeline-item">
                         <h6 class="fw-bold">2014 - The Beginning</h6>
                         <p class="text-muted small mb-0">Founded with just 5 cars and a dream to revolutionize luxury car sales.</p>
                     </div>
-                    <div class="timeline-item">
+                    <div class="em-timeline-item">
                         <h6 class="fw-bold">2018 - Expansion</h6>
                         <p class="text-muted small mb-0">Opened our flagship showroom in Beverly Hills, expanding our collection to 50+ vehicles.</p>
                     </div>
-                    <div class="timeline-item">
+                    <div class="em-timeline-item">
                         <h6 class="fw-bold">2021 - Digital Innovation</h6>
                         <p class="text-muted small mb-0">Launched our online platform, making luxury cars accessible worldwide.</p>
                     </div>
-                    <div class="timeline-item">
+                    <div class="em-timeline-item">
                         <h6 class="fw-bold">2024 - Today</h6>
                         <p class="text-muted small mb-0">500+ satisfied clients and counting, with a curated collection of the world's finest automobiles.</p>
                     </div>
@@ -733,28 +733,28 @@
             </div>
             <div class="row">
                 <div class="col-6 col-lg-3">
-                    <div class="value-item">
+                    <div class="em-value-item">
                         <i class="bi bi-shield-check"></i>
                         <h5>Integrity</h5>
                         <p>Complete transparency in every transaction</p>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
-                    <div class="value-item">
+                    <div class="em-value-item">
                         <i class="bi bi-star"></i>
                         <h5>Excellence</h5>
                         <p>Only the finest vehicles make our collection</p>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
-                    <div class="value-item">
+                    <div class="em-value-item">
                         <i class="bi bi-people"></i>
                         <h5>Relationships</h5>
                         <p>Clients become family, not just customers</p>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
-                    <div class="value-item">
+                    <div class="em-value-item">
                         <i class="bi bi-lightning"></i>
                         <h5>Innovation</h5>
                         <p>Embracing technology for better service</p>
@@ -765,7 +765,7 @@
     </section>
 
     <!-- Team Section -->
-    <section class="team-section">
+    <section class="em-team-section">
         <div class="container">
             <div class="text-center mb-5">
                 <span class="badge-label">OUR TEAM</span>
@@ -774,11 +774,11 @@
             </div>
             <div class="row g-4">
                 <div class="col-lg-4">
-                    <div class="team-card">
-                        <div class="team-img">
+                    <div class="em-team-card">
+                        <div class="em-team-img">
                             <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400" alt="CEO">
                         </div>
-                        <div class="team-info">
+                        <div class="em-team-info">
                             <h5>Marcus Sterling</h5>
                             <p>Founder & CEO</p>
                             <div class="social-links">
@@ -790,11 +790,11 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="team-card">
-                        <div class="team-img">
+                    <div class="em-team-card">
+                        <div class="em-team-img">
                             <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400" alt="Sales Director">
                         </div>
-                        <div class="team-info">
+                        <div class="em-team-info">
                             <h5>Sarah Mitchell</h5>
                             <p>Sales Director</p>
                             <div class="social-links">
@@ -806,11 +806,11 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="team-card">
-                        <div class="team-img">
+                    <div class="em-team-card">
+                        <div class="em-team-img">
                             <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400" alt="Head Mechanic">
                         </div>
-                        <div class="team-info">
+                        <div class="em-team-info">
                             <h5>James Donovan</h5>
                             <p>Head Mechanic</p>
                             <div class="social-links">
@@ -826,7 +826,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section">
+    <section class="em-cta-section">
         <div class="container text-center">
             <h2 class="display-5 mb-3">Ready to Find Your Dream Car?</h2>
             <p class="lead mb-4">Browse our exclusive collection or schedule a visit to our showroom.</p>
@@ -866,7 +866,8 @@
                         <li class="mb-2"><a href="about.html" class="text-muted">About Us</a></li>
                         <li class="mb-2"><a href="blog.html" class="text-muted">Blog</a></li>
                         <li class="mb-2"><a href="testimonials.html" class="text-muted">Reviews</a></li>
-                        <li class="mb-2"><a href="contact.html" class="text-muted">Contact</a></li>
+<li class="mb-2"><a href="contact.html" class="text-muted">Contact</a></li>
+                        <li class="mb-2"><a href="terms-policies.html" class="text-muted">Terms & Policies</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-4 mb-4">

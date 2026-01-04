@@ -13,7 +13,7 @@
     
     <style>
         /* Hero Section */
-        .faq-hero {
+        .em-faq-hero {
             background: linear-gradient(135deg, #000 0%, #1a1a1a 50%, #000 100%);
             padding: 100px 0 80px;
             margin-top: 76px;
@@ -21,7 +21,7 @@
             overflow: hidden;
         }
         
-        .faq-hero::before {
+        .em-faq-hero::before {
             content: '';
             position: absolute;
             top: 0;
@@ -32,12 +32,12 @@
             opacity: 0.15;
         }
         
-        .faq-hero .container {
+        .em-faq-hero .container {
             position: relative;
             z-index: 1;
         }
         
-        .faq-hero h1 {
+        .em-faq-hero h1 {
             font-size: 3.5rem;
             font-weight: 800;
             background: linear-gradient(135deg, #fff 0%, #ffd700 100%);
@@ -47,12 +47,12 @@
         }
         
         /* Search Box */
-        .faq-search {
+        .em-faq-search {
             max-width: 500px;
             margin: 30px auto 0;
         }
         
-        .faq-search .form-control {
+        .em-faq-search .form-control {
             border-radius: 50px;
             padding: 15px 25px;
             font-size: 1.1rem;
@@ -61,18 +61,18 @@
             color: #fff;
         }
         
-        .faq-search .form-control::placeholder {
+        .em-faq-search .form-control::placeholder {
             color: rgba(255,255,255,0.6);
         }
         
-        .faq-search .form-control:focus {
+        .em-faq-search .form-control:focus {
             border-color: #ffd700;
             box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
             background: rgba(255,255,255,0.15);
             color: #fff;
         }
         
-        .faq-search .btn {
+        .em-faq-search .btn {
             position: absolute;
             right: 5px;
             top: 5px;
@@ -81,7 +81,7 @@
         }
         
         /* Category Tabs */
-        .faq-tabs {
+        .em-faq-tabs {
             background: #fff;
             border-radius: 20px;
             padding: 10px;
@@ -91,7 +91,7 @@
             z-index: 10;
         }
         
-        .faq-tabs .nav-link {
+        .em-faq-tabs .nav-link {
             border-radius: 15px;
             padding: 15px 25px;
             font-weight: 600;
@@ -100,26 +100,26 @@
             border: none;
         }
         
-        .faq-tabs .nav-link:hover {
+        .em-faq-tabs .nav-link:hover {
             background: #f8f9fa;
         }
         
-        .faq-tabs .nav-link.active {
+        .em-faq-tabs .nav-link.active {
             background: linear-gradient(135deg, #000 0%, #333 100%);
             color: #ffd700;
         }
         
-        .faq-tabs .nav-link i {
+        .em-faq-tabs .nav-link i {
             font-size: 1.3rem;
             margin-right: 8px;
         }
         
         /* Category Section */
-        .faq-category {
+        .em-faq-category {
             padding: 40px 0;
         }
         
-        .category-header {
+        .em-category-header {
             display: flex;
             align-items: center;
             gap: 15px;
@@ -128,7 +128,7 @@
             border-bottom: 2px solid #f0f0f0;
         }
         
-        .category-icon {
+        .em-category-icon {
             width: 60px;
             height: 60px;
             background: linear-gradient(135deg, #ffd700 0%, #ffed4a 100%);
@@ -140,19 +140,19 @@
             color: #000;
         }
         
-        .category-header h3 {
+        .em-category-header h3 {
             margin: 0;
             font-weight: 700;
         }
         
-        .category-header p {
+        .em-category-header p {
             margin: 0;
             color: #666;
             font-size: 0.95rem;
         }
         
         /* Accordion Styling */
-        .faq-accordion .accordion-item {
+        .em-faq-accordion .accordion-item {
             border: none;
             margin-bottom: 15px;
             border-radius: 15px !important;
@@ -161,12 +161,12 @@
             transition: all 0.3s;
         }
         
-        .faq-accordion .accordion-item:hover {
+        .em-faq-accordion .accordion-item:hover {
             box-shadow: 0 5px 25px rgba(0,0,0,0.1);
             transform: translateY(-2px);
         }
         
-        .faq-accordion .accordion-button {
+        .em-faq-accordion .accordion-button {
             font-weight: 600;
             font-size: 1.05rem;
             padding: 20px 25px;
@@ -175,35 +175,35 @@
             border-radius: 15px !important;
         }
         
-        .faq-accordion .accordion-button:not(.collapsed) {
+        .em-faq-accordion .accordion-button:not(.collapsed) {
             background: linear-gradient(135deg, #fffef5 0%, #fff8e1 100%);
             color: #000;
             box-shadow: none;
         }
         
-        .faq-accordion .accordion-button:focus {
+        .em-faq-accordion .accordion-button:focus {
             box-shadow: none;
             border-color: transparent;
         }
         
-        .faq-accordion .accordion-button::after {
+        .em-faq-accordion .accordion-button::after {
             background-size: 1.2rem;
             width: 1.2rem;
             height: 1.2rem;
         }
         
-        .faq-accordion .accordion-body {
+        .em-faq-accordion .accordion-body {
             padding: 0 25px 25px;
             color: #555;
             line-height: 1.8;
         }
         
-        .faq-accordion .accordion-body strong {
+        .em-faq-accordion .accordion-body strong {
             color: #000;
         }
         
         /* Quick Stats */
-        .faq-stats {
+        .em-faq-stats {
             background: #f8f9fa;
             border-radius: 20px;
             padding: 30px;
@@ -233,7 +233,7 @@
         }
         
         /* CTA Section */
-        .faq-cta {
+        .em-faq-cta {
             background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
             border-radius: 30px;
             padding: 60px;
@@ -243,7 +243,7 @@
             overflow: hidden;
         }
         
-        .faq-cta::before {
+        .em-faq-cta::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -253,21 +253,21 @@
             background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
         }
         
-        .faq-cta h2 {
+        .em-faq-cta h2 {
             color: #fff;
             font-weight: 700;
             margin-bottom: 15px;
             position: relative;
         }
         
-        .faq-cta p {
+        .em-faq-cta p {
             color: rgba(255,255,255,0.7);
             font-size: 1.1rem;
             margin-bottom: 30px;
             position: relative;
         }
         
-        .faq-cta .btn {
+        .em-faq-cta .btn {
             position: relative;
         }
         
@@ -310,21 +310,21 @@
         
         /* Responsive */
         @media (max-width: 768px) {
-            .faq-hero h1 {
+            .em-faq-hero h1 {
                 font-size: 2.2rem;
             }
             
-            .faq-tabs .nav-link {
+            .em-faq-tabs .nav-link {
                 padding: 12px 15px;
                 font-size: 0.9rem;
             }
             
-            .faq-tabs .nav-link i {
+            .em-faq-tabs .nav-link i {
                 display: block;
                 margin: 0 0 5px 0;
             }
             
-            .faq-cta {
+            .em-faq-cta {
                 padding: 40px 25px;
                 border-radius: 20px;
             }
@@ -333,7 +333,7 @@
                 gap: 25px;
             }
             
-            .category-icon {
+            .em-category-icon {
                 width: 50px;
                 height: 50px;
                 font-size: 1.4rem;
@@ -383,13 +383,13 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="faq-hero text-center">
+    <header class="em-faq-hero text-center">
         <div class="container">
             <h1>How Can We Help?</h1>
             <p class="lead text-light opacity-75 mb-4">Find answers to common questions about buying, renting, and servicing luxury vehicles.</p>
             
             <!-- Search Box -->
-            <div class="faq-search position-relative">
+            <div class="em-faq-search position-relative">
                 <input type="text" class="form-control" id="faqSearch" placeholder="Search for answers..." autocomplete="off">
                 <button class="btn em-btn-primary" type="button">
                     <i class="bi bi-search"></i>
@@ -401,7 +401,7 @@
     <!-- Main Content -->
     <div class="container">
         <!-- Category Tabs -->
-        <div class="faq-tabs">
+        <div class="em-faq-tabs">
             <ul class="nav nav-pills justify-content-center flex-wrap" id="faqCategoryTabs" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="all-tab" data-bs-toggle="pill" data-bs-target="#all-content" type="button" role="tab">
@@ -432,7 +432,7 @@
         </div>
 
         <!-- Quick Stats -->
-        <div class="faq-stats mt-5">
+        <div class="em-faq-stats mt-5">
             <div class="row">
                 <div class="col-6 col-md-3">
                     <div class="stat-item">
@@ -472,9 +472,9 @@
             <div class="tab-pane fade show active" id="all-content" role="tabpanel">
                 
                 <!-- Purchasing Section -->
-                <div class="faq-category" id="section-purchase">
-                    <div class="category-header">
-                        <div class="category-icon"><i class="bi bi-cart-check"></i></div>
+                <div class="em-faq-category" id="section-purchase">
+                    <div class="em-category-header">
+                        <div class="em-category-icon"><i class="bi bi-cart-check"></i></div>
                         <div>
                             <h3>Purchasing & Financing</h3>
                             <p>Everything about buying your dream car</p>
@@ -547,9 +547,9 @@
                 </div>
 
                 <!-- Rentals Section -->
-                <div class="faq-category" id="section-rental">
-                    <div class="category-header">
-                        <div class="category-icon"><i class="bi bi-key"></i></div>
+                <div class="em-faq-category" id="section-rental">
+                    <div class="em-category-header">
+                        <div class="em-category-icon"><i class="bi bi-key"></i></div>
                         <div>
                             <h3>Rentals & Experiences</h3>
                             <p>Drive the car of your dreams</p>
@@ -624,9 +624,9 @@
                 </div>
 
                 <!-- Parts Section -->
-                <div class="faq-category" id="section-parts">
-                    <div class="category-header">
-                        <div class="category-icon"><i class="bi bi-gear"></i></div>
+                <div class="em-faq-category" id="section-parts">
+                    <div class="em-category-header">
+                        <div class="em-category-icon"><i class="bi bi-gear"></i></div>
                         <div>
                             <h3>Parts & Service</h3>
                             <p>Genuine parts and expert service</p>
@@ -688,9 +688,9 @@
                 </div>
 
                 <!-- Shipping Section -->
-                <div class="faq-category" id="section-shipping">
-                    <div class="category-header">
-                        <div class="category-icon"><i class="bi bi-truck"></i></div>
+                <div class="em-faq-category" id="section-shipping">
+                    <div class="em-category-header">
+                        <div class="em-category-icon"><i class="bi bi-truck"></i></div>
                         <div>
                             <h3>Shipping & Delivery</h3>
                             <p>Safe and secure worldwide delivery</p>
@@ -756,16 +756,16 @@
 
             <!-- Individual Category Tabs (show filtered content) -->
             <div class="tab-pane fade" id="purchase-content" role="tabpanel">
-                <div class="faq-category" id="section-purchase-tab"></div>
+                <div class="em-faq-category" id="section-purchase-tab"></div>
             </div>
             <div class="tab-pane fade" id="rental-content" role="tabpanel">
-                <div class="faq-category" id="section-rental-tab"></div>
+                <div class="em-faq-category" id="section-rental-tab"></div>
             </div>
             <div class="tab-pane fade" id="parts-content" role="tabpanel">
-                <div class="faq-category" id="section-parts-tab"></div>
+                <div class="em-faq-category" id="section-parts-tab"></div>
             </div>
             <div class="tab-pane fade" id="shipping-content" role="tabpanel">
-                <div class="faq-category" id="section-shipping-tab"></div>
+                <div class="em-faq-category" id="section-shipping-tab"></div>
             </div>
         </div>
 
@@ -777,7 +777,7 @@
         </div>
 
         <!-- CTA Section -->
-        <div class="faq-cta">
+        <div class="em-faq-cta">
             <h2>Still Have Questions?</h2>
             <p>Our concierge team is available 24/7 to assist you with any inquiries.</p>
             <a href="contact.html" class="btn em-btn-primary btn-lg px-5 py-3">
@@ -820,7 +820,8 @@
                         <li class="mb-2"><a href="inventory.html" class="text-muted">Inventory</a></li>
                         <li class="mb-2"><a href="rent.html" class="text-muted">Rentals</a></li>
                         <li class="mb-2"><a href="parts.html" class="text-muted">Parts Shop</a></li>
-                        <li class="mb-2"><a href="contact.html" class="text-muted">Contact Us</a></li>
+<li class="mb-2"><a href="contact.html" class="text-muted">Contact Us</a></li>
+                        <li class="mb-2"><a href="terms-policies.html" class="text-muted">Terms & Policies</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 mb-4">
@@ -861,7 +862,7 @@
                     allAccordionItems.forEach(item => {
                         item.style.display = 'block';
                     });
-                    document.querySelectorAll('.faq-category').forEach(cat => {
+                    document.querySelectorAll('.em-faq-category').forEach(cat => {
                         cat.style.display = 'block';
                     });
                     noResults.style.display = 'none';
@@ -883,7 +884,7 @@
                 });
                 
                 // Show/hide categories based on visible items
-                document.querySelectorAll('.faq-category').forEach(category => {
+                document.querySelectorAll('.em-faq-category').forEach(category => {
                     const visibleItems = category.querySelectorAll('.accordion-item[style="display: block"]');
                     category.style.display = visibleItems.length > 0 ? 'block' : 'none';
                 });
@@ -908,7 +909,7 @@
                     };
                     
                     const sourceSection = document.querySelector(sectionMap[targetId]);
-                    const targetPane = document.querySelector(targetId + ' .faq-category');
+                    const targetPane = document.querySelector(targetId + ' .em-faq-category');
                     
                     if (sourceSection && targetPane) {
                         targetPane.innerHTML = sourceSection.innerHTML;

@@ -38,13 +38,13 @@
         }
         
         /* Booking Card */
-        .booking-card {
+        .em-booking-card {
             background: rgba(255,255,255,0.98);
             border-radius: 25px;
             padding: 40px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.3);
         }
-        .booking-card h3 {
+        .em-booking-card h3 {
             font-weight: 700;
         }
         
@@ -112,11 +112,11 @@
         }
         
         /* Fleet Section */
-        .fleet-section {
+        .em-fleet-section {
             background: #f8f9fa;
             padding: 80px 0;
         }
-        .fleet-card {
+        .em-fleet-card {
             background: #fff;
             border-radius: 20px;
             overflow: hidden;
@@ -124,25 +124,25 @@
             transition: all 0.3s ease;
             height: 100%;
         }
-        .fleet-card:hover {
+        .em-fleet-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
-        .fleet-card .card-img-container {
+        .em-fleet-card .card-img-container {
             height: 220px;
             overflow: hidden;
             position: relative;
         }
-        .fleet-card .card-img-container img {
+        .em-fleet-card .card-img-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-        .fleet-card:hover .card-img-container img {
+        .em-fleet-card:hover .card-img-container img {
             transform: scale(1.1);
         }
-        .fleet-card .status-badge {
+        .em-fleet-card .status-badge {
             position: absolute;
             top: 15px;
             right: 15px;
@@ -151,24 +151,24 @@
             font-size: 0.75rem;
             font-weight: 600;
         }
-        .fleet-card .card-body {
+        .em-fleet-card .card-body {
             padding: 25px;
         }
-        .fleet-card .card-title {
+        .em-fleet-card .card-title {
             font-weight: 700;
             margin-bottom: 5px;
         }
-        .fleet-card .daily-rate {
+        .em-fleet-card .daily-rate {
             font-size: 1.5rem;
             font-weight: 700;
             color: #c9a033;
         }
-        .fleet-card .daily-rate span {
+        .em-fleet-card .daily-rate span {
             font-size: 0.9rem;
             font-weight: 400;
             color: #888;
         }
-        .fleet-card .btn-select {
+        .em-fleet-card .btn-select {
             background: #111;
             color: #fff;
             border: none;
@@ -178,18 +178,18 @@
             width: 100%;
             transition: all 0.3s ease;
         }
-        .fleet-card .btn-select:hover {
+        .em-fleet-card .btn-select:hover {
             background: #c9a033;
             color: #000;
         }
-        .fleet-card .btn-select:disabled {
+        .em-fleet-card .btn-select:disabled {
             background: #ccc;
             cursor: not-allowed;
         }
-        .fleet-card.unavailable {
+        .em-fleet-card.unavailable {
             opacity: 0.7;
         }
-        .fleet-card.unavailable .card-img-container img {
+        .em-fleet-card.unavailable .card-img-container img {
             filter: grayscale(70%);
         }
         
@@ -329,7 +329,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="booking-card">
+                    <div class="em-booking-card">
                         <h3 class="mb-4">Book Your Rental</h3>
                         
                         <form id="rentalForm" onsubmit="event.preventDefault(); handleBooking();">
@@ -416,7 +416,7 @@
     </section>
 
     <!-- Fleet Section -->
-    <section class="fleet-section" id="fleet">
+    <section class="em-fleet-section" id="fleet">
         <div class="container">
             <div class="text-center mb-5">
                 <span class="badge-label mb-3 d-inline-block">OUR FLEET</span>
@@ -498,7 +498,8 @@
                         <li class="mb-2"><a href="about.html" class="text-muted">About Us</a></li>
                         <li class="mb-2"><a href="blog.html" class="text-muted">Blog</a></li>
                         <li class="mb-2"><a href="testimonials.html" class="text-muted">Reviews</a></li>
-                        <li class="mb-2"><a href="contact.html" class="text-muted">Contact</a></li>
+<li class="mb-2"><a href="contact.html" class="text-muted">Contact</a></li>
+                        <li class="mb-2"><a href="terms-policies.html" class="text-muted">Terms & Policies</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-4 mb-4">
@@ -526,7 +527,7 @@
         const defaultRentalCars = [
             {
                 id: 'rental-1',
-                name: 'Lamborghini Huracán EVO',
+                name: 'Lamborghini HuracÃ¡n EVO',
                 dailyRate: 1500,
                 image: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=600',
                 status: 'available',
@@ -644,7 +645,7 @@
                 
                 html += `
                     <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="fleet-card ${cardClass}">
+                        <div class="em-fleet-card ${cardClass}">
                             <div class="card-img-container">
                                 <img src="${car.image}" alt="${car.name}">
                                 ${statusBadge}
@@ -690,7 +691,7 @@
             calculateTotal();
             
             // Scroll to booking form
-            document.querySelector('.booking-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            document.querySelector('.em-booking-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
         function removeCar() {

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         /* ============ HERO SECTION ============ */
-        .gallery-hero {
+        .em-gallery-hero {
             background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%),
                         url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1920');
             background-size: cover;
@@ -18,18 +18,18 @@
             text-align: center;
         }
         
-        .gallery-hero h1 {
+        .em-gallery-hero h1 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
             color: #fff;
             margin-bottom: 15px;
         }
         
-        .gallery-hero h1 span {
+        .em-gallery-hero h1 span {
             color: #ffd700;
         }
         
-        .gallery-hero p {
+        .em-gallery-hero p {
             color: rgba(255,255,255,0.7);
             font-size: 1.1rem;
             max-width: 600px;
@@ -37,7 +37,7 @@
         }
         
         /* ============ FILTER TABS ============ */
-        .filter-section {
+        .em-filter-section {
             background: #fff;
             padding: 25px 0;
             border-bottom: 1px solid #eee;
@@ -46,14 +46,14 @@
             z-index: 100;
         }
         
-        .filter-tabs {
+        .em-filter-tabs {
             display: flex;
             justify-content: center;
             gap: 10px;
             flex-wrap: wrap;
         }
         
-        .filter-btn {
+        .em-filter-btn {
             background: #f8f9fa;
             border: none;
             padding: 10px 24px;
@@ -65,28 +65,28 @@
             transition: all 0.3s;
         }
         
-        .filter-btn:hover {
+        .em-filter-btn:hover {
             background: #eee;
         }
         
-        .filter-btn.active {
+        .em-filter-btn.active {
             background: #000;
             color: #ffd700;
         }
         
         /* ============ GALLERY GRID ============ */
-        .gallery-section {
+        .em-gallery-section {
             padding: 60px 0;
             background: #f8f9fa;
         }
         
-        .gallery-grid {
+        .em-gallery-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
         }
         
-        .gallery-item {
+        .em-gallery-item {
             position: relative;
             border-radius: 15px;
             overflow: hidden;
@@ -95,20 +95,20 @@
         }
         
         /* Different sizes for variety */
-        .gallery-item.large {
+        .em-gallery-item.large {
             grid-column: span 2;
             grid-row: span 2;
         }
         
-        .gallery-item.wide {
+        .em-gallery-item.wide {
             grid-column: span 2;
         }
         
-        .gallery-item.tall {
+        .em-gallery-item.tall {
             grid-row: span 2;
         }
         
-        .gallery-item img {
+        .em-gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -117,18 +117,18 @@
             min-height: 200px;
         }
         
-        .gallery-item.large img,
-        .gallery-item.tall img {
+        .em-gallery-item.large img,
+        .em-gallery-item.tall img {
             min-height: 420px;
         }
         
-        .gallery-item:hover img {
+        .em-gallery-item:hover img {
             transform: scale(1.08);
             opacity: 1;
         }
         
         /* Overlay */
-        .gallery-overlay {
+        .em-gallery-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -139,25 +139,25 @@
             transition: opacity 0.3s;
         }
         
-        .gallery-item:hover .gallery-overlay {
+        .em-gallery-item:hover .em-gallery-overlay {
             opacity: 1;
         }
         
-        .gallery-overlay h5 {
+        .em-gallery-overlay h5 {
             color: #fff;
             font-weight: 700;
             margin-bottom: 5px;
             font-size: 1.1rem;
         }
         
-        .gallery-overlay span {
+        .em-gallery-overlay span {
             color: #ffd700;
             font-size: 0.85rem;
             font-weight: 500;
         }
         
         /* Zoom icon */
-        .gallery-zoom {
+        .em-gallery-zoom {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -174,12 +174,12 @@
             transition: transform 0.3s;
         }
         
-        .gallery-item:hover .gallery-zoom {
+        .em-gallery-item:hover .em-gallery-zoom {
             transform: translate(-50%, -50%) scale(1);
         }
         
         /* ============ LIGHTBOX ============ */
-        .lightbox {
+        .em-lightbox {
             position: fixed;
             top: 0;
             left: 0;
@@ -193,24 +193,24 @@
             padding: 20px;
         }
         
-        .lightbox.active {
+        .em-lightbox.active {
             display: flex;
         }
         
-        .lightbox-content {
+        .em-lightbox-content {
             max-width: 1200px;
             max-height: 90vh;
             position: relative;
         }
         
-        .lightbox-content img {
+        .em-lightbox-content img {
             max-width: 100%;
             max-height: 85vh;
             object-fit: contain;
             border-radius: 10px;
         }
         
-        .lightbox-close {
+        .em-lightbox-close {
             position: absolute;
             top: 20px;
             right: 20px;
@@ -226,12 +226,12 @@
             z-index: 10000;
         }
         
-        .lightbox-close:hover {
+        .em-lightbox-close:hover {
             background: #ffd700;
             color: #000;
         }
         
-        .lightbox-nav {
+        .em-lightbox-nav {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -246,36 +246,36 @@
             transition: all 0.3s;
         }
         
-        .lightbox-nav:hover {
+        .em-lightbox-nav:hover {
             background: #ffd700;
             color: #000;
         }
         
-        .lightbox-prev {
+        .em-lightbox-prev {
             left: 20px;
         }
         
-        .lightbox-next {
+        .em-lightbox-next {
             right: 20px;
         }
         
-        .lightbox-info {
+        .em-lightbox-info {
             text-align: center;
             margin-top: 20px;
             color: #fff;
         }
         
-        .lightbox-info h4 {
+        .em-lightbox-info h4 {
             font-weight: 700;
             margin-bottom: 5px;
         }
         
-        .lightbox-info span {
+        .em-lightbox-info span {
             color: #ffd700;
         }
         
         /* ============ STATS SECTION ============ */
-        .gallery-stats {
+        .em-gallery-stats {
             background: #000;
             padding: 60px 0;
         }
@@ -307,19 +307,19 @@
         }
         
         /* ============ CTA SECTION ============ */
-        .gallery-cta {
+        .em-gallery-cta {
             padding: 80px 0;
             background: #fff;
             text-align: center;
         }
         
-        .gallery-cta h2 {
+        .em-gallery-cta h2 {
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 800;
             margin-bottom: 15px;
         }
         
-        .gallery-cta p {
+        .em-gallery-cta p {
             color: #666;
             font-size: 1.1rem;
             margin-bottom: 30px;
@@ -330,61 +330,61 @@
         
         /* ============ RESPONSIVE ============ */
         @media (max-width: 991px) {
-            .gallery-grid {
+            .em-gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .gallery-item.large {
+            .em-gallery-item.large {
                 grid-column: span 2;
                 grid-row: span 1;
             }
             
-            .gallery-item.tall {
+            .em-gallery-item.tall {
                 grid-row: span 1;
             }
             
-            .gallery-item.large img,
-            .gallery-item.tall img {
+            .em-gallery-item.large img,
+            .em-gallery-item.tall img {
                 min-height: 250px;
             }
         }
         
         @media (max-width: 576px) {
-            .gallery-grid {
+            .em-gallery-grid {
                 grid-template-columns: 1fr;
                 gap: 15px;
             }
             
-            .gallery-item.large,
-            .gallery-item.wide {
+            .em-gallery-item.large,
+            .em-gallery-item.wide {
                 grid-column: span 1;
             }
             
-            .gallery-item img,
-            .gallery-item.large img,
-            .gallery-item.tall img {
+            .em-gallery-item img,
+            .em-gallery-item.large img,
+            .em-gallery-item.tall img {
                 min-height: 220px;
             }
             
-            .filter-section {
+            .em-filter-section {
                 padding: 15px 0;
             }
             
-            .filter-btn {
+            .em-filter-btn {
                 padding: 8px 16px;
                 font-size: 0.8rem;
             }
             
-            .lightbox-nav {
+            .em-lightbox-nav {
                 width: 40px;
                 height: 40px;
             }
             
-            .lightbox-prev {
+            .em-lightbox-prev {
                 left: 10px;
             }
             
-            .lightbox-next {
+            .em-lightbox-next {
                 right: 10px;
             }
         }
@@ -429,7 +429,7 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="gallery-hero">
+    <section class="em-gallery-hero">
         <div class="container">
             <h1>The <span>Collection</span></h1>
             <p>A visual journey through automotive perfection. Explore our curated gallery of the world's most prestigious automobiles.</p>
@@ -437,137 +437,137 @@
     </section>
 
     <!-- FILTER TABS -->
-    <div class="filter-section">
+    <div class="em-filter-section">
         <div class="container">
-            <div class="filter-tabs">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="supercar">Supercars</button>
-                <button class="filter-btn" data-filter="hypercar">Hypercars</button>
-                <button class="filter-btn" data-filter="classic">Classics</button>
-                <button class="filter-btn" data-filter="luxury">Luxury</button>
+            <div class="em-filter-tabs">
+                <button class="em-filter-btn active" data-filter="all">All</button>
+                <button class="em-filter-btn" data-filter="supercar">Supercars</button>
+                <button class="em-filter-btn" data-filter="hypercar">Hypercars</button>
+                <button class="em-filter-btn" data-filter="classic">Classics</button>
+                <button class="em-filter-btn" data-filter="luxury">Luxury</button>
             </div>
         </div>
     </div>
 
     <!-- GALLERY GRID -->
-    <section class="gallery-section">
+    <section class="em-gallery-section">
         <div class="container">
-            <div class="gallery-grid" id="galleryGrid">
+            <div class="em-gallery-grid" id="galleryGrid">
                 <!-- Item 1 - Large -->
-                <div class="gallery-item large" data-category="supercar" data-index="0">
+                <div class="em-gallery-item large" data-category="supercar" data-index="0">
                     <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1200" alt="Bugatti Chiron">
-                    <div class="gallery-zoom"><i class="bi bi-zoom-in"></i></div>
-                    <div class="gallery-overlay">
+                    <div class="em-gallery-zoom"><i class="bi bi-zoom-in"></i></div>
+                    <div class="em-gallery-overlay">
                         <h5>Bugatti Chiron</h5>
                         <span>Hypercar</span>
                     </div>
                 </div>
                 
                 <!-- Item 2 -->
-                <div class="gallery-item" data-category="supercar" data-index="1">
+                <div class="em-gallery-item" data-category="supercar" data-index="1">
                     <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800" alt="Porsche 911">
-                    <div class="gallery-zoom"><i class="bi bi-zoom-in"></i></div>
-                    <div class="gallery-overlay">
+                    <div class="em-gallery-zoom"><i class="bi bi-zoom-in"></i></div>
+                    <div class="em-gallery-overlay">
                         <h5>Porsche 911 GT3</h5>
                         <span>Supercar</span>
                     </div>
                 </div>
                 
                 <!-- Item 3 -->
-                <div class="gallery-item" data-category="classic" data-index="2">
+                <div class="em-gallery-item" data-category="classic" data-index="2">
                     <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=800" alt="Ferrari Classic">
-                    <div class="gallery-zoom"><i class="bi bi-zoom-in"></i></div>
-                    <div class="gallery-overlay">
+                    <div class="em-gallery-zoom"><i class="bi bi-zoom-in"></i></div>
+                    <div class="em-gallery-overlay">
                         <h5>Ferrari 250 GTO</h5>
                         <span>Classic</span>
                     </div>
                 </div>
                 
                 <!-- Item 4 - Tall -->
-                <div class="gallery-item tall" data-category="supercar" data-index="3">
+                <div class="em-gallery-item tall" data-category="supercar" data-index="3">
                     <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=800" alt="Lamborghini">
-                    <div class="gallery-zoom"><i class="bi bi-zoom-in"></i></div>
-                    <div class="gallery-overlay">
+                    <div class="em-gallery-zoom"><i class="bi bi-zoom-in"></i></div>
+                    <div class="em-gallery-overlay">
                         <h5>Lamborghini Huracan</h5>
                         <span>Supercar</span>
                     </div>
                 </div>
                 
                 <!-- Item 5 - Wide -->
-                <div class="gallery-item wide" data-category="luxury" data-index="4">
+                <div class="em-gallery-item wide" data-category="luxury" data-index="4">
                     <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&q=80&w=1200" alt="Ford Mustang">
-                    <div class="gallery-zoom"><i class="bi bi-zoom-in"></i></div>
-                    <div class="gallery-overlay">
+                    <div class="em-gallery-zoom"><i class="bi bi-zoom-in"></i></div>
+                    <div class="em-gallery-overlay">
                         <h5>Ford Mustang GT</h5>
                         <span>Luxury</span>
                     </div>
                 </div>
                 
                 <!-- Item 6 -->
-                <div class="gallery-item" data-category="hypercar" data-index="5">
+                <div class="em-gallery-item" data-category="hypercar" data-index="5">
                     <img src="https://images.unsplash.com/photo-1566008885218-90abf9200ddb?auto=format&fit=crop&q=80&w=800" alt="Lamborghini Aventador">
-                    <div class="gallery-zoom"><i class="bi bi-zoom-in"></i></div>
-                    <div class="gallery-overlay">
+                    <div class="em-gallery-zoom"><i class="bi bi-zoom-in"></i></div>
+                    <div class="em-gallery-overlay">
                         <h5>Lamborghini Aventador</h5>
                         <span>Hypercar</span>
                     </div>
                 </div>
                 
                 <!-- Item 7 -->
-                <div class="gallery-item" data-category="supercar" data-index="6">
+                <div class="em-gallery-item" data-category="supercar" data-index="6">
                     <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=800" alt="Ferrari Front">
-                    <div class="gallery-zoom"><i class="bi bi-zoom-in"></i></div>
-                    <div class="gallery-overlay">
+                    <div class="em-gallery-zoom"><i class="bi bi-zoom-in"></i></div>
+                    <div class="em-gallery-overlay">
                         <h5>Ferrari 488 Pista</h5>
                         <span>Supercar</span>
                     </div>
                 </div>
                 
                 <!-- Item 8 -->
-                <div class="gallery-item" data-category="luxury" data-index="7">
+                <div class="em-gallery-item" data-category="luxury" data-index="7">
                     <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800" alt="Audi R8">
-                    <div class="gallery-zoom"><i class="bi bi-zoom-in"></i></div>
-                    <div class="gallery-overlay">
+                    <div class="em-gallery-zoom"><i class="bi bi-zoom-in"></i></div>
+                    <div class="em-gallery-overlay">
                         <h5>Audi R8 V10</h5>
                         <span>Luxury</span>
                     </div>
                 </div>
                 
                 <!-- Item 9 - Wide -->
-                <div class="gallery-item wide" data-category="classic" data-index="8">
+                <div class="em-gallery-item wide" data-category="classic" data-index="8">
                     <img src="https://images.unsplash.com/photo-1566024164372-0281f1133aa6?auto=format&fit=crop&q=80&w=1200" alt="Mercedes Classic">
-                    <div class="gallery-zoom"><i class="bi bi-zoom-in"></i></div>
-                    <div class="gallery-overlay">
+                    <div class="em-gallery-zoom"><i class="bi bi-zoom-in"></i></div>
+                    <div class="em-gallery-overlay">
                         <h5>Mercedes 300SL Gullwing</h5>
                         <span>Classic</span>
                     </div>
                 </div>
                 
                 <!-- Item 10 -->
-                <div class="gallery-item" data-category="hypercar" data-index="9">
+                <div class="em-gallery-item" data-category="hypercar" data-index="9">
                     <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&q=80&w=800" alt="McLaren">
-                    <div class="gallery-zoom"><i class="bi bi-zoom-in"></i></div>
-                    <div class="gallery-overlay">
+                    <div class="em-gallery-zoom"><i class="bi bi-zoom-in"></i></div>
+                    <div class="em-gallery-overlay">
                         <h5>McLaren 720S</h5>
                         <span>Hypercar</span>
                     </div>
                 </div>
                 
                 <!-- Item 11 -->
-                <div class="gallery-item" data-category="luxury" data-index="10">
+                <div class="em-gallery-item" data-category="luxury" data-index="10">
                     <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=800" alt="BMW M4">
-                    <div class="gallery-zoom"><i class="bi bi-zoom-in"></i></div>
-                    <div class="gallery-overlay">
+                    <div class="em-gallery-zoom"><i class="bi bi-zoom-in"></i></div>
+                    <div class="em-gallery-overlay">
                         <h5>BMW M4 Competition</h5>
                         <span>Luxury</span>
                     </div>
                 </div>
                 
                 <!-- Item 12 -->
-                <div class="gallery-item" data-category="supercar" data-index="11">
+                <div class="em-gallery-item" data-category="supercar" data-index="11">
                     <img src="https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&q=80&w=800" alt="Nissan GTR">
-                    <div class="gallery-zoom"><i class="bi bi-zoom-in"></i></div>
-                    <div class="gallery-overlay">
+                    <div class="em-gallery-zoom"><i class="bi bi-zoom-in"></i></div>
+                    <div class="em-gallery-overlay">
                         <h5>Nissan GT-R Nismo</h5>
                         <span>Supercar</span>
                     </div>
@@ -577,13 +577,13 @@
     </section>
 
     <!-- LIGHTBOX -->
-    <div class="lightbox" id="lightbox">
-        <button class="lightbox-close" id="lightboxClose"><i class="bi bi-x-lg"></i></button>
-        <button class="lightbox-nav lightbox-prev" id="lightboxPrev"><i class="bi bi-chevron-left"></i></button>
-        <button class="lightbox-nav lightbox-next" id="lightboxNext"><i class="bi bi-chevron-right"></i></button>
-        <div class="lightbox-content">
+    <div class="em-lightbox" id="lightbox">
+        <button class="em-lightbox-close" id="lightboxClose"><i class="bi bi-x-lg"></i></button>
+        <button class="em-lightbox-nav lightbox-prev" id="lightboxPrev"><i class="bi bi-chevron-left"></i></button>
+        <button class="em-lightbox-nav lightbox-next" id="lightboxNext"><i class="bi bi-chevron-right"></i></button>
+        <div class="em-lightbox-content">
             <img src="" alt="" id="lightboxImg">
-            <div class="lightbox-info">
+            <div class="em-lightbox-info">
                 <h4 id="lightboxTitle"></h4>
                 <span id="lightboxCategory"></span>
             </div>
@@ -591,7 +591,7 @@
     </div>
 
     <!-- STATS SECTION -->
-    <section class="gallery-stats">
+    <section class="em-gallery-stats">
         <div class="container">
             <div class="row">
                 <div class="col-6 col-md-3">
@@ -627,7 +627,7 @@
     </section>
 
     <!-- CTA SECTION -->
-    <section class="gallery-cta">
+    <section class="em-gallery-cta">
         <div class="container">
             <h2>Want to See These Cars in Person?</h2>
             <p>Visit our showroom or schedule a private viewing with our team. Experience automotive excellence firsthand.</p>
@@ -667,7 +667,8 @@
                         <li class="mb-2"><a href="faq.html" class="text-muted">FAQ</a></li>
                         <li class="mb-2"><a href="contact.html" class="text-muted">Contact Us</a></li>
                         <li class="mb-2"><a href="user-dashboard.html" class="text-muted">Dashboard</a></li>
-                        <li class="mb-2"><a href="about.html" class="text-muted">About Us</a></li>
+<li class="mb-2"><a href="about.html" class="text-muted">About Us</a></li>
+                        <li class="mb-2"><a href="terms-policies.html" class="text-muted">Terms & Policies</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
@@ -700,13 +701,13 @@
             }
             
             // Gallery Data
-            const galleryItems = document.querySelectorAll('.gallery-item');
+            const galleryItems = document.querySelectorAll('.em-gallery-item');
             const galleryData = [];
             
             galleryItems.forEach((item, index) => {
                 const img = item.querySelector('img');
-                const title = item.querySelector('.gallery-overlay h5').textContent;
-                const category = item.querySelector('.gallery-overlay span').textContent;
+                const title = item.querySelector('.em-gallery-overlay h5').textContent;
+                const category = item.querySelector('.em-gallery-overlay span').textContent;
                 
                 galleryData.push({
                     src: img.src,
@@ -716,7 +717,7 @@
             });
             
             // Filter Functionality
-            const filterBtns = document.querySelectorAll('.filter-btn');
+            const filterBtns = document.querySelectorAll('.em-filter-btn');
             
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', function() {

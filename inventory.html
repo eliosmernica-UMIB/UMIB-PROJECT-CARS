@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         /* ============ HERO SECTION ============ */
-        .inventory-hero {
+        .em-inventory-hero {
             background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 100%),
                         url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=1920');
             background-size: cover;
@@ -17,18 +17,18 @@
             padding: 140px 0 60px;
         }
         
-        .inventory-hero h1 {
+        .em-inventory-hero h1 {
             font-size: clamp(2.5rem, 5vw, 3.5rem);
             font-weight: 800;
             color: #fff;
             margin-bottom: 10px;
         }
         
-        .inventory-hero h1 span {
+        .em-inventory-hero h1 span {
             color: #ffd700;
         }
         
-        .inventory-hero p {
+        .em-inventory-hero p {
             color: rgba(255,255,255,0.7);
             font-size: 1.1rem;
         }
@@ -71,7 +71,7 @@
         }
         
         /* ============ FILTER SECTION ============ */
-        .filter-section {
+        .em-filter-section {
             background: #fff;
             padding: 20px 0;
             border-bottom: 1px solid #eee;
@@ -80,27 +80,27 @@
             z-index: 100;
         }
         
-        .filter-row {
+        .em-filter-row {
             display: flex;
             align-items: center;
             gap: 15px;
             flex-wrap: wrap;
         }
         
-        .filter-group {
+        .em-filter-group {
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        .filter-label {
+        .em-filter-label {
             font-weight: 600;
             font-size: 0.85rem;
             color: #666;
             white-space: nowrap;
         }
         
-        .filter-select {
+        .em-filter-select {
             padding: 8px 35px 8px 15px;
             border-radius: 50px;
             border: 1px solid #ddd;
@@ -110,18 +110,18 @@
             min-width: 140px;
         }
         
-        .filter-select:focus {
+        .em-filter-select:focus {
             outline: none;
             border-color: #ffd700;
         }
         
-        .filter-tabs {
+        .em-filter-tabs {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
         }
         
-        .filter-tab {
+        .em-filter-tab {
             padding: 8px 18px;
             border-radius: 50px;
             border: 1px solid #ddd;
@@ -132,11 +132,11 @@
             transition: all 0.3s;
         }
         
-        .filter-tab:hover {
+        .em-filter-tab:hover {
             border-color: #000;
         }
         
-        .filter-tab.active {
+        .em-filter-tab.active {
             background: #000;
             color: #ffd700;
             border-color: #000;
@@ -149,13 +149,13 @@
         }
         
         /* ============ INVENTORY GRID ============ */
-        .inventory-section {
+        .em-inventory-section {
             padding: 50px 0 80px;
             background: #f8f9fa;
             min-height: 60vh;
         }
         
-        .car-card {
+        .em-car-card {
             background: #fff;
             border-radius: 20px;
             overflow: hidden;
@@ -166,29 +166,29 @@
             flex-direction: column;
         }
         
-        .car-card:hover {
+        .em-car-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.12);
         }
         
-        .car-image {
+        .em-car-image {
             position: relative;
             height: 220px;
             overflow: hidden;
         }
         
-        .car-image img {
+        .em-car-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
         }
         
-        .car-card:hover .car-image img {
+        .em-car-card:hover .em-car-image img {
             transform: scale(1.08);
         }
         
-        .car-badge {
+        .em-car-badge {
             position: absolute;
             top: 15px;
             left: 15px;
@@ -200,7 +200,7 @@
             letter-spacing: 1px;
         }
         
-        .car-status {
+        .em-car-status {
             position: absolute;
             top: 15px;
             right: 15px;
@@ -210,7 +210,7 @@
             font-weight: 600;
         }
         
-        .car-wishlist {
+        .em-car-wishlist {
             position: absolute;
             bottom: 15px;
             right: 15px;
@@ -228,24 +228,24 @@
             transform: translateY(10px);
         }
         
-        .car-card:hover .car-wishlist {
+        .em-car-card:hover .em-car-wishlist {
             opacity: 1;
             transform: translateY(0);
         }
         
-        .car-wishlist:hover {
+        .em-car-wishlist:hover {
             background: #dc3545;
             color: #fff;
         }
         
-        .car-body {
+        .em-car-body {
             padding: 25px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
         
-        .car-category {
+        .em-car-category {
             font-size: 0.75rem;
             font-weight: 600;
             color: #ffd700;
@@ -254,20 +254,20 @@
             margin-bottom: 8px;
         }
         
-        .car-body h5 {
+        .em-car-body h5 {
             font-weight: 700;
             margin-bottom: 10px;
             font-size: 1.15rem;
         }
         
-        .car-price {
+        .em-car-price {
             font-size: 1.4rem;
             font-weight: 800;
             color: #000;
             margin-bottom: 15px;
         }
         
-        .car-specs {
+        .em-car-specs {
             display: flex;
             gap: 15px;
             margin-bottom: 20px;
@@ -286,13 +286,13 @@
             color: #ffd700;
         }
         
-        .car-actions {
+        .em-car-actions {
             margin-top: auto;
             display: flex;
             gap: 10px;
         }
         
-        .car-actions .btn {
+        .em-car-actions .btn {
             flex: 1;
         }
         
@@ -322,7 +322,7 @@
         
         /* ============ RESPONSIVE ============ */
         @media (max-width: 991px) {
-            .filter-row {
+            .em-filter-row {
                 justify-content: center;
             }
             
@@ -335,29 +335,29 @@
         }
         
         @media (max-width: 768px) {
-            .inventory-hero {
+            .em-inventory-hero {
                 padding: 120px 0 50px;
             }
             
-            .filter-section {
+            .em-filter-section {
                 padding: 15px 0;
             }
             
-            .filter-group {
+            .em-filter-group {
                 width: 100%;
                 justify-content: center;
             }
             
-            .filter-tabs {
+            .em-filter-tabs {
                 justify-content: center;
                 width: 100%;
             }
             
-            .car-image {
+            .em-car-image {
                 height: 200px;
             }
             
-            .car-actions {
+            .em-car-actions {
                 flex-direction: column;
             }
         }
@@ -401,7 +401,7 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="inventory-hero">
+    <section class="em-inventory-hero">
         <div class="container text-center">
             <h1>Explore Our <span>Collection</span></h1>
             <p>Discover the world's most exclusive exotic and classic automobiles</p>
@@ -413,21 +413,21 @@
     </section>
 
     <!-- FILTER SECTION -->
-    <div class="filter-section">
+    <div class="em-filter-section">
         <div class="container">
-            <div class="filter-row">
-                <div class="filter-tabs" id="categoryTabs">
-                    <button class="filter-tab active" data-category="all">All Cars</button>
-                    <button class="filter-tab" data-category="hypercar">Hypercars</button>
-                    <button class="filter-tab" data-category="supercar">Supercars</button>
-                    <button class="filter-tab" data-category="sports">Sports</button>
-                    <button class="filter-tab" data-category="classic">Classics</button>
-                    <button class="filter-tab" data-category="luxury">Luxury</button>
+            <div class="em-filter-row">
+                <div class="em-filter-tabs" id="categoryTabs">
+                    <button class="em-filter-tab active" data-category="all">All Cars</button>
+                    <button class="em-filter-tab" data-category="hypercar">Hypercars</button>
+                    <button class="em-filter-tab" data-category="supercar">Supercars</button>
+                    <button class="em-filter-tab" data-category="sports">Sports</button>
+                    <button class="em-filter-tab" data-category="classic">Classics</button>
+                    <button class="em-filter-tab" data-category="luxury">Luxury</button>
                 </div>
                 
-                <div class="filter-group">
-                    <span class="filter-label">Sort:</span>
-                    <select class="filter-select" id="sortSelect">
+                <div class="em-filter-group">
+                    <span class="em-filter-label">Sort:</span>
+                    <select class="em-filter-select" id="sortSelect">
                         <option value="featured">Featured</option>
                         <option value="price-low">Price: Low to High</option>
                         <option value="price-high">Price: High to Low</option>
@@ -435,9 +435,9 @@
                     </select>
                 </div>
                 
-                <div class="filter-group">
-                    <span class="filter-label">Price:</span>
-                    <select class="filter-select" id="priceSelect">
+                <div class="em-filter-group">
+                    <span class="em-filter-label">Price:</span>
+                    <select class="em-filter-select" id="priceSelect">
                         <option value="all">All Prices</option>
                         <option value="0-500000">Under $500K</option>
                         <option value="500000-1000000">$500K - $1M</option>
@@ -452,7 +452,7 @@
     </div>
 
     <!-- INVENTORY GRID -->
-    <section class="inventory-section">
+    <section class="em-inventory-section">
         <div class="container">
             <div class="row g-4" id="inventoryGrid">
                 <!-- Cars will be rendered here by JavaScript -->
@@ -497,7 +497,8 @@
                         <li class="mb-2"><a href="faq.html" class="text-muted">FAQ</a></li>
                         <li class="mb-2"><a href="contact.html" class="text-muted">Contact Us</a></li>
                         <li class="mb-2"><a href="user-dashboard.html" class="text-muted">Dashboard</a></li>
-                        <li class="mb-2"><a href="about.html" class="text-muted">About Us</a></li>
+<li class="mb-2"><a href="about.html" class="text-muted">About Us</a></li>
+                        <li class="mb-2"><a href="terms-policies.html" class="text-muted">Terms & Policies</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
@@ -803,9 +804,9 @@
 
         function setupEventListeners() {
             // Category tabs
-            document.querySelectorAll('.filter-tab').forEach(tab => {
+            document.querySelectorAll('.em-filter-tab').forEach(tab => {
                 tab.addEventListener('click', function() {
-                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.em-filter-tab').forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
                     currentCategory = this.dataset.category;
                     applyFilters();
@@ -895,29 +896,29 @@
                 };
 
                 const statusBadge = car.status !== 'available' 
-                    ? `<span class="car-status bg-warning text-dark">${car.status}</span>` 
+                    ? `<span class="em-car-status bg-warning text-dark">${car.status}</span>` 
                     : '';
 
                 return `
                     <div class="col-lg-4 col-md-6">
-                        <div class="car-card">
-                            <div class="car-image">
+                        <div class="em-car-card">
+                            <div class="em-car-image">
                                 <img src="${car.image}" alt="${car.name}" onerror="this.src='https://via.placeholder.com/800x400?text=No+Image'">
-                                <span class="car-badge ${categoryColors[car.category] || 'bg-secondary'}">${car.category}</span>
+                                <span class="em-car-badge ${categoryColors[car.category] || 'bg-secondary'}">${car.category}</span>
                                 ${statusBadge}
-                                <button class="car-wishlist" onclick="addToWishlist('${car.id}')" title="Add to Wishlist">
+                                <button class="em-car-wishlist" onclick="addToWishlist('${car.id}')" title="Add to Wishlist">
                                     <i class="bi bi-heart"></i>
                                 </button>
                             </div>
-                            <div class="car-body">
-                                <div class="car-category">${car.category}</div>
+                            <div class="em-car-body">
+                                <div class="em-car-category">${car.category}</div>
                                 <h5>${car.name}</h5>
-                                <div class="car-price">$${car.price.toLocaleString()}</div>
-                                <div class="car-specs">
+                                <div class="em-car-price">$${car.price.toLocaleString()}</div>
+                                <div class="em-car-specs">
                                     <span class="spec-badge"><i class="bi bi-speedometer2"></i> ${car.speed}</span>
                                     <span class="spec-badge"><i class="bi bi-lightning-charge"></i> ${car.acceleration}</span>
                                 </div>
-                                <div class="car-actions">
+                                <div class="em-car-actions">
                                     <button class="btn em-btn-primary" onclick="addToCart('${car.id}')" ${car.status !== 'available' ? 'disabled' : ''}>
                                         ${car.status === 'available' ? 'Add to Cart' : 'Reserved'}
                                     </button>
@@ -938,8 +939,8 @@
             currentPrice = 'all';
             searchTerm = '';
 
-            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-            document.querySelector('.filter-tab[data-category="all"]').classList.add('active');
+            document.querySelectorAll('.em-filter-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector('.em-filter-tab[data-category="all"]').classList.add('active');
             document.getElementById('sortSelect').value = 'featured';
             document.getElementById('priceSelect').value = 'all';
             document.getElementById('searchInput').value = '';

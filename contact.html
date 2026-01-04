@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         /* Hero Section */
-        .contact-hero {
+        .em-contact-hero {
             min-height: 50vh;
             background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 100%),
                         url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&q=80&w=1920');
@@ -19,7 +19,7 @@
             align-items: center;
             padding-top: 80px;
         }
-        .contact-hero .badge-label {
+        .em-contact-hero .em-badge-label {
             background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
             color: #000;
             font-weight: 600;
@@ -30,12 +30,12 @@
         }
         
         /* Contact Cards */
-        .contact-cards {
+        .em-contact-cards {
             margin-top: -60px;
             position: relative;
             z-index: 10;
         }
-        .contact-card {
+        .em-contact-card {
             background: #fff;
             border-radius: 20px;
             padding: 35px 30px;
@@ -44,11 +44,11 @@
             transition: all 0.3s ease;
             height: 100%;
         }
-        .contact-card:hover {
+        .em-contact-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
-        .contact-card .icon {
+        .em-contact-card .icon {
             width: 70px;
             height: 70px;
             background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
@@ -58,56 +58,56 @@
             justify-content: center;
             margin: 0 auto 20px;
         }
-        .contact-card .icon i {
+        .em-contact-card .icon i {
             font-size: 1.8rem;
             color: #000;
         }
-        .contact-card h5 {
+        .em-contact-card h5 {
             font-weight: 700;
             margin-bottom: 10px;
         }
-        .contact-card p {
+        .em-contact-card p {
             color: #666;
             margin: 0;
         }
-        .contact-card a {
+        .em-contact-card a {
             color: #c9a033;
             text-decoration: none;
             font-weight: 600;
         }
         
         /* Form Section */
-        .form-section {
+        .em-form-section {
             padding: 80px 0;
             background: #f8f9fa;
         }
-        .form-card {
+        .em-form-card {
             background: #fff;
             border-radius: 25px;
             padding: 50px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
-        .form-card h3 {
+        .em-form-card h3 {
             font-weight: 700;
             margin-bottom: 30px;
         }
-        .form-card .form-control,
-        .form-card .form-select {
+        .em-form-card .form-control,
+        .em-form-card .form-select {
             padding: 15px 20px;
             border-radius: 12px;
             border: 2px solid #eee;
             font-size: 1rem;
         }
-        .form-card .form-control:focus,
-        .form-card .form-select:focus {
+        .em-form-card .form-control:focus,
+        .em-form-card .form-select:focus {
             border-color: #c9a033;
             box-shadow: none;
         }
-        .form-card label {
+        .em-form-card label {
             font-weight: 600;
             margin-bottom: 8px;
         }
-        .btn-submit {
+        .em-btn-submit {
             background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
             border: none;
             color: #000;
@@ -117,22 +117,22 @@
             font-size: 1.1rem;
             transition: all 0.3s ease;
         }
-        .btn-submit:hover {
+        .em-btn-submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(201, 160, 51, 0.4);
             color: #000;
         }
         
         /* Map Section */
-        .map-section {
+        .em-map-section {
             position: relative;
         }
-        .map-section iframe {
+        .em-map-section iframe {
             width: 100%;
             height: 450px;
             border: none;
         }
-        .map-overlay {
+        .em-map-overlay {
             position: absolute;
             bottom: 30px;
             left: 50%;
@@ -143,11 +143,11 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             text-align: center;
         }
-        .map-overlay h5 {
+        .em-map-overlay h5 {
             font-weight: 700;
             margin-bottom: 5px;
         }
-        .map-overlay p {
+        .em-map-overlay p {
             color: #666;
             margin: 0;
         }
@@ -235,10 +235,10 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="contact-hero">
+    <section class="em-contact-hero">
         <div class="container">
             <div class="text-center">
-                <span class="badge-label mb-4 d-inline-block">GET IN TOUCH</span>
+                <span class="em-badge-label mb-4 d-inline-block">GET IN TOUCH</span>
                 <h1 class="display-3 fw-bold text-white mb-4">Contact Us</h1>
                 <p class="lead text-white-50 mx-auto" style="max-width: 600px;">
                     Have a question about a vehicle or need assistance? We're here to help.
@@ -248,11 +248,11 @@
     </section>
 
     <!-- Contact Cards -->
-    <section class="contact-cards">
+    <section class="em-contact-cards">
         <div class="container">
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="contact-card">
+                    <div class="em-contact-card">
                         <div class="icon">
                             <i class="bi bi-telephone"></i>
                         </div>
@@ -262,7 +262,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="contact-card">
+                    <div class="em-contact-card">
                         <div class="icon">
                             <i class="bi bi-envelope"></i>
                         </div>
@@ -272,7 +272,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="contact-card">
+                    <div class="em-contact-card">
                         <div class="icon">
                             <i class="bi bi-geo-alt"></i>
                         </div>
@@ -286,11 +286,11 @@
     </section>
 
     <!-- Form Section -->
-    <section class="form-section">
+    <section class="em-form-section">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="form-card">
+                    <div class="em-form-card">
                         <div class="text-center mb-4">
                             <h3>Send Us a Message</h3>
                             <p class="text-muted">Fill out the form below and we'll get back to you as soon as possible.</p>
@@ -342,9 +342,9 @@
     </section>
 
     <!-- Map Section -->
-    <section class="map-section" id="map">
+    <section class="em-map-section" id="map">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.715220363574!2d-118.40251678494954!3d34.05118742523296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2bb79f53e5361%3A0xc6c766e4a6442802!2sBeverly%20Hills%2C%20CA%2C%20USA!5e0!3m2!1sen!2s!4v1698654321234!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
-        <div class="map-overlay">
+        <div class="em-map-overlay">
             <h5>EM Luxury Cars</h5>
             <p>123 Luxury Blvd, Beverly Hills, CA 90210</p>
         </div>
@@ -394,7 +394,8 @@
                         <li class="mb-2"><a href="about.html" class="text-muted">About Us</a></li>
                         <li class="mb-2"><a href="blog.html" class="text-muted">Blog</a></li>
                         <li class="mb-2"><a href="testimonials.html" class="text-muted">Reviews</a></li>
-                        <li class="mb-2"><a href="contact.html" class="text-muted">Contact</a></li>
+<li class="mb-2"><a href="contact.html" class="text-muted">Contact</a></li>
+                        <li class="mb-2"><a href="terms-policies.html" class="text-muted">Terms & Policies</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-4 mb-4">

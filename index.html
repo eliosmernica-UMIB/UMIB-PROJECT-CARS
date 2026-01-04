@@ -13,7 +13,7 @@
     
     <style>
         /* ============ HERO SECTION WITH SLIDER ============ */
-        .hero-section {
+        .em-hero-section {
             min-height: 100vh;
             position: relative;
             display: flex;
@@ -23,7 +23,7 @@
         }
         
         /* Hero Slider */
-        .hero-slider {
+        .em-hero-slider {
             position: absolute;
             top: 0;
             left: 0;
@@ -32,18 +32,18 @@
             z-index: 0;
         }
         
-        .hero-slider .carousel-inner,
-        .hero-slider .carousel-item {
+        .em-hero-slider .carousel-inner,
+        .em-hero-slider .carousel-item {
             height: 100%;
         }
         
-        .hero-slide {
+        .em-hero-slide {
             height: 100%;
             background-size: cover;
             background-position: center;
         }
         
-        .hero-slide::before {
+        .em-hero-slide::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -51,8 +51,8 @@
         }
         
         /* Slider Controls */
-        .hero-slider .carousel-control-prev,
-        .hero-slider .carousel-control-next {
+        .em-hero-slider .carousel-control-prev,
+        .em-hero-slider .carousel-control-next {
             width: 60px;
             height: 60px;
             background: rgba(255,255,255,0.1);
@@ -65,38 +65,38 @@
             transition: all 0.3s ease;
         }
         
-        .hero-section:hover .carousel-control-prev,
-        .hero-section:hover .carousel-control-next {
+        .em-hero-section:hover .carousel-control-prev,
+        .em-hero-section:hover .carousel-control-next {
             opacity: 1;
         }
         
-        .hero-slider .carousel-control-prev {
+        .em-hero-slider .carousel-control-prev {
             left: 30px;
         }
         
-        .hero-slider .carousel-control-next {
+        .em-hero-slider .carousel-control-next {
             right: 30px;
         }
         
-        .hero-slider .carousel-control-prev:hover,
-        .hero-slider .carousel-control-next:hover {
+        .em-hero-slider .carousel-control-prev:hover,
+        .em-hero-slider .carousel-control-next:hover {
             background: rgba(201, 160, 51, 0.3);
             border-color: #c9a033;
         }
         
-        .hero-slider .carousel-control-prev-icon,
-        .hero-slider .carousel-control-next-icon {
+        .em-hero-slider .carousel-control-prev-icon,
+        .em-hero-slider .carousel-control-next-icon {
             width: 20px;
             height: 20px;
         }
         
         /* Slider Indicators */
-        .hero-slider .carousel-indicators {
+        .em-hero-slider .carousel-indicators {
             bottom: 30px;
             gap: 10px;
         }
         
-        .hero-slider .carousel-indicators button {
+        .em-hero-slider .carousel-indicators button {
             width: 12px;
             height: 12px;
             border-radius: 50%;
@@ -105,19 +105,19 @@
             transition: all 0.3s ease;
         }
         
-        .hero-slider .carousel-indicators button.active {
+        .em-hero-slider .carousel-indicators button.active {
             background: #c9a033;
             border-color: #c9a033;
             transform: scale(1.2);
         }
         
         /* Hero Content */
-        .hero-content {
+        .em-hero-content {
             position: relative;
             z-index: 2;
         }
         
-        .hero-badge {
+        .em-hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -134,7 +134,7 @@
             backdrop-filter: blur(10px);
         }
         
-        .hero-title {
+        .em-hero-title {
             font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 800;
             color: #fff;
@@ -142,14 +142,14 @@
             margin-bottom: 20px;
         }
         
-        .hero-title .gold {
+        .em-hero-title .em-gold {
             background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
-        .hero-description {
+        .em-hero-description {
             font-size: 1.1rem;
             color: rgba(255,255,255,0.7);
             max-width: 500px;
@@ -157,13 +157,13 @@
             line-height: 1.8;
         }
         
-        .hero-buttons {
+        .em-hero-buttons {
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
         }
         
-        .btn-hero-primary {
+        .em-btn-hero-primary {
             background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
             color: #000;
             padding: 16px 36px;
@@ -181,13 +181,13 @@
             box-shadow: 0 4px 25px rgba(201, 160, 51, 0.4);
         }
         
-        .btn-hero-primary:hover {
+        .em-btn-hero-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 35px rgba(201, 160, 51, 0.5);
             color: #000;
         }
         
-        .btn-hero-outline {
+        .em-btn-hero-outline {
             background: transparent;
             color: #fff;
             padding: 16px 36px;
@@ -203,7 +203,7 @@
             backdrop-filter: blur(10px);
         }
         
-        .btn-hero-outline:hover {
+        .em-btn-hero-outline:hover {
             background: #fff;
             color: #000;
             border-color: #fff;
@@ -211,7 +211,7 @@
         }
         
         /* Scroll Indicator */
-        .hero-scroll {
+        .em-hero-scroll {
             position: absolute;
             bottom: 30px;
             left: 50%;
@@ -227,27 +227,27 @@
             text-transform: uppercase;
         }
         
-        .hero-scroll .line {
+        .em-hero-scroll .em-line {
             width: 1px;
             height: 40px;
             background: linear-gradient(to bottom, #c9a033, transparent);
-            animation: scrollPulse 2s ease-in-out infinite;
+            animation: emScrollPulse 2s ease-in-out infinite;
         }
         
-        @keyframes scrollPulse {
+        @keyframes emScrollPulse {
             0%, 100% { opacity: 0.3; height: 30px; }
             50% { opacity: 1; height: 40px; }
         }
         
         /* ============ STATS SECTION ============ */
-        .stats-section {
+        .em-stats-section {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
             padding: 80px 0;
             position: relative;
             overflow: hidden;
         }
         
-        .stats-section::before {
+        .em-stats-section::before {
             content: '';
             position: absolute;
             top: 0;
@@ -259,13 +259,13 @@
             pointer-events: none;
         }
         
-        .stat-box {
+        .em-stat-box {
             text-align: center;
             padding: 30px 20px;
             position: relative;
         }
         
-        .stat-box .stat-number {
+        .em-stat-box .em-stat-number {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
             color: #fff;
@@ -273,7 +273,7 @@
             line-height: 1;
         }
         
-        .stat-box .stat-plus {
+        .em-stat-box .em-stat-plus {
             font-size: clamp(1.5rem, 3vw, 2.5rem);
             font-weight: 700;
             background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
@@ -282,7 +282,7 @@
             background-clip: text;
         }
         
-        .stat-box .stat-label {
+        .em-stat-box .em-stat-label {
             color: rgba(255,255,255,0.5);
             font-size: 0.9rem;
             text-transform: uppercase;
@@ -291,7 +291,7 @@
             margin-bottom: 0;
         }
         
-        .stat-box::after {
+        .em-stat-box::after {
             content: '';
             position: absolute;
             right: 0;
@@ -302,32 +302,32 @@
             background: linear-gradient(to bottom, transparent, rgba(201, 160, 51, 0.3), transparent);
         }
         
-        .col-lg-3:last-child .stat-box::after {
+        .col-lg-3:last-child .em-stat-box::after {
             display: none;
         }
         
         @media (max-width: 991px) {
-            .stats-section {
+            .em-stats-section {
                 padding: 60px 0;
             }
             
-            .stat-box::after {
+            .em-stat-box::after {
                 display: none;
             }
             
-            .stat-box {
+            .em-stat-box {
                 padding: 25px 15px;
             }
         }
         
         /* ============ BRAND BAR ============ */
-        .brand-bar {
+        .em-brand-bar {
             background: #000;
             padding: 20px 0;
             overflow: hidden;
         }
         
-        .brand-list {
+        .em-brand-list {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -335,7 +335,7 @@
             flex-wrap: wrap;
         }
         
-        .brand-list span {
+        .em-brand-list span {
             color: rgba(255,255,255,0.4);
             font-size: 0.9rem;
             font-weight: 600;
@@ -344,12 +344,12 @@
         }
         
         /* ============ SERVICES SECTION ============ */
-        .services-section {
+        .em-services-section {
             padding: 80px 0;
             background: #fff;
         }
         
-        .section-label {
+        .em-section-label {
             display: inline-block;
             color: #ffd700;
             font-weight: 700;
@@ -362,20 +362,20 @@
             border-radius: 50px;
         }
         
-        .section-title {
+        .em-section-title {
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 800;
             color: #000;
             margin-bottom: 15px;
         }
         
-        .section-description {
+        .em-section-description {
             color: #666;
             font-size: 1rem;
             max-width: 600px;
         }
         
-        .service-card {
+        .em-service-card {
             background: #f8f9fa;
             border-radius: 20px;
             padding: 35px 30px;
@@ -384,14 +384,14 @@
             border: 1px solid transparent;
         }
         
-        .service-card:hover {
+        .em-service-card:hover {
             background: #fff;
             transform: translateY(-8px);
             box-shadow: 0 20px 50px rgba(0,0,0,0.1);
             border-color: rgba(255, 215, 0, 0.3);
         }
         
-        .service-icon {
+        .em-service-icon {
             width: 70px;
             height: 70px;
             background: linear-gradient(135deg, #000 0%, #333 100%);
@@ -404,20 +404,20 @@
             margin-bottom: 20px;
         }
         
-        .service-card h4 {
+        .em-service-card h4 {
             font-weight: 700;
             margin-bottom: 12px;
             font-size: 1.2rem;
         }
         
-        .service-card p {
+        .em-service-card p {
             color: #666;
             margin-bottom: 20px;
             font-size: 0.95rem;
             line-height: 1.6;
         }
         
-        .service-link {
+        .em-service-link {
             color: #000;
             font-weight: 600;
             text-decoration: none;
@@ -428,18 +428,18 @@
             transition: all 0.3s;
         }
         
-        .service-link:hover {
+        .em-service-link:hover {
             color: #ffd700;
             gap: 12px;
         }
         
         /* ============ FEATURED SECTION ============ */
-        .featured-section {
+        .em-featured-section {
             padding: 80px 0;
             background: #f8f9fa;
         }
         
-        .featured-card {
+        .em-featured-card {
             background: #fff;
             border-radius: 20px;
             overflow: hidden;
@@ -448,29 +448,29 @@
             height: 100%;
         }
         
-        .featured-card:hover {
+        .em-featured-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 50px rgba(0,0,0,0.12);
         }
         
-        .featured-image {
+        .em-featured-image {
             position: relative;
             overflow: hidden;
             height: 220px;
         }
         
-        .featured-image img {
+        .em-featured-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.4s;
         }
         
-        .featured-card:hover .featured-image img {
+        .em-featured-card:hover .em-featured-image img {
             transform: scale(1.08);
         }
         
-        .featured-badge {
+        .em-featured-badge {
             position: absolute;
             top: 15px;
             left: 15px;
@@ -482,30 +482,30 @@
             letter-spacing: 1px;
         }
         
-        .featured-body {
+        .em-featured-body {
             padding: 25px;
         }
         
-        .featured-body h5 {
+        .em-featured-body h5 {
             font-weight: 700;
             margin-bottom: 8px;
             font-size: 1.1rem;
         }
         
-        .featured-price {
+        .em-featured-price {
             font-size: 1.3rem;
             font-weight: 800;
             color: #000;
             margin-bottom: 15px;
         }
         
-        .featured-specs {
+        .em-featured-specs {
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
         }
         
-        .spec-item {
+        .em-spec-item {
             background: #f8f9fa;
             padding: 8px 12px;
             border-radius: 8px;
@@ -513,7 +513,7 @@
             flex: 1;
         }
         
-        .spec-item span {
+        .em-spec-item span {
             display: block;
             font-size: 0.65rem;
             color: #999;
@@ -522,28 +522,28 @@
             margin-bottom: 2px;
         }
         
-        .spec-item strong {
+        .em-spec-item strong {
             font-size: 0.8rem;
             color: #000;
         }
         
         /* ============ WHY CHOOSE US ============ */
-        .why-section {
+        .em-why-section {
             padding: 80px 0;
             background: #000;
             color: #fff;
         }
         
-        .why-section .section-title {
+        .em-why-section .em-section-title {
             color: #fff;
         }
         
-        .why-card {
+        .em-why-card {
             text-align: center;
             padding: 30px 20px;
         }
         
-        .why-icon {
+        .em-why-icon {
             width: 80px;
             height: 80px;
             background: rgba(255, 215, 0, 0.1);
@@ -556,83 +556,83 @@
             color: #ffd700;
         }
         
-        .why-card h5 {
+        .em-why-card h5 {
             font-weight: 700;
             margin-bottom: 10px;
             color: #fff;
         }
         
-        .why-card p {
+        .em-why-card p {
             color: rgba(255,255,255,0.6);
             font-size: 0.9rem;
             line-height: 1.6;
         }
         
         /* ============ TESTIMONIALS ============ */
-        .testimonials-section {
+        .em-testimonials-section {
             padding: 80px 0;
             background: #fff;
         }
         
-        .testimonial-card {
+        .em-testimonial-card {
             background: #f8f9fa;
             border-radius: 20px;
             padding: 30px;
             height: 100%;
         }
         
-        .testimonial-rating {
+        .em-testimonial-rating {
             color: #ffd700;
             font-size: 1rem;
             margin-bottom: 15px;
         }
         
-        .testimonial-text {
+        .em-testimonial-text {
             font-size: 1rem;
             line-height: 1.7;
             color: #333;
             margin-bottom: 20px;
         }
         
-        .testimonial-author {
+        .em-testimonial-author {
             display: flex;
             align-items: center;
             gap: 12px;
         }
         
-        .testimonial-author img {
+        .em-testimonial-author img {
             width: 50px;
             height: 50px;
             border-radius: 50%;
             object-fit: cover;
         }
         
-        .testimonial-author h6 {
+        .em-testimonial-author h6 {
             font-weight: 700;
             margin-bottom: 2px;
             font-size: 0.95rem;
         }
         
-        .testimonial-author span {
+        .em-testimonial-author span {
             color: #999;
             font-size: 0.8rem;
         }
         
         /* ============ CTA SECTION ============ */
-        .cta-section {
+        .em-cta-section {
             padding: 80px 0;
             background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
             text-align: center;
         }
         
-        .cta-title {
+        .em-cta-title {
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 800;
             color: #fff;
             margin-bottom: 15px;
         }
         
-        .cta-text {
+        .em-cta-text {
             color: rgba(255,255,255,0.7);
             font-size: 1rem;
             margin-bottom: 30px;
@@ -641,7 +641,7 @@
             margin-right: auto;
         }
         
-        .cta-buttons {
+        .em-cta-buttons {
             display: flex;
             gap: 15px;
             justify-content: center;
@@ -650,83 +650,83 @@
         
         /* ============ RESPONSIVE ============ */
         @media (max-width: 991px) {
-            .hero-section {
+            .em-hero-section {
                 padding: 100px 0 60px;
             }
             
-            .hero-slider .carousel-control-prev,
-            .hero-slider .carousel-control-next {
+            .em-hero-slider .carousel-control-prev,
+            .em-hero-slider .carousel-control-next {
                 display: none;
             }
             
-            .hero-stats .row > div {
+            .em-hero-stats .row > div {
                 margin-bottom: 20px;
             }
         }
         
         @media (max-width: 768px) {
-            .hero-section {
+            .em-hero-section {
                 min-height: auto;
                 padding: 100px 0 50px;
             }
             
-            .hero-description {
+            .em-hero-description {
                 font-size: 1rem;
             }
             
-            .hero-stats {
+            .em-hero-stats {
                 margin-top: 40px;
                 padding-top: 30px;
             }
             
-            .stat-number {
+            .em-stat-number {
                 font-size: 1.5rem;
             }
             
-            .brand-list {
+            .em-brand-list {
                 gap: 20px;
             }
             
-            .brand-list span {
+            .em-brand-list span {
                 font-size: 0.75rem;
             }
             
-            .services-section,
-            .featured-section,
-            .why-section,
-            .testimonials-section,
-            .cta-section {
+            .em-services-section,
+            .em-featured-section,
+            .em-why-section,
+            .em-testimonials-section,
+            .em-cta-section {
                 padding: 60px 0;
             }
             
-            .btn-hero-primary,
-            .btn-hero-outline {
+            .em-btn-hero-primary,
+            .em-btn-hero-outline {
                 padding: 12px 24px;
                 font-size: 0.85rem;
                 width: 100%;
                 justify-content: center;
             }
             
-            .hero-buttons {
+            .em-hero-buttons {
                 flex-direction: column;
             }
             
-            .featured-specs {
+            .em-featured-specs {
                 gap: 5px;
             }
             
-            .spec-item {
+            .em-spec-item {
                 padding: 6px 8px;
             }
         }
         
         @media (max-width: 576px) {
-            .hero-stats .col-6 {
+            .em-hero-stats .col-6 {
                 flex: 0 0 50%;
                 max-width: 50%;
             }
             
-            .stat-item {
+            .em-stat-item {
                 padding: 10px 5px;
             }
         }
@@ -774,9 +774,9 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="hero-section">
+    <section class="em-hero-section">
         <!-- Background Slider -->
-        <div id="heroSlider" class="carousel slide hero-slider" data-bs-ride="carousel" data-bs-interval="5000">
+        <div id="heroSlider" class="carousel slide em-hero-slider" data-bs-ride="carousel" data-bs-interval="5000">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="0" class="active"></button>
                 <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="1"></button>
@@ -786,19 +786,19 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1920');"></div>
+                    <div class="em-hero-slide" style="background-image: url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1920');"></div>
                 </div>
                 <div class="carousel-item">
-                    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1920');"></div>
+                    <div class="em-hero-slide" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1920');"></div>
                 </div>
                 <div class="carousel-item">
-                    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=1920');"></div>
+                    <div class="em-hero-slide" style="background-image: url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=1920');"></div>
                 </div>
                 <div class="carousel-item">
-                    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=1920');"></div>
+                    <div class="em-hero-slide" style="background-image: url('https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=1920');"></div>
                 </div>
                 <div class="carousel-item">
-                    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&q=80&w=1920');"></div>
+                    <div class="em-hero-slide" style="background-image: url('https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&q=80&w=1920');"></div>
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#heroSlider" data-bs-slide="prev">
@@ -812,23 +812,23 @@
         <!-- Hero Content -->
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-xl-7 hero-content">
-                    <div class="hero-badge">
+                <div class="col-lg-8 col-xl-7 em-hero-content">
+                    <div class="em-hero-badge">
                         <i class="bi bi-lightning-charge-fill"></i>
                         Premium Luxury Dealership
                     </div>
-                    <h1 class="hero-title">
-                        Drive Your <span class="gold">Dreams</span> Today
+                    <h1 class="em-hero-title">
+                        Drive Your <span class="em-gold">Dreams</span> Today
                     </h1>
-                    <p class="hero-description">
+                    <p class="em-hero-description">
                         Discover an exclusive collection of hypercars, supercars, and timeless classics. 
                         Buy, rent, or upgrade with the world's most prestigious automobiles.
                     </p>
-                    <div class="hero-buttons">
-                        <a href="inventory.html" class="btn-hero-primary">
+                    <div class="em-hero-buttons">
+                        <a href="inventory.html" class="em-btn-hero-primary">
                             <i class="bi bi-collection"></i> Explore Collection
                         </a>
-                        <a href="rent.html" class="btn-hero-outline">
+                        <a href="rent.html" class="em-btn-hero-outline">
                             <i class="bi bi-key"></i> Rent a Supercar
                         </a>
                     </div>
@@ -838,42 +838,42 @@
         </div>
         
         <!-- Scroll Indicator -->
-        <div class="hero-scroll d-none d-lg-flex">
-            <div class="line"></div>
+        <div class="em-hero-scroll d-none d-lg-flex">
+            <div class="em-line"></div>
             <span>Scroll</span>
         </div>
     </section>
 
     <!-- STATS SECTION -->
-    <section class="stats-section" id="statsSection">
+    <section class="em-stats-section" id="statsSection">
         <div class="container">
             <div class="row">
                 <div class="col-6 col-lg-3">
-                    <div class="stat-box">
-                        <span class="stat-number" data-target="500">0</span>
-                        <span class="stat-plus">+</span>
-                        <p class="stat-label">Cars Sold</p>
+                    <div class="em-stat-box">
+                        <span class="em-stat-number" data-target="500">0</span>
+                        <span class="em-stat-plus">+</span>
+                        <p class="em-stat-label">Cars Sold</p>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
-                    <div class="stat-box">
-                        <span class="stat-number" data-target="100">0</span>
-                        <span class="stat-plus">+</span>
-                        <p class="stat-label">Happy Clients</p>
+                    <div class="em-stat-box">
+                        <span class="em-stat-number" data-target="100">0</span>
+                        <span class="em-stat-plus">+</span>
+                        <p class="em-stat-label">Happy Clients</p>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
-                    <div class="stat-box">
-                        <span class="stat-number" data-target="15">0</span>
-                        <span class="stat-plus">+</span>
-                        <p class="stat-label">Years Experience</p>
+                    <div class="em-stat-box">
+                        <span class="em-stat-number" data-target="15">0</span>
+                        <span class="em-stat-plus">+</span>
+                        <p class="em-stat-label">Years Experience</p>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
-                    <div class="stat-box">
-                        <span class="stat-number" data-target="50">0</span>
-                        <span class="stat-plus">+</span>
-                        <p class="stat-label">Countries Served</p>
+                    <div class="em-stat-box">
+                        <span class="em-stat-number" data-target="50">0</span>
+                        <span class="em-stat-plus">+</span>
+                        <p class="em-stat-label">Countries Served</p>
                     </div>
                 </div>
             </div>
@@ -881,9 +881,9 @@
     </section>
 
     <!-- BRAND BAR -->
-    <div class="brand-bar">
+    <div class="em-brand-bar">
         <div class="container">
-            <div class="brand-list">
+            <div class="em-brand-list">
                 <span>Lamborghini</span>
                 <span>Ferrari</span>
                 <span>Bugatti</span>
@@ -897,13 +897,13 @@
     </div>
 
     <!-- SERVICES SECTION -->
-    <section class="services-section">
+    <section class="em-services-section">
         <div class="container">
             <div class="row mb-4 mb-md-5">
                 <div class="col-lg-6">
-                    <span class="section-label">What We Offer</span>
-                    <h2 class="section-title">Premium Automotive Services</h2>
-                    <p class="section-description">
+                    <span class="em-section-label">What We Offer</span>
+                    <h2 class="em-section-title">Premium Automotive Services</h2>
+                    <p class="em-section-description">
                         Experience excellence at every touchpoint. From acquisition to maintenance, 
                         we provide comprehensive solutions for automotive enthusiasts.
                     </p>
@@ -911,37 +911,37 @@
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon">
+                    <div class="em-service-card">
+                        <div class="em-service-icon">
                             <i class="bi bi-car-front-fill"></i>
                         </div>
                         <h4>Buy Premium Cars</h4>
                         <p>Access our exclusive collection of hypercars, supercars, and classic collector vehicles sourced worldwide.</p>
-                        <a href="inventory.html" class="service-link">
+                        <a href="inventory.html" class="em-service-link">
                             View Inventory <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon">
+                    <div class="em-service-card">
+                        <div class="em-service-icon">
                             <i class="bi bi-key-fill"></i>
                         </div>
                         <h4>Luxury Rentals</h4>
                         <p>Experience your dream car for a day, weekend, or month with our white-glove rental service.</p>
-                        <a href="rent.html" class="service-link">
+                        <a href="rent.html" class="em-service-link">
                             Rent Now <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon">
+                    <div class="em-service-card">
+                        <div class="em-service-icon">
                             <i class="bi bi-gear-fill"></i>
                         </div>
                         <h4>Genuine Parts</h4>
                         <p>OEM and performance parts for maintenance and upgrades, verified for authenticity.</p>
-                        <a href="parts.html" class="service-link">
+                        <a href="parts.html" class="em-service-link">
                             Shop Parts <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
@@ -951,36 +951,36 @@
     </section>
 
     <!-- FEATURED SECTION -->
-    <section class="featured-section">
+    <section class="em-featured-section">
         <div class="container">
             <div class="text-center mb-4 mb-md-5">
-                <span class="section-label">Our Collection</span>
-                <h2 class="section-title">Featured Vehicles</h2>
-                <p class="section-description mx-auto">
+                <span class="em-section-label">Our Collection</span>
+                <h2 class="em-section-title">Featured Vehicles</h2>
+                <p class="em-section-description mx-auto">
                     Hand-picked automobiles from our premium inventory.
                 </p>
             </div>
             <div class="row g-4">
                 <!-- Featured Car 1 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="featured-card">
-                        <div class="featured-image">
+                    <div class="em-featured-card">
+                        <div class="em-featured-image">
                             <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=800" alt="Bugatti Chiron">
-                            <span class="featured-badge bg-warning text-dark">Hypercar</span>
+                            <span class="em-featured-badge bg-warning text-dark">Hypercar</span>
                         </div>
-                        <div class="featured-body">
+                        <div class="em-featured-body">
                             <h5>Bugatti Chiron Super Sport</h5>
-                            <div class="featured-price">$3,800,000</div>
-                            <div class="featured-specs">
-                                <div class="spec-item">
+                            <div class="em-featured-price">$3,800,000</div>
+                            <div class="em-featured-specs">
+                                <div class="em-spec-item">
                                     <span>Speed</span>
                                     <strong>441 km/h</strong>
                                 </div>
-                                <div class="spec-item">
+                                <div class="em-spec-item">
                                     <span>0-100</span>
                                     <strong>2.3s</strong>
                                 </div>
-                                <div class="spec-item">
+                                <div class="em-spec-item">
                                     <span>Power</span>
                                     <strong>1600 HP</strong>
                                 </div>
@@ -991,24 +991,24 @@
                 </div>
                 <!-- Featured Car 2 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="featured-card">
-                        <div class="featured-image">
+                    <div class="em-featured-card">
+                        <div class="em-featured-image">
                             <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=800" alt="Ferrari 250 GTO">
-                            <span class="featured-badge bg-dark text-white">Classic</span>
+                            <span class="em-featured-badge bg-dark text-white">Classic</span>
                         </div>
-                        <div class="featured-body">
+                        <div class="em-featured-body">
                             <h5>Ferrari 250 GTO</h5>
-                            <div class="featured-price">$48,000,000</div>
-                            <div class="featured-specs">
-                                <div class="spec-item">
+                            <div class="em-featured-price">$48,000,000</div>
+                            <div class="em-featured-specs">
+                                <div class="em-spec-item">
                                     <span>Speed</span>
                                     <strong>280 km/h</strong>
                                 </div>
-                                <div class="spec-item">
+                                <div class="em-spec-item">
                                     <span>0-100</span>
                                     <strong>5.5s</strong>
                                 </div>
-                                <div class="spec-item">
+                                <div class="em-spec-item">
                                     <span>Engine</span>
                                     <strong>3.0L V12</strong>
                                 </div>
@@ -1019,24 +1019,24 @@
                 </div>
                 <!-- Featured Car 3 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="featured-card">
-                        <div class="featured-image">
+                    <div class="em-featured-card">
+                        <div class="em-featured-image">
                             <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=800" alt="Lamborghini Huracan">
-                            <span class="featured-badge bg-success text-white">Available</span>
+                            <span class="em-featured-badge bg-success text-white">Available</span>
                         </div>
-                        <div class="featured-body">
+                        <div class="em-featured-body">
                             <h5>Lamborghini Huracan EVO</h5>
-                            <div class="featured-price">$280,000</div>
-                            <div class="featured-specs">
-                                <div class="spec-item">
+                            <div class="em-featured-price">$280,000</div>
+                            <div class="em-featured-specs">
+                                <div class="em-spec-item">
                                     <span>Speed</span>
                                     <strong>325 km/h</strong>
                                 </div>
-                                <div class="spec-item">
+                                <div class="em-spec-item">
                                     <span>0-100</span>
                                     <strong>2.9s</strong>
                                 </div>
-                                <div class="spec-item">
+                                <div class="em-spec-item">
                                     <span>Power</span>
                                     <strong>640 HP</strong>
                                 </div>
@@ -1055,16 +1055,16 @@
     </section>
 
     <!-- WHY CHOOSE US -->
-    <section class="why-section">
+    <section class="em-why-section">
         <div class="container">
             <div class="text-center mb-4 mb-md-5">
-                <span class="section-label">Why EM</span>
-                <h2 class="section-title">The EM Difference</h2>
+                <span class="em-section-label">Why EM</span>
+                <h2 class="em-section-title">The EM Difference</h2>
             </div>
             <div class="row g-4">
                 <div class="col-lg-3 col-md-6">
-                    <div class="why-card">
-                        <div class="why-icon">
+                    <div class="em-why-card">
+                        <div class="em-why-icon">
                             <i class="bi bi-shield-check"></i>
                         </div>
                         <h5>Verified Authenticity</h5>
@@ -1072,8 +1072,8 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="why-card">
-                        <div class="why-icon">
+                    <div class="em-why-card">
+                        <div class="em-why-icon">
                             <i class="bi bi-globe"></i>
                         </div>
                         <h5>Worldwide Delivery</h5>
@@ -1081,8 +1081,8 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="why-card">
-                        <div class="why-icon">
+                    <div class="em-why-card">
+                        <div class="em-why-icon">
                             <i class="bi bi-headset"></i>
                         </div>
                         <h5>24/7 Support</h5>
@@ -1090,8 +1090,8 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="why-card">
-                        <div class="why-icon">
+                    <div class="em-why-card">
+                        <div class="em-why-icon">
                             <i class="bi bi-credit-card"></i>
                         </div>
                         <h5>Flexible Financing</h5>
@@ -1103,26 +1103,26 @@
     </section>
 
     <!-- TESTIMONIALS -->
-    <section class="testimonials-section">
+    <section class="em-testimonials-section">
         <div class="container">
             <div class="text-center mb-4 mb-md-5">
-                <span class="section-label">Client Stories</span>
-                <h2 class="section-title">What Our Clients Say</h2>
+                <span class="em-section-label">Client Stories</span>
+                <h2 class="em-section-title">What Our Clients Say</h2>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6">
-                    <div class="testimonial-card">
-                        <div class="testimonial-rating">
+                    <div class="em-testimonial-card">
+                        <div class="em-testimonial-rating">
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                         </div>
-                        <p class="testimonial-text">
+                        <p class="em-testimonial-text">
                             "The entire experience was exceptional. From the first inquiry to taking delivery of my Porsche GT3, the team exceeded every expectation."
                         </p>
-                        <div class="testimonial-author">
+                        <div class="em-testimonial-author">
                             <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client">
                             <div>
                                 <h6>James Mitchell</h6>
@@ -1132,18 +1132,18 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="testimonial-card">
-                        <div class="testimonial-rating">
+                    <div class="em-testimonial-card">
+                        <div class="em-testimonial-rating">
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                         </div>
-                        <p class="testimonial-text">
+                        <p class="em-testimonial-text">
                             "Rented a Ferrari 488 for my anniversary. The car was immaculate and the service made the experience truly memorable."
                         </p>
-                        <div class="testimonial-author">
+                        <div class="em-testimonial-author">
                             <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client">
                             <div>
                                 <h6>Sarah Chen</h6>
@@ -1153,18 +1153,18 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="testimonial-card">
-                        <div class="testimonial-rating">
+                    <div class="em-testimonial-card">
+                        <div class="em-testimonial-rating">
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                         </div>
-                        <p class="testimonial-text">
+                        <p class="em-testimonial-text">
                             "As a collector, authenticity is everything. EM's verification process gave me complete confidence in my purchase."
                         </p>
-                        <div class="testimonial-author">
+                        <div class="em-testimonial-author">
                             <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Client">
                             <div>
                                 <h6>Robert Andersson</h6>
@@ -1183,17 +1183,17 @@
     </section>
 
     <!-- CTA SECTION -->
-    <section class="cta-section">
+    <section class="em-cta-section">
         <div class="container">
-            <h2 class="cta-title">Ready to Find Your Dream Car?</h2>
-            <p class="cta-text">
+            <h2 class="em-cta-title">Ready to Find Your Dream Car?</h2>
+            <p class="em-cta-text">
                 Contact us today for a personalized consultation with our automotive experts.
             </p>
-            <div class="cta-buttons">
-                <a href="contact.html" class="btn-hero-primary">
+            <div class="em-cta-buttons">
+                <a href="contact.html" class="em-btn-hero-primary">
                     <i class="bi bi-chat-dots"></i> Contact Us
                 </a>
-                <a href="tel:+15551234567" class="btn-hero-outline">
+                <a href="tel:+15551234567" class="em-btn-hero-outline">
                     <i class="bi bi-telephone"></i> +1 (555) 123-4567
                 </a>
             </div>
@@ -1228,7 +1228,7 @@
                     <ul class="list-unstyled">
                         <li class="mb-2"><a href="faq.html" class="text-muted">FAQ</a></li>
                         <li class="mb-2"><a href="contact.html" class="text-muted">Contact Us</a></li>
-                        <li class="mb-2"><a href="user-dashboard.html" class="text-muted">Dashboard</a></li>
+                        <li class="mb-2"><a href="terms-policies.html" class="text-muted">Terms & Policies</a></li>
                         <li class="mb-2"><a href="about.html" class="text-muted">About Us</a></li>
                     </ul>
                 </div>
@@ -1265,7 +1265,7 @@
             
             // Stats Counter Animation on Scroll
             const statsSection = document.getElementById('statsSection');
-            const counters = document.querySelectorAll('.stat-number');
+            const counters = document.querySelectorAll('.em-stat-number');
             let animated = false;
             
             const animateCounters = () => {

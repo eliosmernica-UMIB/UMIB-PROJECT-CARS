@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EM Luxury Cars - Terms & Policies</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* ============ HERO SECTION ============ */
+        .em-terms-hero {
+            min-height: 50vh;
+            background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 100%),
+                        url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+        
+        .em-terms-hero .em-badge-label {
+            background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
+            color: #000;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        
+        /* ============ CONTENT SECTION ============ */
+        .em-terms-content {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .em-terms-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        
+        .em-terms-card h3 {
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .em-terms-card h3 i {
+            color: #c9a033;
+            font-size: 1.5rem;
+        }
+        
+        .em-terms-card h5 {
+            font-weight: 600;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .em-terms-card p, 
+        .em-terms-card li {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .em-terms-card ul {
+            padding-left: 20px;
+        }
+        
+        .em-terms-card ul li {
+            margin-bottom: 10px;
+        }
+        
+        .em-terms-card ul li::marker {
+            color: #c9a033;
+        }
+        
+        /* ============ SIDEBAR NAV ============ */
+        .em-terms-nav {
+            position: sticky;
+            top: 100px;
+        }
+        
+        .em-terms-nav-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        
+        .em-terms-nav-card h5 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+        
+        .em-terms-nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .em-terms-nav-list li {
+            margin-bottom: 10px;
+        }
+        
+        .em-terms-nav-list a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .em-terms-nav-list a:hover,
+        .em-terms-nav-list a.active {
+            background: #ffd700;
+            color: #000;
+        }
+        
+        .em-terms-nav-list a i {
+            font-size: 1.1rem;
+        }
+        
+        /* ============ LAST UPDATED ============ */
+        .em-last-updated {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #fff;
+            padding: 20px 30px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .em-last-updated i {
+            font-size: 1.5rem;
+            color: #ffd700;
+        }
+        
+        .em-last-updated p {
+            margin: 0;
+            color: #aaa;
+        }
+        
+        .em-last-updated strong {
+            color: #fff;
+        }
+        
+        /* ============ CONTACT CTA ============ */
+        .em-terms-cta {
+            background: linear-gradient(135deg, #c9a033 0%, #e8c547 100%);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .em-terms-cta h4 {
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 15px;
+        }
+        
+        .em-terms-cta p {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .em-terms-cta .btn {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .em-terms-cta .btn:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
+        
+        /* ============ TABLE STYLES ============ */
+        .em-policy-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .em-policy-table th,
+        .em-policy-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .em-policy-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .em-policy-table tr:hover {
+            background: #fafafa;
+        }
+    </style>
+</head>
+<body id="em-body">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">EM<span style="color: #ffd700;">.</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Services</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="inventory.html">Buy Cars</a></li>
+                            <li><a class="dropdown-item" href="rent.html">Rent Cars</a></li>
+                            <li><a class="dropdown-item" href="parts.html">Car Parts</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="testimonials.html">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex ms-3 gap-2">
+                    <a href="checkout.html" class="btn btn-outline-light rounded-pill position-relative">
+                        <i class="bi bi-cart3"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark" id="em-cart-count">0</span>
+                    </a>
+                    <a href="login.html" class="btn btn-warning rounded-pill px-3">
+                        <i class="bi bi-person"></i> Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="em-terms-hero">
+        <div class="container">
+            <div class="text-center">
+                <span class="em-badge-label mb-3 d-inline-block">LEGAL</span>
+                <h1 class="display-4 fw-bold text-white mb-3">Terms & Policies</h1>
+                <p class="lead text-white-50">Understanding your rights and our commitments</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <section class="em-terms-content">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar Navigation -->
+                <div class="col-lg-3 mb-4">
+                    <div class="em-terms-nav">
+                        <div class="em-terms-nav-card">
+                            <h5>Quick Navigation</h5>
+                            <ul class="em-terms-nav-list">
+                                <li><a href="#terms" class="active"><i class="bi bi-file-text"></i> Terms of Service</a></li>
+                                <li><a href="#privacy"><i class="bi bi-shield-lock"></i> Privacy Policy</a></li>
+                                <li><a href="#cookies"><i class="bi bi-cookie"></i> Cookie Policy</a></li>
+                                <li><a href="#refund"><i class="bi bi-arrow-return-left"></i> Refund Policy</a></li>
+                                <li><a href="#rental"><i class="bi bi-key"></i> Rental Terms</a></li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Contact CTA -->
+                        <div class="em-terms-cta mt-4">
+                            <h4>Questions?</h4>
+                            <p>Our team is here to help you understand our policies.</p>
+                            <a href="contact.html" class="btn"><i class="bi bi-chat-dots me-2"></i>Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Content -->
+                <div class="col-lg-9">
+                    <!-- Last Updated Notice -->
+                    <div class="em-last-updated">
+                        <i class="bi bi-calendar-check"></i>
+                        <p><strong>Last Updated:</strong> January 15, 2026 | These policies are effective immediately upon publication.</p>
+                    </div>
+                    
+                    <!-- Terms of Service -->
+                    <div class="em-terms-card" id="terms">
+                        <h3><i class="bi bi-file-text"></i> Terms of Service</h3>
+                        <p>Welcome to EM Luxury Cars. By accessing and using our website and services, you agree to be bound by these Terms of Service.</p>
+                        
+                        <h5>1. Acceptance of Terms</h5>
+                        <p>By accessing or using our services, you acknowledge that you have read, understood, and agree to be bound by these terms. If you do not agree with any part of these terms, you must not use our services.</p>
+                        
+                        <h5>2. Services Description</h5>
+                        <p>EM Luxury Cars provides the following services:</p>
+                        <ul>
+                            <li>Sale of luxury, exotic, and classic automobiles</li>
+                            <li>Vehicle rental services for premium cars</li>
+                            <li>Authentic car parts and accessories</li>
+                            <li>Vehicle consultation and acquisition services</li>
+                        </ul>
+                        
+                        <h5>3. User Responsibilities</h5>
+                        <p>As a user of our services, you agree to:</p>
+                        <ul>
+                            <li>Provide accurate and complete information when creating an account</li>
+                            <li>Maintain the security of your account credentials</li>
+                            <li>Use our services only for lawful purposes</li>
+                            <li>Not engage in any fraudulent or deceptive activities</li>
+                        </ul>
+                        
+                        <h5>4. Intellectual Property</h5>
+                        <p>All content on this website, including text, graphics, logos, and images, is the property of EM Luxury Cars and is protected by copyright laws.</p>
+                    </div>
+                    
+                    <!-- Privacy Policy -->
+                    <div class="em-terms-card" id="privacy">
+                        <h3><i class="bi bi-shield-lock"></i> Privacy Policy</h3>
+                        <p>Your privacy is important to us. This policy explains how we collect, use, and protect your personal information.</p>
+                        
+                        <h5>1. Information We Collect</h5>
+                        <p>We may collect the following types of information:</p>
+                        <ul>
+                            <li><strong>Personal Information:</strong> Name, email address, phone number, and billing address</li>
+                            <li><strong>Transaction Data:</strong> Purchase history, payment information, and order details</li>
+                            <li><strong>Usage Data:</strong> Browser type, IP address, and pages visited</li>
+                            <li><strong>Communication Data:</strong> Messages sent through our contact forms</li>
+                        </ul>
+                        
+                        <h5>2. How We Use Your Information</h5>
+                        <table class="em-policy-table">
+                            <thead>
+                                <tr>
+                                    <th>Purpose</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Order Processing</td>
+                                    <td>To process and fulfill your purchases and rentals</td>
+                                </tr>
+                                <tr>
+                                    <td>Customer Support</td>
+                                    <td>To respond to inquiries and provide assistance</td>
+                                </tr>
+                                <tr>
+                                    <td>Marketing</td>
+                                    <td>To send promotional offers (with your consent)</td>
+                                </tr>
+                                <tr>
+                                    <td>Improvement</td>
+                                    <td>To enhance our website and services</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h5>3. Data Protection</h5>
+                        <p>We implement industry-standard security measures to protect your personal information, including encryption, secure servers, and regular security audits.</p>
+                    </div>
+                    
+                    <!-- Cookie Policy -->
+                    <div class="em-terms-card" id="cookies">
+                        <h3><i class="bi bi-cookie"></i> Cookie Policy</h3>
+                        <p>This website uses cookies to enhance your browsing experience and provide personalized services.</p>
+                        
+                        <h5>1. What Are Cookies?</h5>
+                        <p>Cookies are small text files stored on your device when you visit a website. They help us remember your preferences and improve your experience.</p>
+                        
+                        <h5>2. Types of Cookies We Use</h5>
+                        <ul>
+                            <li><strong>Essential Cookies:</strong> Required for the website to function properly</li>
+                            <li><strong>Analytics Cookies:</strong> Help us understand how visitors use our site</li>
+                            <li><strong>Preference Cookies:</strong> Remember your settings and preferences</li>
+                            <li><strong>Marketing Cookies:</strong> Used to deliver relevant advertisements</li>
+                        </ul>
+                        
+                        <h5>3. Managing Cookies</h5>
+                        <p>You can control cookies through your browser settings. However, disabling certain cookies may affect the functionality of our website.</p>
+                    </div>
+                    
+                    <!-- Refund Policy -->
+                    <div class="em-terms-card" id="refund">
+                        <h3><i class="bi bi-arrow-return-left"></i> Refund Policy</h3>
+                        <p>We want you to be completely satisfied with your purchase. Please review our refund policy below.</p>
+                        
+                        <h5>1. Vehicle Purchases</h5>
+                        <p>All vehicle sales are final. However, we offer a 7-day inspection period during which you may report any undisclosed issues for resolution.</p>
+                        
+                        <h5>2. Parts & Accessories</h5>
+                        <ul>
+                            <li>Unused parts may be returned within 30 days for a full refund</li>
+                            <li>Items must be in original packaging and condition</li>
+                            <li>Custom or special-order items are non-refundable</li>
+                            <li>Shipping costs are non-refundable</li>
+                        </ul>
+                        
+                        <h5>3. Rental Deposits</h5>
+                        <p>Rental deposits are fully refundable upon return of the vehicle in its original condition, subject to inspection.</p>
+                    </div>
+                    
+                    <!-- Rental Terms -->
+                    <div class="em-terms-card" id="rental">
+                        <h3><i class="bi bi-key"></i> Rental Terms & Conditions</h3>
+                        <p>The following terms apply to all vehicle rentals from EM Luxury Cars.</p>
+                        
+                        <h5>1. Eligibility Requirements</h5>
+                        <ul>
+                            <li>Minimum age of 25 years</li>
+                            <li>Valid driver's license held for at least 3 years</li>
+                            <li>Clean driving record with no major violations</li>
+                            <li>Valid credit card for security deposit</li>
+                        </ul>
+                        
+                        <h5>2. Insurance & Liability</h5>
+                        <p>All rentals include basic insurance coverage. Additional coverage options are available. The renter is responsible for any damage not covered by insurance.</p>
+                        
+                        <h5>3. Mileage & Fuel Policy</h5>
+                        <table class="em-policy-table">
+                            <thead>
+                                <tr>
+                                    <th>Rental Type</th>
+                                    <th>Daily Mileage</th>
+                                    <th>Excess Charge</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Standard</td>
+                                    <td>150 miles</td>
+                                    <td>$0.50/mile</td>
+                                </tr>
+                                <tr>
+                                    <td>Premium</td>
+                                    <td>200 miles</td>
+                                    <td>$0.75/mile</td>
+                                </tr>
+                                <tr>
+                                    <td>Unlimited</td>
+                                    <td>Unlimited</td>
+                                    <td>N/A</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h5>4. Late Returns</h5>
+                        <p>Late returns will be charged at the hourly rate for up to 3 hours. After 3 hours, an additional full day will be charged.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="em-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5 class="text-white fw-bold mb-3">EM<span style="color: #ffd700;">.</span> Luxury Cars</h5>
+                    <p class="text-muted">The premier destination for automotive excellence. Buying, renting, and upgrading - we do it all with passion.</p>
+                    <div class="em-social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="inventory.html" class="text-muted">Inventory</a></li>
+                        <li class="mb-2"><a href="rent.html" class="text-muted">Rentals</a></li>
+                        <li class="mb-2"><a href="parts.html" class="text-muted">Parts Shop</a></li>
+                        <li class="mb-2"><a href="gallery.html" class="text-muted">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Support</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="faq.html" class="text-muted">FAQ</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-muted">Contact Us</a></li>
+                        <li class="mb-2"><a href="terms-policies.html" class="text-muted">Terms & Policies</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-muted">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h6 class="text-white fw-bold mb-3">Contact Info</h6>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2" style="color: #ffd700;"></i>123 Luxury Blvd, Beverly Hills, CA</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2" style="color: #ffd700;"></i>+1 (555) 123-4567</li>
+                        <li class="mb-2"><i class="bi bi-envelope me-2" style="color: #ffd700;"></i>info@emcars.com</li>
+                        <li class="mb-2"><i class="bi bi-clock me-2" style="color: #ffd700;"></i>Mon-Sat: 9AM - 7PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-4 pt-4 border-top border-secondary">
+                <p class="mb-0 text-muted small">&copy; 2026 EM Luxury Cars. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Auth JS -->
+    <script src="js/auth.js"></script>
+    <!-- Main JS -->
+    <script src="js/main.js"></script>
+    
+    <script>
+        // Cart Badge Update
+        document.addEventListener('DOMContentLoaded', function() {
+            const cart = JSON.parse(localStorage.getItem('emCart')) || [];
+            const badge = document.getElementById('em-cart-count');
+            if (badge) {
+                const count = cart.reduce((total, item) => total + item.quantity, 0);
+                badge.innerText = count;
+            }
+            
+            // Smooth scroll for navigation links
+            document.querySelectorAll('.em-terms-nav-list a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        const offset = 100;
+                        const targetPosition = target.offsetTop - offset;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                    
+                    // Update active state
+                    document.querySelectorAll('.em-terms-nav-list a').forEach(a => a.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Update active nav on scroll
+            window.addEventListener('scroll', function() {
+                const sections = ['terms', 'privacy', 'cookies', 'refund', 'rental'];
+                let current = '';
+                
+                sections.forEach(section => {
+                    const element = document.getElementById(section);
+                    if (element) {
+                        const rect = element.getBoundingClientRect();
+                        if (rect.top <= 150) {
+                            current = section;
+                        }
+                    }
+                });
+                
+                document.querySelectorAll('.em-terms-nav-list a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
