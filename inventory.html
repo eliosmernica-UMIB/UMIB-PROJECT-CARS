@@ -584,18 +584,18 @@
         </div>
     </div>
 
-    <!-- Login Prompt Modal -->
+<!-- Login Prompt Modal -->
     <div class="modal fade" id="loginPromptModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-4 rounded-4 text-center">
-                <div class="success-icon" style="background: #6c757d; color: #fff;">
+                <div class="success-icon" style="background: linear-gradient(135deg, #c9a033, #e8c547); color: #000;">
                     <i class="bi bi-person-lock"></i>
                 </div>
                 <h4 class="fw-bold mb-2">Login Required</h4>
-                <p class="text-muted mb-4">Please sign in to add items to your wishlist.</p>
+                <p class="text-muted mb-4">Please sign in with Google to add items to your cart or wishlist. It's free and takes just seconds!</p>
                 <div class="d-grid gap-2">
-                    <a href="login.html" class="btn em-btn-primary">Sign In</a>
-                    <button type="button" class="btn btn-outline-dark rounded-pill" data-bs-dismiss="modal">Cancel</button>
+                    <a href="login.html" class="btn em-btn-primary"><i class="bi bi-google me-2"></i>Sign In with Google</a>
+                    <button type="button" class="btn btn-outline-dark rounded-pill" data-bs-dismiss="modal">Continue Browsing</button>
                 </div>
             </div>
         </div>
@@ -956,7 +956,14 @@
             }
         }
 
-        function addToCart(carId) {
+function addToCart(carId) {
+            // Check if user is logged in
+            const currentUser = typeof EMAuth !== 'undefined' ? EMAuth.getCurrentUser() : null;
+            if (!currentUser || !currentUser.isLoggedIn) {
+                new bootstrap.Modal(document.getElementById('loginPromptModal')).show();
+                return;
+            }
+            
             const car = allCars.find(c => c.id === carId);
             if (!car || car.status !== 'available') return;
 

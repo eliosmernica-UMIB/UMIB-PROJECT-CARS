@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -444,7 +444,7 @@
         </div>
     </div>
 
-    <!-- Empty Cart Modal -->
+<!-- Empty Cart Modal -->
     <div class="modal fade" id="emptyCartModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content text-center p-5" style="border-radius: 25px;">
@@ -457,6 +457,38 @@
                 <div class="d-grid gap-2">
                     <a href="inventory.html" class="btn em-btn-primary py-3">Browse Cars</a>
                     <a href="parts.html" class="btn btn-outline-dark rounded-pill py-2">Shop Parts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Required Modal -->
+    <div class="modal fade" id="loginRequiredModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center p-5" style="border-radius: 25px;">
+                <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #c9a033, #e8c547); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 50px; margin: 0 auto 25px auto;">
+                    <i class="bi bi-person-lock"></i>
+                </div>
+                <h2 class="fw-bold mb-2">Login Required</h2>
+                <p class="text-muted mb-4">Please sign in with your Google account to complete your purchase. Creating an account is free and takes just a few seconds!</p>
+                
+                <div class="bg-light p-4 rounded-4 mb-4">
+                    <h6 class="fw-bold mb-3">Why create an account?</h6>
+                    <ul class="list-unstyled text-start mb-0">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Track your orders</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Save items to wishlist</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Faster checkout</li>
+                        <li><i class="bi bi-check-circle-fill text-success me-2"></i>Exclusive member offers</li>
+                    </ul>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <a href="login.html" class="btn em-btn-primary py-3">
+                        <i class="bi bi-google me-2"></i>Sign In with Google
+                    </a>
+                    <button type="button" class="btn btn-outline-dark rounded-pill py-2" data-bs-dismiss="modal">
+                        Continue Browsing
+                    </button>
                 </div>
             </div>
         </div>
@@ -576,12 +608,21 @@
             }
         }
 
-        function checkAndPurchase() {
+function checkAndPurchase() {
             const cart = JSON.parse(localStorage.getItem('emCart')) || [];
             
+            // Check if cart is empty
             if (cart.length === 0) {
                 const emptyModal = new bootstrap.Modal(document.getElementById('emptyCartModal'));
                 emptyModal.show();
+                return;
+            }
+            
+            // Check if user is logged in
+            const currentUser = typeof EMAuth !== 'undefined' ? EMAuth.getCurrentUser() : null;
+            if (!currentUser || !currentUser.isLoggedIn) {
+                const loginModal = new bootstrap.Modal(document.getElementById('loginRequiredModal'));
+                loginModal.show();
                 return;
             }
             
