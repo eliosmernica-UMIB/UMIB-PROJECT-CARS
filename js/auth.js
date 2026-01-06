@@ -467,7 +467,7 @@ const EMAuth = {
         }
         
         const newOrder = {
-            orderId: 'EM-' + Date.now(),
+            orderId: 'EM-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
             ...order,
             date: new Date().toISOString(),
             status: 'pending',
@@ -610,7 +610,7 @@ const EMAuth = {
         }
 
         const newRental = {
-            rentalId: 'RNT-' + Date.now(),
+            rentalId: 'RNT-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
             ...rental,
             bookedAt: new Date().toISOString(),
             status: 'confirmed'
@@ -692,7 +692,7 @@ const EMAuth = {
         const user = this.getUserByGoogleId(googleId);
 
         const newTicket = {
-            id: 'TKT-' + Date.now(),
+            id: 'TKT-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
             userId: googleId,
             userName: user ? user.name : 'Unknown',
             userEmail: user ? user.email : 'Unknown',
@@ -763,7 +763,7 @@ const EMAuth = {
         }
 
         allNotifications[googleId].unshift({
-            id: 'NTF-' + Date.now(),
+            id: 'NTF-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
             ...notification,
             date: new Date().toISOString()
         });
@@ -806,7 +806,7 @@ const EMAuth = {
     saveContactMessage: function(message) {
         let messages = this.getFromStorage(this.KEYS.CONTACT_MESSAGES) || [];
         messages.unshift({
-            id: 'MSG-' + Date.now(),
+            id: 'MSG-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
             ...message,
             date: new Date().toISOString(),
             read: false
@@ -846,7 +846,7 @@ const EMAuth = {
         const toUser = toId === 'admin' ? { name: 'Admin', email: 'admin@emcars.com' } : this.getUserByGoogleId(toId);
         
         const newMessage = {
-            id: 'INBOX-' + Date.now(),
+            id: 'INBOX-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
             fromId: fromId,
             toId: toId,
             fromName: fromUser ? fromUser.name : 'Unknown',
@@ -949,7 +949,7 @@ const EMAuth = {
     addBlogPost: function(post) {
         let posts = this.getFromStorage(this.KEYS.BLOG_POSTS) || [];
         posts.unshift({
-            id: 'POST-' + Date.now(),
+            id: 'POST-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
             ...post,
             date: new Date().toISOString()
         });
@@ -987,7 +987,7 @@ const EMAuth = {
     addTestimonial: function(testimonial) {
         let testimonials = this.getFromStorage(this.KEYS.TESTIMONIALS) || [];
         testimonials.unshift({
-            id: 'REV-' + Date.now(),
+            id: 'REV-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
             ...testimonial,
             date: new Date().toISOString(),
             approved: false
@@ -1025,7 +1025,7 @@ const EMAuth = {
     addCar: function(car) {
         let cars = this.getFromStorage(this.KEYS.CARS) || [];
         const newCar = {
-            id: 'CAR-' + Date.now(),
+            id: 'CAR-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
             ...car,
             createdAt: new Date().toISOString(),
             status: car.status || 'available'
@@ -1065,7 +1065,7 @@ const EMAuth = {
     addRentalCar: function(car) {
         let cars = this.getFromStorage(this.KEYS.RENTAL_CARS) || [];
         const newCar = {
-            id: 'RENT-' + Date.now(),
+            id: 'RENT-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
             ...car,
             createdAt: new Date().toISOString(),
             status: car.status || 'available'
@@ -1105,7 +1105,7 @@ const EMAuth = {
     addCarPart: function(part) {
         let parts = this.getFromStorage(this.KEYS.CAR_PARTS) || [];
         const newPart = {
-            id: 'PART-' + Date.now(),
+            id: 'PART-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
             ...part,
             createdAt: new Date().toISOString(),
             status: part.status || 'in-stock'
