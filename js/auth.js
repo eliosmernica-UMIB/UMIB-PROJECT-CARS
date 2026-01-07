@@ -85,15 +85,18 @@ const EMAuth = {
                     return;
                 }
 
+                // Check if this is a new user BEFORE registering
+                const existingUser = this.getUserByGoogleId(userData.googleId);
+                const isNewUser = !existingUser;
+
                 // Register or update user
                 this.registerOrUpdateUser(userData);
 
-                // Create session
-                this.createUserSession(userData);
+                // Create session with isNewUser flag
+                this.createUserSession(userData, isNewUser);
 
                 // Add welcome notification for new users
-                const existingUser = this.getUserByGoogleId(userData.googleId);
-                if (!existingUser || !existingUser.hasLoggedInBefore) {
+                if (isNewUser) {
                     this.addNotification(userData.googleId, {
                         type: 'welcome',
                         title: 'Welcome to EM Luxury Cars!',
@@ -345,7 +348,7 @@ const EMAuth = {
     // ==================== SESSION MANAGEMENT ====================
 
     // Create user session
-    createUserSession: function(userData) {
+    createUserSession: function(userData, isNewUser = false) {
         const session = {
             isLoggedIn: true,
             userType: 'user',
@@ -353,7 +356,8 @@ const EMAuth = {
             name: userData.name,
             email: userData.email,
             picture: userData.picture,
-            loginTime: new Date().toISOString()
+            loginTime: new Date().toISOString(),
+            isNewUser: isNewUser
         };
         this.saveToStorage(this.KEYS.CURRENT_USER, session);
     },

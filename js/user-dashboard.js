@@ -73,12 +73,19 @@
         const avatar = document.getElementById('user-avatar');
         const name = document.getElementById('user-name');
         const email = document.getElementById('user-email');
-        const welcomeName = document.getElementById('welcome-name');
+        const welcomeText = document.getElementById('welcome-text');
 
         if (avatar) avatar.src = currentUser.picture || 'https://via.placeholder.com/80';
         if (name) name.innerText = currentUser.name;
         if (email) email.innerText = currentUser.email;
-        if (welcomeName) welcomeName.innerText = currentUser.name.split(' ')[0];
+        if (welcomeText) {
+            const firstName = currentUser.name.split(' ')[0];
+            if (currentUser.isNewUser) {
+                welcomeText.innerText = 'Welcome, ' + firstName + '!';
+            } else {
+                welcomeText.innerText = 'Welcome back, ' + firstName + '!';
+            }
+        }
     }
 
     // Update statistics
