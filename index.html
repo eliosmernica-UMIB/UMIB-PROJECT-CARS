@@ -960,89 +960,11 @@
                     Hand-picked automobiles from our premium inventory.
                 </p>
             </div>
-            <div class="row g-4">
-                <!-- Featured Car 1 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="em-featured-card">
-                        <div class="em-featured-image">
-                            <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=800" alt="Bugatti Chiron">
-                            <span class="em-featured-badge bg-warning text-dark">Hypercar</span>
-                        </div>
-                        <div class="em-featured-body">
-                            <h5>Bugatti Chiron Super Sport</h5>
-                            <div class="em-featured-price">$3,800,000</div>
-                            <div class="em-featured-specs">
-                                <div class="em-spec-item">
-                                    <span>Speed</span>
-                                    <strong>441 km/h</strong>
-                                </div>
-                                <div class="em-spec-item">
-                                    <span>0-100</span>
-                                    <strong>2.3s</strong>
-                                </div>
-                                <div class="em-spec-item">
-                                    <span>Power</span>
-                                    <strong>1600 HP</strong>
-                                </div>
-                            </div>
-                            <a href="inventory.html" class="btn em-btn-primary w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Featured Car 2 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="em-featured-card">
-                        <div class="em-featured-image">
-                            <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=800" alt="Ferrari 250 GTO">
-                            <span class="em-featured-badge bg-dark text-white">Classic</span>
-                        </div>
-                        <div class="em-featured-body">
-                            <h5>Ferrari 250 GTO</h5>
-                            <div class="em-featured-price">$48,000,000</div>
-                            <div class="em-featured-specs">
-                                <div class="em-spec-item">
-                                    <span>Speed</span>
-                                    <strong>280 km/h</strong>
-                                </div>
-                                <div class="em-spec-item">
-                                    <span>0-100</span>
-                                    <strong>5.5s</strong>
-                                </div>
-                                <div class="em-spec-item">
-                                    <span>Engine</span>
-                                    <strong>3.0L V12</strong>
-                                </div>
-                            </div>
-                            <a href="inventory.html" class="btn em-btn-primary w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Featured Car 3 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="em-featured-card">
-                        <div class="em-featured-image">
-                            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=800" alt="Lamborghini Huracan">
-                            <span class="em-featured-badge bg-success text-white">Available</span>
-                        </div>
-                        <div class="em-featured-body">
-                            <h5>Lamborghini Huracan EVO</h5>
-                            <div class="em-featured-price">$280,000</div>
-                            <div class="em-featured-specs">
-                                <div class="em-spec-item">
-                                    <span>Speed</span>
-                                    <strong>325 km/h</strong>
-                                </div>
-                                <div class="em-spec-item">
-                                    <span>0-100</span>
-                                    <strong>2.9s</strong>
-                                </div>
-                                <div class="em-spec-item">
-                                    <span>Power</span>
-                                    <strong>640 HP</strong>
-                                </div>
-                            </div>
-                            <a href="inventory.html" class="btn em-btn-primary w-100">View Details</a>
-                        </div>
+            <div class="row g-4" id="featured-cars-container">
+                <!-- Featured cars loaded dynamically from admin panel -->
+                <div class="col-12 text-center py-5">
+                    <div class="spinner-border text-warning" role="status">
+                        <span class="visually-hidden">Loading...</span>
                     </div>
                 </div>
             </div>
@@ -1255,6 +1177,9 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Load Featured Cars from admin panel
+            loadFeaturedCars();
+            
             // Cart Badge
             const cart = JSON.parse(localStorage.getItem('emCart')) || [];
             const badge = document.getElementById('em-cart-count');
@@ -1313,6 +1238,80 @@
                 observer.observe(statsSection);
             }
         });
+        
+        // Load Featured Cars from EMAuth (admin panel data only)
+        function loadFeaturedCars() {
+            const container = document.getElementById('featured-cars-container');
+            if (!container) return;
+            
+            let cars = [];
+            
+            // Get cars from EMAuth (real data from admin panel only)
+            if (typeof EMAuth !== 'undefined' && typeof EMAuth.getCars === 'function') {
+                cars = EMAuth.getCars();
+            }
+            
+            // Show first 3 available cars
+            const featuredCars = cars.filter(car => car.status === 'available').slice(0, 3);
+            
+            if (featuredCars.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="bi bi-car-front display-1 text-muted"></i>
+                        <h4 class="mt-3 text-muted">No Featured Vehicles</h4>
+                        <p class="text-muted">Check back soon for our premium collection!</p>
+                        <a href="inventory.html" class="btn em-btn-primary mt-2">Browse Inventory</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            const categoryColors = {
+                'hypercar': 'bg-danger text-white',
+                'supercar': 'bg-warning text-dark',
+                'sports': 'bg-primary text-white',
+                'classic': 'bg-dark text-white',
+                'luxury': 'bg-success text-white'
+            };
+            
+            let html = '';
+            featuredCars.forEach(car => {
+                const category = (car.category || 'supercar').toLowerCase();
+                const badgeClass = categoryColors[category] || 'bg-secondary text-white';
+                
+                html += `
+                    <div class="col-lg-4 col-md-6">
+                        <div class="em-featured-card">
+                            <div class="em-featured-image">
+                                <img src="${car.image}" alt="${car.name}" onerror="this.src='https://via.placeholder.com/800x400?text=No+Image'">
+                                <span class="em-featured-badge ${badgeClass}">${car.category || 'Supercar'}</span>
+                            </div>
+                            <div class="em-featured-body">
+                                <h5>${car.name}</h5>
+                                <div class="em-featured-price">$${car.price.toLocaleString()}</div>
+                                <div class="em-featured-specs">
+                                    <div class="em-spec-item">
+                                        <span>Speed</span>
+                                        <strong>${car.speed || 'N/A'}</strong>
+                                    </div>
+                                    <div class="em-spec-item">
+                                        <span>0-100</span>
+                                        <strong>${car.acceleration || 'N/A'}</strong>
+                                    </div>
+                                    <div class="em-spec-item">
+                                        <span>Engine</span>
+                                        <strong>${car.engine || 'N/A'}</strong>
+                                    </div>
+                                </div>
+                                <a href="inventory.html" class="btn em-btn-primary w-100">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
     </script>
 </body>
 </html>

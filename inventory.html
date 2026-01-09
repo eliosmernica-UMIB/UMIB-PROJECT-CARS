@@ -606,177 +606,43 @@
     <script src="js/main.js"></script>
 
     <script>
-        // Extended car inventory with more items
-        const allCars = [
-            {
-                id: 'car-1',
-                name: 'Bugatti Chiron Super Sport',
-                price: 3800000,
-                category: 'hypercar',
-                image: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=800',
-                description: 'The ultimate hypercar with quad-turbocharged W16 engine producing 1600 HP.',
-                speed: '440 km/h',
-                acceleration: '2.3s',
-                engine: 'W16 Quad-Turbo',
-                status: 'available',
-                featured: true
-            },
-            {
-                id: 'car-2',
-                name: 'Ferrari 250 GTO',
-                price: 48000000,
-                category: 'classic',
-                image: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=800',
-                description: 'One of the most valuable and collectible Ferraris ever made. A true piece of automotive history.',
-                speed: '280 km/h',
-                acceleration: '5.5s',
-                engine: '3.0L V12',
-                status: 'available',
-                featured: true
-            },
-            {
-                id: 'car-3',
-                name: 'Lamborghini Revuelto',
-                price: 608000,
-                category: 'hypercar',
-                image: 'https://images.unsplash.com/photo-1566008885218-90abf9200ddb?auto=format&fit=crop&q=80&w=800',
-                description: 'The first V12 hybrid Lamborghini, combining raw power with electrification.',
-                speed: '350 km/h',
-                acceleration: '2.5s',
-                engine: 'V12 Hybrid',
-                status: 'available',
-                featured: true
-            },
-            {
-                id: 'car-4',
-                name: 'Porsche 911 GT3 RS',
-                price: 225000,
-                category: 'sports',
-                image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800',
-                description: 'Track-focused perfection with naturally aspirated flat-six engine.',
-                speed: '312 km/h',
-                acceleration: '3.2s',
-                engine: '4.0L Flat-6',
-                status: 'available',
-                featured: false
-            },
-            {
-                id: 'car-5',
-                name: 'McLaren 720S Spider',
-                price: 315000,
-                category: 'supercar',
-                image: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&q=80&w=800',
-                description: 'Open-top thrills with incredible performance and lightweight construction.',
-                speed: '341 km/h',
-                acceleration: '2.9s',
-                engine: '4.0L Twin-Turbo V8',
-                status: 'available',
-                featured: false
-            },
-            {
-                id: 'car-6',
-                name: 'Lamborghini Huracan EVO',
-                price: 280000,
-                category: 'supercar',
-                image: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=800',
-                description: 'Naturally aspirated V10 supercar with advanced aerodynamics.',
-                speed: '325 km/h',
-                acceleration: '2.9s',
-                engine: '5.2L V10',
-                status: 'available',
-                featured: false
-            },
-            {
-                id: 'car-7',
-                name: 'Ferrari 488 Pista',
-                price: 350000,
-                category: 'supercar',
-                image: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=800',
-                description: 'Track-derived performance with the most powerful V8 in Ferrari history.',
-                speed: '340 km/h',
-                acceleration: '2.85s',
-                engine: 'Twin-Turbo V8',
-                status: 'available',
-                featured: false
-            },
-            {
-                id: 'car-8',
-                name: 'Aston Martin DBS Superleggera',
-                price: 316000,
-                category: 'luxury',
-                image: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&q=80&w=800',
-                description: 'Grand touring excellence with breathtaking design and performance.',
-                speed: '340 km/h',
-                acceleration: '3.4s',
-                engine: '5.2L Twin-Turbo V12',
-                status: 'available',
-                featured: false
-            },
-            {
-                id: 'car-9',
-                name: 'Mercedes 300SL Gullwing',
-                price: 1500000,
-                category: 'classic',
-                image: 'https://images.unsplash.com/photo-1566024164372-0281f1133aa6?auto=format&fit=crop&q=80&w=800',
-                description: 'Iconic gullwing doors and racing heritage. A true automotive legend.',
-                speed: '260 km/h',
-                acceleration: '8.8s',
-                engine: '3.0L Inline-6',
-                status: 'available',
-                featured: false
-            },
-            {
-                id: 'car-10',
-                name: 'Koenigsegg Jesko',
-                price: 3000000,
-                category: 'hypercar',
-                image: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=800',
-                description: 'Swedish hypercar masterpiece with revolutionary Light Speed Transmission.',
-                speed: '480 km/h',
-                acceleration: '2.5s',
-                engine: '5.0L Twin-Turbo V8',
-                status: 'reserved',
-                featured: false
-            },
-            {
-                id: 'car-11',
-                name: 'Bentley Continental GT',
-                price: 245000,
-                category: 'luxury',
-                image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=800',
-                description: 'The definitive grand tourer combining luxury craftsmanship with performance.',
-                speed: '333 km/h',
-                acceleration: '3.6s',
-                engine: '6.0L W12 Twin-Turbo',
-                status: 'available',
-                featured: false
-            },
-            {
-                id: 'car-12',
-                name: 'Ferrari SF90 Stradale',
-                price: 507000,
-                category: 'hypercar',
-                image: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=800',
-                description: 'Ferrari\'s first plug-in hybrid with 986 combined horsepower.',
-                speed: '340 km/h',
-                acceleration: '2.5s',
-                engine: 'V8 Hybrid',
-                status: 'available',
-                featured: false
-            }
-        ];
+        // Cars inventory - loaded dynamically from EMAuth (admin panel)
+        let allCars = [];
 
         // State
-        let filteredCars = [...allCars];
+        let filteredCars = [];
         let currentCategory = 'all';
         let currentSort = 'featured';
         let currentPrice = 'all';
         let searchTerm = '';
         // Use emCart from main.js (already declared globally)
 
+        // Load cars from EMAuth (real data from admin panel)
+        function loadCars() {
+            if (typeof EMAuth !== 'undefined' && typeof EMAuth.getCars === 'function') {
+                const cars = EMAuth.getCars();
+                // Map the data to match the expected format
+                allCars = cars.map(car => ({
+                    id: car.id,
+                    name: car.name,
+                    price: car.price,
+                    category: (car.category || 'supercar').toLowerCase(),
+                    image: car.image,
+                    description: car.description || '',
+                    speed: car.speed || 'N/A',
+                    acceleration: car.acceleration || 'N/A',
+                    engine: car.engine || 'N/A',
+                    status: car.status || 'available',
+                    featured: car.featured || false
+                }));
+            }
+            filteredCars = [...allCars];
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             try {
+                loadCars();
                 renderCars();
                 setupEventListeners();
                 updateBadge();
@@ -792,6 +658,7 @@
                 var grid = document.getElementById('inventoryGrid');
                 if (grid && grid.children.length === 0) {
                     try {
+                        loadCars();
                         renderCars();
                         setupEventListeners();
                         updateBadge();
@@ -1042,6 +909,7 @@ function addToCart(carId) {
         // Immediately render cars when script loads
         (function initInventory() {
             try {
+                loadCars();
                 renderCars();
                 setupEventListeners();
                 updateBadge();

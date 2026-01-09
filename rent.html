@@ -540,73 +540,8 @@
     <script src="js/main.js"></script>
     
     <script>
-        // Default rental cars
-        const defaultRentalCars = [
-            {
-                id: 'rental-1',
-                name: 'Lamborghini HuracÃ¡n EVO',
-                dailyRate: 1500,
-                image: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=600',
-                status: 'available',
-                specs: '640 HP | V10 | AWD'
-            },
-            {
-                id: 'rental-2',
-                name: 'Ferrari 488 Spider',
-                dailyRate: 1800,
-                image: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=600',
-                status: 'available',
-                specs: '661 HP | V8 TT | Convertible'
-            },
-            {
-                id: 'rental-3',
-                name: 'Porsche 911 Turbo S',
-                dailyRate: 1200,
-                image: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=600',
-                status: 'available',
-                specs: '640 HP | Flat-6 TT | AWD'
-            },
-            {
-                id: 'rental-4',
-                name: 'McLaren 720S',
-                dailyRate: 2000,
-                image: 'https://images.unsplash.com/photo-1621135802920-133df287f89c?auto=format&fit=crop&q=80&w=600',
-                status: 'available',
-                specs: '710 HP | V8 TT | RWD'
-            },
-            {
-                id: 'rental-5',
-                name: 'Rolls-Royce Cullinan',
-                dailyRate: 2500,
-                image: 'https://images.unsplash.com/photo-1563720360172-67b8f3dce741?auto=format&fit=crop&q=80&w=600',
-                status: 'available',
-                specs: '563 HP | V12 | Luxury SUV'
-            },
-            {
-                id: 'rental-6',
-                name: 'Bentley Continental GT',
-                dailyRate: 1400,
-                image: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&q=80&w=600',
-                status: 'unavailable',
-                specs: '626 HP | W12 | Grand Tourer'
-            },
-            {
-                id: 'rental-7',
-                name: 'Aston Martin DBS',
-                dailyRate: 1600,
-                image: 'https://images.unsplash.com/photo-1596468138838-6f97fa90d0a1?auto=format&fit=crop&q=80&w=600',
-                status: 'available',
-                specs: '715 HP | V12 | RWD'
-            },
-            {
-                id: 'rental-8',
-                name: 'Mercedes-AMG GT R',
-                dailyRate: 1100,
-                image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=600',
-                status: 'available',
-                specs: '577 HP | V8 TT | Track Beast'
-            }
-        ];
+        // Rental cars - loaded dynamically from EMAuth (admin panel)
+        // No default mock data - only real data from admin panel
 
         let selectedCar = null;
         const startDateInput = document.getElementById('em-start-date');
@@ -619,9 +554,6 @@
             startDateInput.setAttribute('min', today);
             endDateInput.setAttribute('min', today);
             
-            if (typeof EMAuth !== 'undefined') {
-                EMAuth.initializeDefaultInventory();
-            }
             loadRentalCars();
             
             // Date change listeners
@@ -633,12 +565,9 @@
             const grid = document.getElementById('rental-cars-grid');
             let rentalCars = [];
             
+            // Get rental cars from EMAuth (real data from admin panel only)
             if (typeof EMAuth !== 'undefined' && typeof EMAuth.getRentalCars === 'function') {
                 rentalCars = EMAuth.getRentalCars();
-            }
-            
-            if (rentalCars.length === 0) {
-                rentalCars = defaultRentalCars;
             }
             
             if (rentalCars.length === 0) {

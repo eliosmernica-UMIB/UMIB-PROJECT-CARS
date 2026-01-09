@@ -71,7 +71,7 @@ function emInitRentalCalc() {
                 // Update the "Rent Now" button to include these dates
                 const rentBtn = document.getElementById('em-rent-btn');
                 rentBtn.onclick = function() {
-                    emAddToCart('r1', 'Rental Service', total, 'img/rent-car.jpg', 'Rental');
+                    emAddToCart('r1', 'Rental Service', total, 'https://via.placeholder.com/400x200?text=Rental+Car', 'Rental');
                 };
             } else {
                 display.innerText = "Please select valid dates.";
