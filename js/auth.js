@@ -942,6 +942,39 @@ const EMAuth = {
         return messages.filter(m => m.toId === userId && !m.read).length;
     },
 
+    // Like/Unlike inbox message
+    toggleMessageLike: function(messageId, userId) {
+        let messages = this.getFromStorage(this.KEYS.INBOX_MESSAGES) || [];
+        const index = messages.findIndex(m => m.id === messageId);
+        if (index > -1) {
+            // Initialize likes array if not exists
+            if (!messages[index].likes) {
+                messages[index].likes = [];
+            }
+            
+            const likeIndex = messages[index].likes.indexOf(userId);
+            if (likeIndex > -1) {
+                // Unlike
+                messages[index].likes.splice(likeIndex, 1);
+                this.saveToStorage(this.KEYS.INBOX_MESSAGES, messages);
+                return false; // unliked
+            } else {
+                // Like
+                messages[index].likes.push(userId);
+                this.saveToStorage(this.KEYS.INBOX_MESSAGES, messages);
+                return true; // liked
+            }
+        }
+        return null;
+    },
+
+    // Check if user liked a message
+    hasUserLikedMessage: function(messageId, userId) {
+        const messages = this.getFromStorage(this.KEYS.INBOX_MESSAGES) || [];
+        const msg = messages.find(m => m.id === messageId);
+        return msg && msg.likes && msg.likes.includes(userId);
+    },
+
     // ==================== BLOG POSTS ====================
 
     // Get all blog posts

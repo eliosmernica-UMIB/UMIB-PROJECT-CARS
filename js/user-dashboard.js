@@ -40,8 +40,6 @@
         setupSidebarNavigation();
         setupSettingsForm();
         setupTicketForm();
-        setupMessageForm();
-        setupReplyForm();
 
         // Update cart badge
         if (typeof emUpdateBadge === 'function') {
@@ -97,7 +95,8 @@
         const notifications = EMAuth.getNotifications(currentUser.googleId);
         const inboxMessages = EMAuth.getUserInboxMessages(currentUser.googleId);
         const unreadNotifs = notifications.filter(n => !n.read).length;
-        const unreadInbox = inboxMessages.filter(m => m.toId === currentUser.googleId && !m.read).length;
+        // Only count messages FROM admin (user can only receive)
+        const unreadInbox = inboxMessages.filter(m => m.fromId === 'admin' && !m.read).length;
 
         setElementText('stat-orders', orders.length);
         setElementText('stat-wishlist', wishlist.length);
@@ -314,7 +313,9 @@
         const badge = document.getElementById('messages-badge');
         if (!container) return;
 
-        const unreadCount = messages.filter(m => m.toId === currentUser.googleId && !m.read).length;
+        // Only show messages FROM admin (user can only receive, not send)
+        const receivedMessages = messages.filter(m => m.fromId === 'admin');
+        const unreadCount = receivedMessages.filter(m => !m.read).length;
         
         // Update badge
         if (badge) {
@@ -322,31 +323,32 @@
             badge.style.display = unreadCount > 0 ? 'inline-block' : 'none';
         }
 
-        if (messages.length === 0) {
-            container.innerHTML = createEmptyState('bi-chat-left', 'No messages yet. Send a message to admin!');
+        if (receivedMessages.length === 0) {
+            container.innerHTML = createEmptyState('bi-chat-left', 'No messages yet.');
             return;
         }
 
         let html = '<div class="list-group">';
-        messages.forEach(msg => {
-            const isFromAdmin = msg.fromId === 'admin';
-            const direction = isFromAdmin ? 'From Admin' : 'To Admin';
-            const directionBadge = isFromAdmin ? 'bg-primary' : 'bg-secondary';
-            const isUnread = msg.toId === currentUser.googleId && !msg.read;
+        receivedMessages.forEach(msg => {
+            const isUnread = !msg.read;
+            const isLiked = EMAuth.hasUserLikedMessage(msg.id, currentUser.googleId);
             
             html += `
                 <div class="list-group-item ${isUnread ? 'bg-light' : ''}" style="cursor: pointer;" onclick="UserDashboard.viewMessage('${msg.id}')">
                     <div class="d-flex justify-content-between align-items-start">
                         <div class="flex-grow-1">
                             <div class="d-flex align-items-center gap-2 mb-1">
-                                <span class="badge ${directionBadge}">${direction}</span>
+                                <span class="badge bg-primary">From Admin</span>
                                 <h6 class="mb-0 ${isUnread ? 'fw-bold' : ''}">${msg.subject}</h6>
                                 ${isUnread ? '<span class="badge bg-danger">New</span>' : ''}
+                                ${isLiked ? '<i class="bi bi-heart-fill text-danger"></i>' : ''}
                             </div>
                             <p class="mb-1 text-muted small">${msg.message.substring(0, 80)}${msg.message.length > 80 ? '...' : ''}</p>
                             <small class="text-muted">${EMAuth.formatDateTime(msg.date)}</small>
-                            ${msg.replies && msg.replies.length > 0 ? `<span class="badge bg-info ms-2">${msg.replies.length} replies</span>` : ''}
                         </div>
+                        <button class="btn btn-sm ${isLiked ? 'btn-danger' : 'btn-outline-danger'}" onclick="event.stopPropagation(); UserDashboard.toggleLike('${msg.id}')">
+                            <i class="bi ${isLiked ? 'bi-heart-fill' : 'bi-heart'}"></i>
+                        </button>
                     </div>
                 </div>
             `;
@@ -554,53 +556,6 @@
         });
     }
 
-    // Setup Message Form
-    function setupMessageForm() {
-        const form = document.getElementById('new-message-form');
-        if (!form) return;
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const subject = document.getElementById('msg-subject').value;
-            const content = document.getElementById('msg-content').value;
-
-            EMAuth.sendInboxMessage(currentUser.googleId, 'admin', subject, content);
-            
-            const modal = bootstrap.Modal.getInstance(document.getElementById('newMessageModal'));
-            if (modal) modal.hide();
-            this.reset();
-            
-            loadMessages();
-            updateStats();
-            
-            showToast('Message sent to admin!', 'success');
-        });
-    }
-
-    // Setup Reply Form
-    function setupReplyForm() {
-        const form = document.getElementById('reply-message-form');
-        if (!form) return;
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const messageId = document.getElementById('reply-msg-id').value;
-            const replyContent = document.getElementById('reply-msg-content').value;
-
-            EMAuth.replyToInboxMessage(messageId, replyContent, currentUser.googleId);
-            
-            const modal = bootstrap.Modal.getInstance(document.getElementById('replyMessageModal'));
-            if (modal) modal.hide();
-            this.reset();
-            
-            loadMessages();
-            
-            showToast('Reply sent!', 'success');
-        });
-    }
-
     // Setup Sidebar Navigation
     function setupSidebarNavigation() {
         document.querySelectorAll('.em-dash-nav a').forEach(link => {
@@ -716,17 +671,17 @@
             const msg = messages.find(m => m.id === messageId);
             if (!msg) return;
             
-            // Mark as read if received by user
-            if (msg.toId === currentUser.googleId) {
+            // Mark as read
+            if (!msg.read) {
                 EMAuth.markInboxMessageRead(messageId);
                 updateStats();
             }
             
-            const isFromAdmin = msg.fromId === 'admin';
+            const isLiked = EMAuth.hasUserLikedMessage(messageId, currentUser.googleId);
+            
             let html = `
                 <div class="mb-3">
-                    <strong>From:</strong> ${isFromAdmin ? 'Admin' : 'You'}<br>
-                    <strong>To:</strong> ${isFromAdmin ? 'You' : 'Admin'}<br>
+                    <strong>From:</strong> Admin<br>
                     <strong>Date:</strong> ${EMAuth.formatDateTime(msg.date)}
                 </div>
                 <div class="mb-3">
@@ -737,30 +692,28 @@
                 </div>
             `;
             
-            if (msg.replies && msg.replies.length > 0) {
-                html += '<h6 class="fw-bold">Replies:</h6>';
-                msg.replies.forEach(reply => {
-                    const isAdminReply = reply.from === 'admin';
-                    html += `
-                        <div class="p-3 mb-2 ${isAdminReply ? 'bg-primary bg-opacity-10 border-start border-primary border-3' : 'bg-light'}">
-                            <small class="text-muted">${reply.fromName} - ${EMAuth.formatDateTime(reply.date)}</small>
-                            <p class="mb-0">${reply.message}</p>
-                        </div>
-                    `;
-                });
-            }
-            
             document.getElementById('view-msg-content').innerHTML = html;
-            document.getElementById('view-msg-reply-btn').onclick = function() {
-                const viewModal = bootstrap.Modal.getInstance(document.getElementById('viewMessageModal'));
-                if (viewModal) viewModal.hide();
-                
-                document.getElementById('reply-msg-id').value = messageId;
-                document.getElementById('reply-original-msg').innerText = msg.message;
-                new bootstrap.Modal(document.getElementById('replyMessageModal')).show();
+            
+            const likeBtn = document.getElementById('view-msg-like-btn');
+            likeBtn.innerHTML = isLiked ? '<i class="bi bi-heart-fill me-1"></i>Liked' : '<i class="bi bi-heart me-1"></i>Like';
+            likeBtn.className = isLiked ? 'btn btn-danger' : 'btn btn-outline-danger';
+            likeBtn.onclick = function() {
+                UserDashboard.toggleLike(messageId);
+                const modal = bootstrap.Modal.getInstance(document.getElementById('viewMessageModal'));
+                if (modal) modal.hide();
             };
             
             new bootstrap.Modal(document.getElementById('viewMessageModal')).show();
+            loadMessages();
+        },
+
+        toggleLike: function(messageId) {
+            const liked = EMAuth.toggleMessageLike(messageId, currentUser.googleId);
+            if (liked === true) {
+                showToast('Message liked!', 'success');
+            } else if (liked === false) {
+                showToast('Like removed', 'info');
+            }
             loadMessages();
         }
     };
