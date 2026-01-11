@@ -751,6 +751,46 @@ const EMAuth = {
         return false;
     },
 
+    // Delete ticket
+    deleteTicket: function(ticketId, userId) {
+        let tickets = this.getFromStorage(this.KEYS.SUPPORT_TICKETS) || [];
+        const index = tickets.findIndex(t => t.id === ticketId && t.userId === userId);
+        
+        if (index > -1) {
+            tickets.splice(index, 1);
+            this.saveToStorage(this.KEYS.SUPPORT_TICKETS, tickets);
+            return true;
+        }
+        return false;
+    },
+
+    // Update ticket (user can edit subject and message if status is still 'open')
+    updateTicket: function(ticketId, userId, updates) {
+        let tickets = this.getFromStorage(this.KEYS.SUPPORT_TICKETS) || [];
+        const index = tickets.findIndex(t => t.id === ticketId && t.userId === userId);
+        
+        if (index > -1) {
+            // Only allow editing if ticket is still open
+            if (tickets[index].status !== 'open') {
+                return false;
+            }
+            
+            if (updates.subject) tickets[index].subject = updates.subject;
+            if (updates.message) tickets[index].message = updates.message;
+            tickets[index].updatedAt = new Date().toISOString();
+            
+            this.saveToStorage(this.KEYS.SUPPORT_TICKETS, tickets);
+            return true;
+        }
+        return false;
+    },
+
+    // Get single ticket by ID
+    getTicketById: function(ticketId) {
+        const tickets = this.getFromStorage(this.KEYS.SUPPORT_TICKETS) || [];
+        return tickets.find(t => t.id === ticketId);
+    },
+
     // ==================== NOTIFICATIONS ====================
 
     // Get user notifications

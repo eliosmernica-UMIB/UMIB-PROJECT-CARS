@@ -475,15 +475,28 @@
         tickets.forEach(ticket => {
             const statusBg = ticket.status === 'resolved' ? 'bg-success' : 
                             ticket.status === 'in-progress' ? 'bg-warning text-dark' : 'bg-info';
+            const canEdit = ticket.status === 'open';
+            
             html += `
                 <div class="list-group-item">
                     <div class="d-flex justify-content-between align-items-start">
-                        <div>
+                        <div class="flex-grow-1">
                             <h6 class="mb-1 fw-bold">${ticket.subject}</h6>
                             <p class="mb-1 text-muted small">${ticket.message.substring(0, 100)}${ticket.message.length > 100 ? '...' : ''}</p>
                             <small class="text-muted">${EMAuth.formatDateTime(ticket.createdAt)}</small>
                         </div>
-                        <span class="badge ${statusBg}">${ticket.status}</span>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge ${statusBg}">${ticket.status}</span>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    ${canEdit ? `<li><a class="dropdown-item" href="#" onclick="UserDashboard.editTicket('${ticket.id}'); return false;"><i class="bi bi-pencil me-2"></i>Edit</a></li>` : ''}
+                                    <li><a class="dropdown-item text-danger" href="#" onclick="UserDashboard.deleteTicket('${ticket.id}'); return false;"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     ${ticket.responses && ticket.responses.length > 0 ? `
                         <div class="mt-2 p-2 bg-light rounded">
@@ -715,6 +728,66 @@
                 showToast('Like removed', 'info');
             }
             loadMessages();
+        },
+
+        // Edit ticket - open modal with ticket data
+        editTicket: function(ticketId) {
+            const ticket = EMAuth.getTicketById(ticketId);
+            if (!ticket) {
+                showToast('Ticket not found', 'error');
+                return;
+            }
+            
+            if (ticket.status !== 'open') {
+                showToast('Cannot edit ticket - already in progress or resolved', 'warning');
+                return;
+            }
+            
+            document.getElementById('edit-ticket-id').value = ticketId;
+            document.getElementById('edit-ticket-subject').value = ticket.subject;
+            document.getElementById('edit-ticket-message').value = ticket.message;
+            
+            new bootstrap.Modal(document.getElementById('editTicketModal')).show();
+        },
+
+        // Save edited ticket
+        saveTicketEdit: function() {
+            const ticketId = document.getElementById('edit-ticket-id').value;
+            const subject = document.getElementById('edit-ticket-subject').value;
+            const message = document.getElementById('edit-ticket-message').value;
+            
+            if (!subject || !message) {
+                showToast('Please fill in all fields', 'warning');
+                return;
+            }
+            
+            const result = EMAuth.updateTicket(ticketId, currentUser.googleId, { subject, message });
+            
+            if (result) {
+                const modal = bootstrap.Modal.getInstance(document.getElementById('editTicketModal'));
+                if (modal) modal.hide();
+                loadTickets();
+                showToast('Ticket updated successfully!', 'success');
+            } else {
+                showToast('Failed to update ticket', 'error');
+            }
+        },
+
+        // Delete ticket
+        deleteTicket: function(ticketId) {
+            if (!confirm('Are you sure you want to delete this ticket?')) {
+                return;
+            }
+            
+            const result = EMAuth.deleteTicket(ticketId, currentUser.googleId);
+            
+            if (result) {
+                loadTickets();
+                updateStats();
+                showToast('Ticket deleted successfully!', 'success');
+            } else {
+                showToast('Failed to delete ticket', 'error');
+            }
         }
     };
 

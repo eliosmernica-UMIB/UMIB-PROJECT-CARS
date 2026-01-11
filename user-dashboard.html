@@ -358,20 +358,28 @@
         </div>
     </div>
 
-    <!-- View Message Modal -->
-    <div class="modal fade" id="viewMessageModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
+    <!-- Edit Ticket Modal -->
+    <div class="modal fade" id="editTicketModal" tabindex="-1">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fw-bold"><i class="bi bi-envelope-open me-2"></i>Message Details</h5>
+                    <h5 class="modal-title fw-bold"><i class="bi bi-pencil-square me-2"></i>Edit Support Ticket</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body" id="view-msg-content">
-                    <!-- Content loaded dynamically -->
+                <div class="modal-body">
+                    <input type="hidden" id="edit-ticket-id">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Subject</label>
+                        <input type="text" class="form-control" id="edit-ticket-subject" required placeholder="Brief description of your issue">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Message</label>
+                        <textarea class="form-control" id="edit-ticket-message" rows="5" required placeholder="Describe your issue in detail..."></textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn em-btn-primary" id="view-msg-reply-btn">Reply</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn em-btn-primary" onclick="UserDashboard.saveTicketEdit()">Save Changes</button>
                 </div>
             </div>
         </div>
