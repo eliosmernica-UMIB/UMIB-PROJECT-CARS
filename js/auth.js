@@ -905,15 +905,7 @@ const EMAuth = {
         messages.unshift(newMessage);
         this.saveToStorage(this.KEYS.INBOX_MESSAGES, messages);
         
-        // Add notification for recipient
-        if (toId !== 'admin') {
-            this.addNotification(toId, {
-                type: 'inbox',
-                title: 'New Message from Admin',
-                message: subject,
-                read: false
-            });
-        }
+        // No separate notification - messages show directly in Messages tab
         
         return newMessage;
     },
@@ -958,18 +950,7 @@ const EMAuth = {
             
             this.saveToStorage(this.KEYS.INBOX_MESSAGES, messages);
             
-            // Notify the other party
-            const originalMessage = messages[index];
-            const recipientId = originalMessage.fromId === fromId ? originalMessage.toId : originalMessage.fromId;
-            
-            if (recipientId !== 'admin') {
-                this.addNotification(recipientId, {
-                    type: 'inbox',
-                    title: 'New Reply',
-                    message: `Reply to: ${originalMessage.subject}`,
-                    read: false
-                });
-            }
+            // No separate notification - replies show directly in the message thread
             
             return true;
         }
