@@ -12,6 +12,16 @@
     <link rel="stylesheet" href="css/style.css">
     
     <style>
+        /* ============ NAVBAR FIX ============ */
+        .em-navbar {
+            height: 76px;
+        }
+        
+        .em-navbar .dropdown-menu {
+            position: absolute !important;
+            top: 100% !important;
+        }
+        
         /* ============ HERO SECTION ============ */
         .em-terms-hero {
             min-height: 50vh;
@@ -226,14 +236,12 @@
 </head>
 <body id="em-body">
     <!-- NAVBAR (Simplified) -->
-    <nav class="navbar navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top em-navbar">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">EM<span style="color: #ffd700;">.</span></a>
-            <ul class="navbar-nav ms-auto" id="em-nav-auth">
+            <a class="navbar-brand em-brand" href="index.html">EM<span class="em-accent">.</span></a>
+            <ul class="navbar-nav ms-auto align-items-center" id="em-nav-auth">
                 <li class="nav-item">
-                    <a href="login.html" class="btn btn-warning rounded-pill px-3">
-                        <i class="bi bi-person"></i> Login
-                    </a>
+                    <a href="login.html" class="btn em-btn-primary">Login</a>
                 </li>
             </ul>
         </div>
