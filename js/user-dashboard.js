@@ -775,19 +775,17 @@
 
         // Delete ticket
         deleteTicket: function(ticketId) {
-            if (!confirm('Are you sure you want to delete this ticket?')) {
-                return;
-            }
-            
-            const result = EMAuth.deleteTicket(ticketId, currentUser.googleId);
-            
-            if (result) {
-                loadTickets();
-                updateStats();
-                showToast('Ticket deleted successfully!', 'success');
-            } else {
-                showToast('Failed to delete ticket', 'error');
-            }
+            showConfirm('Are you sure you want to delete this ticket?', function() {
+                const result = EMAuth.deleteTicket(ticketId, currentUser.googleId);
+                
+                if (result) {
+                    loadTickets();
+                    updateStats();
+                    showToast('Ticket deleted successfully!', 'success');
+                } else {
+                    showToast('Failed to delete ticket', 'error');
+                }
+            }, { title: 'Delete Ticket', confirmText: 'Delete' });
         }
     };
 

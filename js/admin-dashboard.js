@@ -1118,10 +1118,11 @@
         },
 
         deleteCar: function(carId) {
-            if (confirm('Delete this car?')) {
+            showConfirm('Delete this car?', function() {
                 EMAuth.deleteCar(carId);
                 loadCars();
-            }
+                showToast('Car deleted successfully.', 'success');
+            }, { title: 'Delete Car', confirmText: 'Delete' });
         },
 
         // Rental Cars
@@ -1145,10 +1146,11 @@
         },
 
         deleteRentalCar: function(carId) {
-            if (confirm('Delete this rental car?')) {
+            showConfirm('Delete this rental car?', function() {
                 EMAuth.deleteRentalCar(carId);
                 loadRentalCars();
-            }
+                showToast('Rental car deleted successfully.', 'success');
+            }, { title: 'Delete Rental Car', confirmText: 'Delete' });
         },
 
         // Parts
@@ -1179,10 +1181,11 @@
         },
 
         deletePart: function(partId) {
-            if (confirm('Delete this part?')) {
+            showConfirm('Delete this part?', function() {
                 EMAuth.deleteCarPart(partId);
                 loadParts();
-            }
+                showToast('Part deleted successfully.', 'success');
+            }, { title: 'Delete Part', confirmText: 'Delete' });
         },
 
         // Users
@@ -1193,15 +1196,16 @@
         },
 
         unbanUser: function(userId) {
-            if (confirm('Unban this user?')) {
+            showConfirm('Unban this user?', function() {
                 EMAuth.unbanUser(userId);
                 loadUsers();
                 loadDashboardStats();
-            }
+                showToast('User has been unbanned.', 'success');
+            }, { title: 'Unban User', confirmText: 'Unban', icon: 'unlock-fill', iconColor: 'text-success', danger: false });
         },
 
         deleteUser: function(userId, userName) {
-            if (confirm(`Permanently delete ${userName} and all their data? This cannot be undone!`)) {
+            showConfirm(`Permanently delete ${userName} and all their data? This cannot be undone!`, function() {
                 EMAuth.deleteUser(userId);
                 loadUsers();
                 loadDashboardStats();
@@ -1210,7 +1214,7 @@
                 loadInbox();
                 loadTickets();
                 showToast('User deleted successfully.', 'success');
-            }
+            }, { title: 'Delete User', confirmText: 'Delete Permanently', icon: 'exclamation-triangle-fill', iconColor: 'text-danger' });
         },
 
         messageUser: function(userId) {
@@ -1283,11 +1287,12 @@
         },
 
         closeTicket: function(ticketId) {
-            if (confirm('Close this ticket?')) {
+            showConfirm('Close this ticket?', function() {
                 EMAuth.closeTicket(ticketId);
                 loadTickets();
                 loadDashboardStats();
-            }
+                showToast('Ticket closed successfully.', 'success');
+            }, { title: 'Close Ticket', confirmText: 'Close', icon: 'check-circle-fill', iconColor: 'text-success', danger: false });
         },
 
         filterTickets: function(filter) {
@@ -1313,19 +1318,21 @@
 
         deleteMessage: function(messageId, event) {
             event.stopPropagation();
-            if (confirm('Delete this message?')) {
+            showConfirm('Delete this message?', function() {
                 EMAuth.deleteMessage(messageId);
                 loadMessages();
                 loadDashboardStats();
-            }
+                showToast('Message deleted successfully.', 'success');
+            }, { title: 'Delete Message', confirmText: 'Delete' });
         },
 
         // Blog
         deleteBlogPost: function(postId) {
-            if (confirm('Delete this blog post?')) {
+            showConfirm('Delete this blog post?', function() {
                 EMAuth.deleteBlogPost(postId);
                 loadBlogPosts();
-            }
+                showToast('Blog post deleted successfully.', 'success');
+            }, { title: 'Delete Blog Post', confirmText: 'Delete' });
         },
 
         // Testimonials
@@ -1335,10 +1342,11 @@
         },
 
         deleteTestimonial: function(reviewId) {
-            if (confirm('Delete this testimonial?')) {
+            showConfirm('Delete this testimonial?', function() {
                 EMAuth.deleteTestimonial(reviewId);
                 loadTestimonials();
-            }
+                showToast('Testimonial deleted successfully.', 'success');
+            }, { title: 'Delete Testimonial', confirmText: 'Delete' });
         },
 
         filterTestimonials: function(filter) {

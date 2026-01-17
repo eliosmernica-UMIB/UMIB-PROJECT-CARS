@@ -75,7 +75,7 @@
                             <li><a href="#blog"><i class="bi bi-newspaper"></i> Blog Posts</a></li>
                             <li><a href="#testimonials"><i class="bi bi-star-fill"></i> Testimonials</a></li>
                             <li><hr class="my-2"></li>
-                            <li><a href="#" onclick="if(confirm('Clear all data? This cannot be undone!')){EMAuth.clearAllData();location.reload();}" class="text-warning"><i class="bi bi-trash"></i> Clear All Data</a></li>
+                            <li><a href="#" onclick="showConfirm('Clear all data? This cannot be undone!', function(){ EMAuth.clearAllData(); location.reload(); }, { title: 'Clear All Data', confirmText: 'Clear Everything', icon: 'exclamation-triangle-fill', iconColor: 'text-danger' }); return false;" class="text-warning"><i class="bi bi-trash"></i> Clear All Data</a></li>
                             <li><a href="#" onclick="EMAuth.logout(); return false;" class="text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
                         </ul>
                         </div>
@@ -1001,6 +1001,25 @@
                         <button type="submit" class="btn em-btn-primary">Save Changes</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="emConfirmModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-body text-center p-4">
+                    <div id="emConfirmIcon" class="mb-3">
+                        <i class="bi bi-question-circle-fill text-warning" style="font-size: 3.5rem;"></i>
+                    </div>
+                    <h5 id="emConfirmTitle" class="fw-bold mb-2">Confirm Action</h5>
+                    <p id="emConfirmMessage" class="text-muted mb-4">Are you sure you want to proceed?</p>
+                    <div class="d-flex gap-2 justify-content-center">
+                        <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger px-4" id="emConfirmBtn">Confirm</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

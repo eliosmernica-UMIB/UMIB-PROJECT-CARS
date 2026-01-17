@@ -1561,6 +1561,47 @@ function showNotificationModal(message, type = 'success', title = null) {
 window.showToast = showToast;
 window.showNotificationModal = showNotificationModal;
 
+// Show confirmation modal (replaces browser confirm())
+function showConfirm(message, onConfirm, options = {}) {
+    const modal = document.getElementById('emConfirmModal');
+    if (!modal) {
+        // Fallback to browser confirm if modal doesn't exist
+        if (confirm(message)) {
+            onConfirm();
+        }
+        return;
+    }
+    
+    const title = options.title || 'Confirm Action';
+    const confirmText = options.confirmText || 'Confirm';
+    const confirmClass = options.danger !== false ? 'btn-danger' : 'btn-primary';
+    const icon = options.icon || 'question-circle-fill';
+    const iconColor = options.iconColor || 'text-warning';
+    
+    document.getElementById('emConfirmTitle').innerText = title;
+    document.getElementById('emConfirmMessage').innerText = message;
+    document.getElementById('emConfirmIcon').innerHTML = `<i class="bi bi-${icon} ${iconColor}" style="font-size: 3.5rem;"></i>`;
+    
+    const confirmBtn = document.getElementById('emConfirmBtn');
+    confirmBtn.innerText = confirmText;
+    confirmBtn.className = `btn ${confirmClass} px-4`;
+    
+    // Remove old event listeners by cloning the button
+    const newConfirmBtn = confirmBtn.cloneNode(true);
+    confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+    
+    // Add new click handler
+    newConfirmBtn.addEventListener('click', function() {
+        const bsModal = bootstrap.Modal.getInstance(modal);
+        if (bsModal) bsModal.hide();
+        onConfirm();
+    });
+    
+    new bootstrap.Modal(modal).show();
+}
+
+window.showConfirm = showConfirm;
+
 // Login as demo user (for testing without Google OAuth)
 EMAuth.loginAsDemo = function() {
     // Create demo user if not exists
